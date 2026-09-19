@@ -235,8 +235,9 @@ code,.mono{font-family:'JetBrains Mono',monospace}
 }
 
 .lang-bar{
-  display:flex;gap:14px;justify-content:center;align-items:center;
-  position:relative;z-index:2;margin:0 0 8px;font-size:12px;
+  display:flex;gap:14px;justify-content:flex-end;align-items:center;
+  width:100%;max-width:760px;margin:0 auto 8px;padding:0 24px;
+  position:relative;z-index:2;font-size:12px;
 }
 .lang-bar a{color:var(--text3);text-decoration:none;font-weight:500;padding:2px 4px}
 .lang-bar a:hover{color:var(--text)}
