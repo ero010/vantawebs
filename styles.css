@@ -1,37 +1,28 @@
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#0b0f14;color:#e8eef4}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid #1c2530;position:sticky;top:0;background:#0b0f14cc;backdrop-filter:blur(8px);z-index:5}
-.brand{font-weight:800;font-size:20px;letter-spacing:.3px}.logo{color:#4ade80}
-.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{font-size:12px;border:1px solid #26313d;padding:5px 10px;border-radius:999px;color:#aeb9c5}.badge.green{color:#4ade80;border-color:#1f4d33}
-.wrap{max-width:920px;margin:0 auto;padding:28px 18px 60px}
-.hero h1{font-size:clamp(30px,5vw,48px);margin:10px 0}.hero p{color:#aeb9c5;font-size:17px}.trust{display:flex;gap:14px;flex-wrap:wrap;color:#4ade80;font-size:13px;margin:12px 0 22px}
-.dropzone{border:2px dashed #2c3a49;border-radius:18px;background:#111821;padding:38px 18px;text-align:center;transition:.15s;outline:none}
-.dropzone.over,.dropzone:focus{border-color:#4ade80;background:#0f1a14}
-.dz-icon{font-size:34px;color:#4ade80}.hint{color:#8b98a6;font-size:13px;margin-top:8px}
-.linkbtn{background:none;border:none;color:#4ade80;font-weight:700;cursor:pointer;font-size:15px;text-decoration:underline}
-.controls{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:16px 0;color:#aeb9c5;font-size:14px}
-.btn{background:#4ade80;border:none;color:#06210f;font-weight:800;padding:10px 16px;border-radius:10px;cursor:pointer}
-.btn:disabled{opacity:.4;cursor:default}.btn.secondary{background:#1c2835;color:#e8eef4;border:1px solid #2c3a49}.btn.ghost{background:transparent;color:#8b98a6;border:1px solid #26313d}
-.notice{margin:10px 0;padding:10px 14px;background:#1a1407;border:1px solid #5a4510;border-radius:10px;font-size:14px}.hidden{display:none}
-.cards{display:grid;gap:12px;margin-top:8px}
-.card{background:#111821;border:1px solid #1f2a37;border-radius:14px;padding:14px;display:grid;gap:10px}
-.card .row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
-.fname{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%}
-.meta{font-size:13px;color:#8b98a6}.meta b{color:#e8eef4}
-.pill{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid #2c3a49}
-.pill.ok{color:#4ade80;border-color:#1f4d33}.pill.warn{color:#fbbf24;border-color:#5a4510}.pill.err{color:#f87171;border-color:#5a2020}
-table.diff{width:100%;font-size:12px;border-collapse:collapse;background:#0b0f14;border-radius:8px;overflow:hidden}
-table.diff td,table.diff th{padding:6px 8px;border-bottom:1px solid #1c2530;text-align:left}table.diff th{color:#8b98a6;font-weight:600}
-.actions{display:flex;gap:8px}.prog{height:6px;background:#1c2530;border-radius:99px;overflow:hidden}.prog i{display:block;height:100%;background:#4ade80;width:0%}
-.how{margin-top:34px;color:#aeb9c5}.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.grid3>div{background:#111821;border:1px solid #1f2a37;border-radius:12px;padding:14px}.grid3 b{color:#fff}.warn{margin-top:14px;font-size:13px;background:#141109;border:1px solid #3a300f;padding:12px;border-radius:10px}
-footer{text-align:center;color:#5b6875;font-size:13px;padding:22px}
-code{background:#00000066;padding:2px 6px;border-radius:6px}
-.anti-detect{background:#111821;border:1px solid #2c3a49;border-radius:14px;padding:18px;margin:14px 0}
-.ad-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.ad-head h3{margin:0;color:#fbbf24;font-size:16px}
-.ad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 16px;margin-bottom:14px}
-.ad-grid label{font-size:13px;color:#aeb9c5;cursor:pointer}
-.ad-strength{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.ad-strength label{font-size:14px;color:#aeb9c5}
-.ad-strength .hint{margin-top:0}
-.chk{display:flex;align-items:center;gap:6px;cursor:pointer}
-.chk input{accent-color:#4ade80;width:15px;height:15px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f5f5f5;color:#111;min-height:100vh;display:flex;justify-content:center;padding:20px}
+.app{max-width:520px;width:100%;text-align:center;padding:40px 0}
+h1{font-size:28px;font-weight:800;margin-bottom:6px}
+.sub{color:#666;font-size:15px;margin-bottom:24px}
+.dropzone{border:2px dashed #ccc;border-radius:16px;padding:48px 20px;background:#fff;cursor:pointer;transition:.2s}
+.dropzone:hover,.dropzone.over{border-color:#22c55e;background:#f0fdf4}
+.dz-icon{font-size:36px;color:#22c55e;margin-bottom:8px}
+.dz-text{font-size:15px;color:#333}
+.dz-hint{font-size:13px;color:#999;margin-top:6px}
+.linkbtn{background:none;border:none;color:#22c55e;font-weight:700;cursor:pointer;font-size:15px;text-decoration:underline}
+.status{margin-top:20px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;color:#555}
+.spinner{width:20px;height:20px;border:3px solid #e5e5e5;border-top-color:#22c55e;border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.result{margin-top:20px;background:#fff;border:2px solid #22c55e;border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+.check{width:36px;height:36px;background:#22c55e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0}
+.result-text{flex:1;min-width:150px;text-align:left}
+.result-text b{display:block;font-size:14px;word-break:break-all}
+.result-text span{font-size:12px;color:#888}
+.btn{background:#22c55e;color:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:#16a34a}
+.history{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.hist-item{background:#fff;border:1px solid #e5e5e5;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:13px}
+.hist-item .dot{width:8px;height:8px;background:#22c55e;border-radius:50%;flex-shrink:0}
+.hist-item span{flex:1;word-break:break-all}
+.hist-item a{color:#22c55e;font-weight:600;text-decoration:none;white-space:nowrap}
+.footer{margin-top:32px;font-size:12px;color:#aaa}
+.hidden{display:none!important}

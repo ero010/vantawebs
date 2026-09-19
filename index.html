@@ -3,80 +3,40 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ScrubMeta — Private Metadata Remover for Images, Video & PDF</title>
-<meta name="description" content="Remove EXIF, GPS, device, author and software metadata from images, videos and PDFs. 100% client-side, fast, private." />
+<title>ScrubMeta — Remove Metadata</title>
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header class="topbar">
-  <div class="brand"><span class="logo">◍</span> ScrubMeta</div>
-  <div class="badges">
-    <span class="badge green">● 100% offline after load</span>
-    <span class="badge">files never upload</span>
+
+<div class="app">
+  <h1>ScrubMeta</h1>
+  <p class="sub">Drop a file. Get it back clean. Same quality, no metadata.</p>
+
+  <div id="dropzone" class="dropzone">
+    <div class="dz-icon">⇪</div>
+    <div class="dz-text"><b>Drop file here</b> or <button id="pickBtn" class="linkbtn">browse</button></div>
+    <div class="dz-hint">Images, PDFs, Video, Audio</div>
+    <input id="fileInput" type="file" multiple hidden />
   </div>
-</header>
 
-<main class="wrap">
-  <section class="hero">
-    <h1>Drop files. Get clean files.</h1>
-    <p>Strips EXIF, GPS, camera, author, software & container metadata from <b>images, PDFs, video & audio</b> — right in your browser.</p>
-    <div class="trust">
-      <span>✓ No signup</span><span>✓ No server</span><span>✓ Batch + ZIP</span><span>✓ Before / After proof</span>
+  <div id="status" class="status hidden">
+    <div class="spinner"></div>
+    <span id="statusText">Cleaning...</span>
+  </div>
+
+  <div id="result" class="result hidden">
+    <div class="check">&#10003;</div>
+    <div class="result-text">
+      <b id="resultName"></b>
+      <span id="resultInfo"></span>
     </div>
-  </section>
+    <button id="downloadBtn" class="btn">Download Clean File</button>
+  </div>
 
-  <section id="dropzone" class="dropzone" tabindex="0" aria-label="Drop files here">
-    <div class="dz-inner">
-      <div class="dz-icon">⇪</div>
-      <div><b>Drag & drop files here</b> or <button id="pickBtn" class="linkbtn" type="button">browse</button></div>
-      <div class="hint">JPG · PNG · WEBP · GIF · BMP · PDF · MP4 · MOV · WEBM · MKV · MP3 · WAV · M4A · up to 500MB each</div>
-      <input id="fileInput" type="file" multiple hidden />
-    </div>
-  </section>
+  <div id="history" class="history"></div>
 
-  <section class="controls">
-    <span class="pill ok" style="font-size:12px;">full quality output</span>
-    <span class="pill ok" style="font-size:12px;">filenames always randomized</span>
-    <label class="chk"><input id="verify" type="checkbox" checked /> Verify clean after scrub</label>
-    <button id="downloadAll" class="btn secondary" disabled>Download all (.zip)</button>
-    <button id="clearAll" class="btn ghost" disabled>Clear</button>
-  </section>
-
-  <section class="anti-detect">
-    <div class="ad-head">
-      <h3>Post-Processing (anti-detection)</h3>
-      <span class="pill warn">optional — apply pixel-level transforms to reduce AI classifier scores</span>
-    </div>
-    <div class="ad-grid">
-      <label class="chk"><input id="optResample" type="checkbox" checked /> Resample (downscale → upscale)</label>
-      <label class="chk"><input id="optGrain" type="checkbox" checked /> Film grain noise</label>
-      <label class="chk"><input id="optCrop" type="checkbox" checked /> Random micro-crop</label>
-      <label class="chk"><input id="optColor" type="checkbox" checked /> Color profile shift</label>
-      <label class="chk"><input id="optSharpen" type="checkbox" checked /> Light sharpen pass</label>
-      <label class="chk"><input id="optJpegRe" type="checkbox" checked /> Double JPEG recompress</label>
-    </div>
-    <div class="ad-strength">
-      <label>Strength <input id="adStrength" type="range" min="1" max="5" value="3" /> <span id="adVal">3</span>/5</label>
-      <span class="hint">1 = subtle (looks identical) · 5 = aggressive (slight visible change)</span>
-    </div>
-  </section>
-
-  <section id="ffmpegStatus" class="notice hidden">Loading video engine… (one-time ~30MB)</section>
-
-  <section id="list" class="cards"></section>
-
-  <section class="how">
-    <h2>How powerful is it?</h2>
-    <div class="grid3">
-      <div><b>Images</b><p>Full-quality pixel re-render + invisible anti-detection pipeline. Destroys all EXIF / XMP / IPTC / GPS / thumbnails. Applies imperceptible resample, grain, crop, color, sharpen, double JPEG to scramble classifier fingerprints. Output looks identical to original.</p></div>
-      <div><b>PDF</b><p>Rebuilds document, wipes Author / Creator / Producer / dates / XMP / custom keys.</p></div>
-      <div><b>Video & Audio</b><p>FFmpeg <code>-map_metadata -1</code> with stream-copy. Strips title, encoder, GPS, creation_time with zero quality loss and full re-mux.</p></div>
-    </div>
-    <p class="warn"><b>Honest limit:</b> post-processing reduces AI classifier confidence but does not guarantee 0% detection on every tool. Detectors update constantly. For legal AI-disclosure requirements (EU AI Act, TikTok/IG/YouTube policies), this tool does not replace human judgment.</p>
-  </section>
-</main>
-
-<footer>ScrubMeta · client-side only · MIT · <span id="count">0 files cleaned</span></footer>
+  <p class="footer">100% client-side. Files never leave your device.</p>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
