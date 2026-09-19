@@ -35,8 +35,8 @@
   </section>
 
   <section class="controls">
-    <label>Image quality <input id="quality" type="range" min="80" max="100" value="92" /> <span id="qval">92</span></label>
-    <span class="pill ok" style="font-size:12px; margin-left:8px;">filenames always randomized</span>
+    <span class="pill ok" style="font-size:12px;">full quality output</span>
+    <span class="pill ok" style="font-size:12px;">filenames always randomized</span>
     <label class="chk"><input id="verify" type="checkbox" checked /> Verify clean after scrub</label>
     <button id="downloadAll" class="btn secondary" disabled>Download all (.zip)</button>
     <button id="clearAll" class="btn ghost" disabled>Clear</button>
@@ -68,7 +68,7 @@
   <section class="how">
     <h2>How powerful is it?</h2>
     <div class="grid3">
-      <div><b>Images</b><p>Pixel re-render via canvas + anti-detection pipeline. Destroys EXIF / XMP / IPTC / GPS / thumbnails / comments. Applies resample, grain, crop, color shift, sharpen, double JPEG recompress to scramble classifier fingerprints.</p></div>
+      <div><b>Images</b><p>Full-quality pixel re-render + invisible anti-detection pipeline. Destroys all EXIF / XMP / IPTC / GPS / thumbnails. Applies imperceptible resample, grain, crop, color, sharpen, double JPEG to scramble classifier fingerprints. Output looks identical to original.</p></div>
       <div><b>PDF</b><p>Rebuilds document, wipes Author / Creator / Producer / dates / XMP / custom keys.</p></div>
       <div><b>Video & Audio</b><p>FFmpeg <code>-map_metadata -1</code> with stream-copy. Strips title, encoder, GPS, creation_time with zero quality loss and full re-mux.</p></div>
     </div>
