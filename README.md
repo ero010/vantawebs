@@ -1,6 +1,10 @@
-# Vantawebs — Privacy-First Metadata Remover
+# Vantawebs — Free Online Metadata Remover
 
-Strip ALL hidden metadata from files. 100% client-side. Your files never leave your browser.
+**Live tool: https://vantawebs.site**
+
+Strip ALL hidden metadata from files. 100% client-side — your files never leave your browser. No signup, no upload, no tracking.
+
+Every photo you share carries hidden EXIF data: GPS coordinates, camera model, timestamps. AI-generated images now carry C2PA Content Credentials and generator parameters. PDFs leak author names. Vantawebs removes all of it, losslessly, in your browser.
 
 ## What it removes
 
@@ -42,6 +46,18 @@ Vanilla HTML/CSS/JS + picscrub (lossless image stripping) + pdf-lib + JSZip + ff
 
 Removes technical container metadata for privacy. Does not remove invisible content watermarks (e.g. SynthID) and does not replace legally required AI-content disclosure (EU AI Act, platform policies). Use lawfully.
 
-## Domain
+## Privacy guides
 
-Deploy to **vantawebs.site**
+21 free guides live on the site covering every metadata question people actually search for: what EXIF and C2PA are, what Instagram/Facebook/WhatsApp/TikTok strip (and what they keep), how to clean AI art from Midjourney/Stable Diffusion/DALL-E/Firefly before selling, and more. See [/pages/](https://vantawebs.site/pages/).
+
+## Deploy
+
+Static site — push to any host. Currently live on Cloudflare Pages at **https://vantawebs.site**.
+
+```bash
+npx wrangler pages deploy . --project-name=vantawebs
+```
+
+## Contributing
+
+Found a file type that keeps metadata after cleaning? Open an issue with a sample file description (never upload personal photos) and the tags that survived.
