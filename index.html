@@ -3,44 +3,119 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ScrubMeta — Remove Metadata</title>
+<title>ScrubMeta — Premium Metadata Remover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
 
-<div class="app">
-  <h1>ScrubMeta</h1>
-  <p class="sub">Drop a file. Get it back clean. Same quality, no metadata.</p>
-
-  <div id="dropzone" class="dropzone">
-    <div class="dz-icon">⇪</div>
-    <div class="dz-text"><b>Drop file here</b> or <button id="pickBtn" class="linkbtn">browse</button></div>
-    <div class="dz-hint">Images, PDFs, Video, Audio</div>
-    <input id="fileInput" type="file" multiple hidden />
-  </div>
-
-  <div id="status" class="status hidden">
-    <div class="spinner"></div>
-    <span id="statusText">Cleaning...</span>
-  </div>
-
-  <div id="result" class="result hidden">
-    <div class="check">&#10003;</div>
-    <div class="result-text">
-      <b id="resultName"></b>
-      <span id="resultInfo"></span>
+  <nav class="nav">
+    <div class="nav-brand">
+      <div class="nav-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="url(#g1)" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="url(#g1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g1" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs></svg>
+      </div>
+      <span class="nav-name">ScrubMeta</span>
     </div>
-    <button id="downloadBtn" class="btn">Download Clean File</button>
-  </div>
+    <div class="nav-pills">
+      <span class="pill glass">100% Client-Side</span>
+      <span class="pill glass">Zero Upload</span>
+    </div>
+  </nav>
 
-  <div id="history" class="history"></div>
+  <main class="main">
+    <section class="hero">
+      <div class="hero-badge glass">
+        <span class="hero-badge-dot"></span>
+        Premium Metadata Scrubber
+      </div>
+      <h1 class="hero-title">Strip metadata.<br><span class="gradient-text">Keep quality.</span></h1>
+      <p class="hero-desc">Drop any file. We remove EXIF, GPS, author, device info, and AI fingerprints — then return it at full quality. Everything happens in your browser. Nothing touches a server.</p>
+    </section>
 
-  <p class="footer">100% client-side. Files never leave your device.</p>
-</div>
+    <div id="dropzone" class="dropzone glass-card" tabindex="0">
+      <div class="dz-content">
+        <div class="dz-icon-wrap">
+          <svg class="dz-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="2" y="2" width="44" height="44" rx="12" stroke="url(#g2)" stroke-width="2" stroke-dasharray="6 4"/>
+            <path d="M24 16v16M16 24h16" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
+            <defs><linearGradient id="g2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="dz-text">
+          <b>Drop your file here</b>
+          <span>or <button id="pickBtn" class="linkbtn">browse files</button></span>
+        </div>
+        <div class="dz-formats">JPG · PNG · WEBP · PDF · MP4 · MOV · MP3 · WAV</div>
+      </div>
+      <input id="fileInput" type="file" multiple hidden />
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-<script src="app.js"></script>
+    <div id="status" class="status hidden">
+      <div class="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+      </div>
+      <span id="statusText" class="status-text">Processing...</span>
+    </div>
+
+    <div id="result" class="result hidden">
+      <div class="result-card glass-card">
+        <div class="result-check">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" fill="url(#g3)"/>
+            <path d="M10 16l4 4 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="g3" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="result-info">
+          <div class="result-label">Clean file ready</div>
+          <b id="resultName" class="result-name"></b>
+          <span id="resultInfo" class="result-meta"></span>
+        </div>
+        <button id="downloadBtn" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download
+        </button>
+      </div>
+    </div>
+
+    <div id="history" class="history"></div>
+
+    <section class="features">
+      <div class="feature glass-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="4" stroke="#a78bfa" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <b>Full Quality</b>
+        <span>JPEG at 100%, PNG lossless, video stream-copy. Pixel-identical output.</span>
+      </div>
+      <div class="feature glass-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#a78bfa" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <b>Instant</b>
+        <span>Everything runs in your browser. No upload, no wait, no server.</span>
+      </div>
+      <div class="feature glass-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <b>Private</b>
+        <span>Files never leave your device. Zero server contact. 100% offline.</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">ScrubMeta · built for privacy</footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
