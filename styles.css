@@ -38,6 +38,17 @@ code,.mono{font-family:'JetBrains Mono',monospace}
 .pill-offline{background:rgba(52,211,153,.1)!important;border-color:rgba(52,211,153,.2)!important;color:var(--green)!important}
 .pill-link{text-decoration:none;transition:all .2s}
 .pill-link:hover{border-color:rgba(167,139,250,.3)!important;color:var(--text)!important}
+.lang-switch{display:inline-flex;gap:2px;align-items:center;font-size:11px}
+.lang-switch a{color:var(--text3);text-decoration:none;padding:5px 7px;border-radius:8px;font-weight:500}
+.lang-switch a:hover{color:var(--text)}
+.lang-switch a.lang-active{color:var(--purple);font-weight:700}
+
+/* RTL (Arabic) */
+[dir="rtl"] body{letter-spacing:0}
+[dir="rtl"] .hero-title,[dir="rtl"] .nav-name,[dir="rtl"] .dz-formats{letter-spacing:0}
+[dir="rtl"] .meta-row .meta-cat{min-width:0}
+[dir="rtl"] .file-size{direction:ltr;unicode-bidi:embed}
+[dir="rtl"] .license-input{font-family:'Inter',system-ui,sans-serif}
 .glass{background:var(--glass);border:1px solid var(--glass-border);color:var(--text2);backdrop-filter:blur(12px)}
 
 .main{width:100%;max-width:760px;padding:0 24px 60px;position:relative;z-index:2}

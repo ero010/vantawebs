@@ -2,6 +2,13 @@
 (function(){
 'use strict';
 
+// i18n: t() comes from i18n.js (loaded before app.js). Fallback = key itself.
+var t = (window.VTx && window.VTx.t.bind(window.VTx)) || function(k){ return k; };
+function catLabel(cat) {
+  var m = {'Device Info':'cat_device','Location':'cat_location','Date & Time':'cat_dates','Software':'cat_software','Author & Rights':'cat_author','AI Provenance':'cat_ai','Embedded':'cat_embedded','PDF Metadata':'cat_pdf'};
+  return m[cat] ? t(m[cat]) : cat;
+}
+
 const dz = document.getElementById('dropzone');
 const fi = document.getElementById('fileInput');
 const statusEl = document.getElementById('status');
@@ -174,9 +181,9 @@ function findBytes(arr, pattern) {
 function renderMetadataPreview(meta) {
   let html = '';
   for(const [cat, items] of Object.entries(meta.categories)) {
-    html += '<div class="meta-row"><span class="meta-cat">'+cat+'</span><div class="meta-val">';
+    html += '<div class="meta-row"><span class="meta-cat">'+escapeHtml(catLabel(cat))+'</span><div class="meta-val">';
     for(const [k,v] of Object.entries(items)) {
-      html += '<div>'+k+': '+escapeHtml(String(v).substring(0,120))+' <span class="removed">REMOVED</span></div>';
+      html += '<div>'+k+': '+escapeHtml(String(v).substring(0,120))+' <span class="removed">'+t('removed')+'</span></div>';
     }
     html += '</div></div>';
   }
@@ -186,16 +193,16 @@ function renderMetadataPreview(meta) {
 function renderMetadataPanel(meta, cleaned) {
   let html = '';
   for(const [cat, items] of Object.entries(meta.categories)) {
-    html += '<div class="meta-category"><div class="meta-cat-label">'+cat+'</div>';
+    html += '<div class="meta-category"><div class="meta-cat-label">'+escapeHtml(catLabel(cat))+'</div>';
     for(const [k,v] of Object.entries(items)) {
       html += '<div class="meta-item"><span class="mk">'+k+':</span><span class="mv">'+escapeHtml(String(v).substring(0,120))+'</span>';
-      html += cleaned ? '<span class="mg">CLEAN</span>' : '<span class="mr">REMOVED</span>';
+      html += cleaned ? '<span class="mg">'+t('clean')+'</span>' : '<span class="mr">'+t('removed')+'</span>';
       html += '</div>';
     }
     html += '</div>';
   }
   if(cleaned && meta.totalTags === 0) {
-    html = '<div class="meta-item"><span class="mg">No metadata found — file is clean</span></div>';
+    html = '<div class="meta-item"><span class="mg">'+t('file_clean')+'</span></div>';
   }
   return html;
 }
@@ -290,16 +297,16 @@ async function handleFiles(files) {
   const rejected = files.length - supported.length;
 
   if(!supported.length) {
-    showStatus('Unsupported file type');
-    statusText.textContent = 'Supported: JPG, PNG, WebP, HEIC, PDF, MP4, MOV';
+    showStatus(t('unsupported'));
+    statusText.textContent = t('supported_list');
     setTimeout(() => statusEl.classList.add('hidden'), 3000);
     return;
   }
 
   // Check batch limit
   if(!proUnlocked && supported.length > FREE_BATCH_LIMIT) {
-    showStatus('Free tier: max ' + FREE_BATCH_LIMIT + ' files per batch');
-    statusText.textContent = 'Drop fewer files, or unlock Pro for unlimited batches';
+    showStatus(t('free_limit', {n: FREE_BATCH_LIMIT}));
+    statusText.textContent = t('free_hint');
     setTimeout(() => statusEl.classList.add('hidden'), 3000);
     return;
   }
@@ -315,7 +322,7 @@ async function handleFiles(files) {
   fileCountEl.classList.add('hidden');
   batchResults.innerHTML = '';
   processedFiles = [];
-  showStatus('Processing ' + supported.length + ' files...');
+  showStatus(t('processing_files', {n: supported.length}));
   progressBar.classList.remove('hidden');
   progressFill.style.width = '0%';
 
@@ -326,7 +333,7 @@ async function handleFiles(files) {
 
   for(let i = 0; i < supported.length; i++) {
     const file = supported[i];
-    statusText.textContent = 'Processing ' + (i+1) + '/' + supported.length + ': ' + file.name;
+    statusText.textContent = t('processing_one', {i: i+1, n: supported.length, name: file.name});
     progressFill.style.width = ((i / supported.length) * 100) + '%';
 
     try {
@@ -394,11 +401,11 @@ function updateFileCard(index, state, data) {
     card.className = 'file-card card-clean';
     let metaHtml = '';
     if(data.metaBefore.totalTags > 0) {
-      metaHtml = '<button class="file-meta-toggle" data-idx="'+index+'">Show metadata found ('+data.metaBefore.totalTags+' items)</button>'
+      metaHtml = '<button class="file-meta-toggle" data-idx="'+index+'">'+t('show_meta', {n: data.metaBefore.totalTags})+'</button>'
         + '<div class="file-meta-panel hidden" data-panel="'+index+'">'
         + renderMetadataPanel(data.metaBefore, true) + '</div>';
     } else {
-      metaHtml = '<div style="font-size:11px;color:var(--green);margin-top:6px">No metadata found</div>';
+      metaHtml = '<div style="font-size:11px;color:var(--green);margin-top:6px">'+t('no_meta')+'</div>';
     }
 
     card.innerHTML = '<div class="file-card-top">'
@@ -408,7 +415,7 @@ function updateFileCard(index, state, data) {
       + '<div class="file-actions">'
       + '<button class="btn-sm btn-download" data-idx="'+index+'">'
       + '<svg viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-      + 'Download</button>'
+      + t('download') + '</button>'
       + '</div></div>' + metaHtml;
 
     // Wire download
@@ -421,8 +428,8 @@ function updateFileCard(index, state, data) {
         const panel = card.querySelector('[data-panel="'+index+'"]');
         panel.classList.toggle('hidden');
         toggle.textContent = panel.classList.contains('hidden')
-          ? 'Show metadata found ('+data.metaBefore.totalTags+' items)'
-          : 'Hide metadata found';
+          ? t('show_meta', {n: data.metaBefore.totalTags})
+          : t('hide_meta');
       };
     }
   }
@@ -451,7 +458,7 @@ function downloadSingle(index) {
 downloadAllBtn.onclick = async () => {
   if(!processedFiles.length) return;
   downloadAllBtn.disabled = true;
-  downloadAllBtn.textContent = 'Creating ZIP...';
+  downloadAllBtn.textContent = t('creating_zip');
   try {
     const zip = new JSZip();
     for(const entry of processedFiles) {
@@ -464,10 +471,10 @@ downloadAllBtn.onclick = async () => {
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 5000);
   } catch(e) {
-    alert('ZIP creation failed: ' + e.message);
+    alert(t('zip_failed', {msg: e.message}));
   }
   downloadAllBtn.disabled = false;
-  downloadAllBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Download All (ZIP)';
+  downloadAllBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> ' + t('download_all');
 };
 
 clearAllBtn.onclick = () => {
@@ -503,10 +510,10 @@ function validateLicenseKey(key) {
 
 function updateProUI() {
   if(proUnlocked) {
-    proBtn.textContent = 'Pro \u2713';
+    proBtn.textContent = t('pro_on');
     proBtn.classList.add('pill-pro-active');
   } else {
-    proBtn.textContent = 'Unlock Pro';
+    proBtn.textContent = t('unlock_pro');
     proBtn.classList.remove('pill-pro-active');
   }
 }
@@ -516,10 +523,10 @@ proBtn.onclick = () => {
   if(proUnlocked) {
     licenseInput.value = localStorage.getItem('vanta_pro_key') || '';
     licenseInput.disabled = true;
-    activateBtn.textContent = 'Activated';
+    activateBtn.textContent = t('activated_btn');
     activateBtn.disabled = true;
     proStatus.className = 'pro-status pro-ok';
-    proStatus.textContent = 'Pro is active on this browser.';
+    proStatus.textContent = t('pro_active_msg');
     proStatus.classList.remove('hidden');
   }
 };
@@ -534,13 +541,13 @@ activateBtn.onclick = () => {
     localStorage.setItem('vanta_pro', 'true');
     localStorage.setItem('vanta_pro_key', key);
     proStatus.className = 'pro-status pro-ok';
-    proStatus.textContent = 'Pro activated! Unlimited batches unlocked.';
+    proStatus.textContent = t('pro_ok_msg');
     proStatus.classList.remove('hidden');
     updateProUI();
     setTimeout(() => proModal.classList.add('hidden'), 1500);
   } else {
     proStatus.className = 'pro-status pro-err';
-    proStatus.textContent = 'Invalid license key. Please check and try again.';
+    proStatus.textContent = t('invalid_key');
     proStatus.classList.remove('hidden');
   }
 };

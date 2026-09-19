@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vantawebs — مزيل البيانات الوصفية المجاني عبر الإنترنت (EXIF، GPS، C2PA)</title>
+  <meta name="description" content="أزل بيانات EXIF وموقع GPS وبصمات الذكاء الاصطناعي وبيانات اعتماد المحتوى C2PA من الصور وملفات PDF والفيديو. مجاني، دون فقدان الجودة، ويعمل بالكامل داخل متصفحك — لا تغادر ملفاتك جهازك أبداً.">
+  <meta name="keywords" content="remove metadata, remove exif, strip metadata, remove gps from photo, remove c2pa, exif remover, metadata scrubber, photo privacy">
+  <link rel="canonical" href="https://vantawebs.site/ar/">
+  <link rel="alternate" hreflang="en" href="https://vantawebs.site/">
+  <link rel="alternate" hreflang="ar" href="https://vantawebs.site/ar/">
+  <link rel="alternate" hreflang="fr" href="https://vantawebs.site/fr/">
+  <link rel="alternate" hreflang="es" href="https://vantawebs.site/es/">
+  <link rel="alternate" hreflang="x-default" href="https://vantawebs.site/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:title" content="Vantawebs — مزيل البيانات الوصفية المجاني عبر الإنترنت">
+  <meta property="og:description" content="أزل بيانات EXIF وGPS ومصدر الذكاء الاصطناعي وجميع البيانات الوصفية المخفية. دون رفع. دون تتبع. مجاني 100%.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vantawebs.site/ar/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Vantawebs",
+    "url": "https://vantawebs.site/ar/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "أداة مجانية عبر الإنترنت لإزالة بيانات EXIF وGPS وIPTC وXMP وبيانات اعتماد المحتوى C2PA وجميع البيانات الوصفية المخفية من الصور وملفات PDF والفيديو. معالجة كاملة داخل المتصفح.",
+    "featureList": "إزالة EXIF، إزالة GPS، إزالة C2PA، تنظيف بيانات PDF الوصفية، إزالة بيانات الفيديو الوصفية، معالجة الدفعات، مخرجات دون فقدان الجودة",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "127" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "ما هي البيانات الوصفية للصور (بيانات EXIF)؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "بيانات EXIF هي معلومات مخفية مضمنة في ملفات الصور: طراز الكاميرا، وإحداثيات GPS، وتاريخ الالتقاط، وإعدادات العدسة، وأحياناً اسم المؤلف. معظم الناس يشاركون الصور دون أن يعلموا أن هذه البيانات ترافق الملف." }
+      },
+      {
+        "@type": "Question",
+        "name": "هل من الآمن رفع الملفات إلى Vantawebs؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "نعم — يعالج Vantawebs كل شيء في متصفحك باستخدام JavaScript. لا تُرفع ملفاتك إلى أي خادم أبداً. يمكنك التحقق من ذلك بفصل الاتصال بالإنترنت بعد تحميل الصفحة؛ وستستمر الأداة في العمل." }
+      },
+      {
+        "@type": "Question",
+        "name": "هل يقلل Vantawebs من جودة الصورة؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "لا. يزيل Vantawebs البيانات الوصفية على مستوى الحاوية الثنائية دون إعادة ترميز البكسلات، لذلك تكون المخرجات مطابقة للأصل تماماً." }
+      },
+      {
+        "@type": "Question",
+        "name": "هل يزيل Vantawebs بيانات اعتماد المحتوى C2PA وبيانات الذكاء الاصطناعي؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "نعم. يزيل Vantawebs مقاطع C2PA/JUMBF ووسوم نوع المصدر الرقمي IPTC والمعاملات المضمنة من أدوات مثل Midjourney وDALL-E وStable Diffusion وAdobe Firefly." }
+      },
+      {
+        "@type": "Question",
+        "name": "ما صيغ الملفات التي يدعمها Vantawebs؟",
+        "acceptedAnswer": { "@type": "Answer", "text": "JPEG وPNG وWebP وHEIC وGIF وTIFF وPDF وMP4 وMOV وWebM وMKV وMP3 وWAV. تسمح الخطة المجانية بما يصل إلى 10 ملفات لكل دفعة." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "كيفية إزالة البيانات الوصفية من صورة",
+    "step": [
+      { "@type": "HowToStep", "name": "أسقط ملفك", "text": "اسحب صورة أو ملف PDF أو فيديو وأفلته في منطقة الإسقاط في Vantawebs." },
+      { "@type": "HowToStep", "name": "راجع ما تم العثور عليه", "text": "يعرض لك Vantawebs بالضبط البيانات الوصفية المكتشفة — GPS وطراز الكاميرا والمؤلف ووسوم الذكاء الاصطناعي — بلغة واضحة." },
+      { "@type": "HowToStep", "name": "نزّل الملف النظيف", "text": "نزّل ملفك بعد إزالة جميع البيانات الوصفية. تبقى الجودة محفوظة بكسلاً ببكسل." }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2309090b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-weight='800' font-size='22' fill='%23a78bfa' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#09090b">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <nav class="nav">
+    <a href="/ar/" class="nav-brand" style="text-decoration:none;color:inherit">
+      <svg class="nav-logo" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 2L4 7v7c0 6.075 4.25 11.725 10 13 5.75-1.275 10-6.925 10-13V7L14 2z" stroke="url(#navGrad)" stroke-width="2" fill="none"/>
+        <path d="M10 14l3 3 5-5" stroke="url(#navGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="navGrad" x1="4" y1="2" x2="24" y2="28"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+      </svg>
+      <span class="nav-name">Vantawebs</span>
+    </a>
+    <div class="nav-pills">
+      <span class="pill glass">100% داخل المتصفح</span>
+      <span class="pill glass">صفر رفع</span>
+      <a href="/pages/" class="pill glass pill-link">الأدلة</a>
+      <span class="lang-switch">
+        <a href="/">EN</a>
+        <a href="/ar/" class="lang-active">عربي</a>
+        <a href="/fr/">FR</a>
+        <a href="/es/">ES</a>
+      </span>
+      <span id="offlineIndicator" class="pill glass pill-offline hidden">جاهز دون اتصال</span>
+      <button id="proBtn" class="pill glass pill-pro">فتح Pro</button>
+    </div>
+  </nav>
+
+  <main class="main">
+    <section class="hero">
+      <div class="hero-badge glass">
+        <span class="hero-badge-dot"></span>
+        أداة تنظيف البيانات الوصفية التي تضع الخصوصية أولاً
+      </div>
+      <h1 class="hero-title">أزل البيانات الوصفية.<br><span class="gradient-text">حافظ على الجودة.</span></h1>
+      <p class="hero-desc">أسقط أي ملف. نزيل بيانات EXIF وGPS ومعلومات المؤلف وبيانات الجهاز وبصمات الذكاء الاصطناعي وبيانات اعتماد المحتوى C2PA — بجودة كاملة. كل شيء يحدث في متصفحك. لا يلمس أي خادم.</p>
+    </section>
+
+    <div id="dropzone" class="dropzone glass-card" tabindex="0">
+      <div class="dz-content">
+        <div class="dz-icon-wrap">
+          <svg class="dz-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4L8 12v12c0 10.125 6.875 19.625 16 22 9.125-2.375 16-11.875 16-22V12L24 4z" stroke="url(#dzGrad)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+            <path d="M18 24l4 4 8-8" stroke="url(#dzGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="dzGrad" x1="8" y1="4" x2="40" y2="38"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="dz-text">
+          <b>أسقط ملفاتك هنا</b>
+          <span>أو <button id="pickBtn" class="linkbtn">تصفح الملفات</button></span>
+        </div>
+        <div class="dz-formats">JPG · PNG · WEBP · HEIC · PDF · MP4 · MOV</div>
+        <div id="fileCount" class="dz-count hidden"></div>
+      </div>
+      <input id="fileInput" type="file" multiple accept="image/*,video/*,.pdf" hidden>
+    </div>
+
+    <div id="instantPreview" class="instant-preview glass-card hidden">
+      <div class="preview-header">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#f59e0b" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>تم العثور على بيانات وصفية في هذا الملف</span>
+        <button id="previewClose" class="preview-close">&times;</button>
+      </div>
+      <div id="previewMeta" class="preview-meta"></div>
+      <button id="previewClean" class="btn-primary btn-clean-now">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 2.5l-11 11M2.5 2.5l11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        نظّفه الآن
+      </button>
+    </div>
+
+    <div id="status" class="status hidden">
+      <div class="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+      </div>
+      <span id="statusText" class="status-text">جارٍ المعالجة...</span>
+      <div id="progressBar" class="progress-bar hidden">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="batchResults" class="batch-results"></div>
+
+    <div id="batchActions" class="batch-actions hidden">
+      <button id="downloadAllBtn" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        تنزيل الكل (ZIP)
+      </button>
+      <button id="clearAllBtn" class="btn-secondary">مسح</button>
+    </div>
+
+    <section class="features">
+      <div class="feature glass-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 6v5c0 5 3.5 9.5 7 10.5 3.5-1 7-5.5 7-10.5V6L10 2z" stroke="#a78bfa" stroke-width="1.5" fill="none"/></svg>
+        </div>
+        <b>دون فقدان الجودة</b>
+        <span>إزالة البيانات الوصفية على المستوى الثنائي. دون إعادة ترميز. مخرجات مطابقة للبكسل.</span>
+      </div>
+      <div class="feature glass-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="3" stroke="#a78bfa" stroke-width="1.5"/><path d="M7 10l3 3 3-3" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <b>واعٍ بمصدر الذكاء الاصطناعي</b>
+        <span>يزيل بيانات اعتماد المحتوى C2PA ووسوم مولدات الذكاء الاصطناعي وحقول نوع المصدر الرقمي.</span>
+      </div>
+      <div class="feature glass-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.5 5h5l-4 3.5 1.5 5L10 13l-5 2.5L6.5 10.5 3 7h5z" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <b>خاص</b>
+        <span>لا تغادر الملفات جهازك أبداً. لا رفع، لا خادم، ولا حاجة لحساب.</span>
+      </div>
+    </section>
+
+    <section class="seo-section glass-card">
+      <h2>ما المخفي في ملفاتك؟</h2>
+      <p>كل صورة تلتقطها تتضمن <strong>بيانات EXIF</strong>: طراز الكاميرا، و<strong>إحداثيات GPS</strong> الدقيقة لمكان الالتقاط، والتاريخ والوقت، وإعدادات العدسة، وأحياناً اسمك. تحمل ملفات PDF أسماء المؤلفين وبرامج التحرير. تخزن الفيديوهات معلومات الجهاز والموقع. وتحمل الصور المولدة بالذكاء الاصطناعي الآن <strong>بيانات اعتماد المحتوى C2PA</strong> ومعاملات المولد. يزيل Vantawebs كل ذلك — دون فقدان الجودة، في متصفحك، مجاناً.</p>
+      <div class="guide-links">
+        <a href="/pages/what-is-exif-data">ما هي بيانات EXIF؟</a>
+        <a href="/pages/what-is-c2pa">ما هو C2PA؟</a>
+        <a href="/pages/view-exif-data-online">افحص البيانات الوصفية لصورتك</a>
+        <a href="/pages/">جميع أدلة الخصوصية ←</a>
+      </div>
+    </section>
+
+    <section class="seo-section glass-card">
+      <h2>الأسئلة الشائعة</h2>
+      <div class="faq-item">
+        <h3>هل تُرفع ملفاتي إلى أي مكان؟</h3>
+        <p>لا. كل شيء يعمل في متصفحك باستخدام JavaScript. افصل الاتصال بالإنترنت بعد تحميل الصفحة وستستمر الأداة في العمل.</p>
+      </div>
+      <div class="faq-item">
+        <h3>هل سيقلل هذا من جودة صورتي؟</h3>
+        <p>لا. تُزال البيانات الوصفية على المستوى الثنائي دون إعادة ترميز البكسلات. المخرجات مطابقة تماماً للأصل.</p>
+      </div>
+      <div class="faq-item">
+        <h3>هل يزيل بيانات توليد الذكاء الاصطناعي؟</h3>
+        <p>نعم — بيانات اعتماد المحتوى C2PA ووسوم نوع المصدر الرقمي IPTC والمعاملات المضمنة من Midjourney وDALL-E وStable Diffusion وAdobe Firefly.</p>
+      </div>
+      <div class="faq-item">
+        <h3>ما الصيغ المدعومة؟</h3>
+        <p>JPEG وPNG وWebP وHEIC وGIF وTIFF وPDF وMP4 وMOV وWebM وMKV وMP3 وWAV. الخطة المجانية: حتى 10 ملفات لكل دفعة.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Vantawebs · صُنع من أجل الخصوصية · <a href="https://vantawebs.site">vantawebs.site</a></span>
+    <nav class="footer-nav">
+      <a href="/pages/">الأدلة</a> ·
+      <a href="/pages/what-is-exif-data">ما هي بيانات EXIF؟</a> ·
+      <a href="/pages/how-to-remove-c2pa">إزالة C2PA</a> ·
+      <a href="/pages/view-exif-data-online">افحص البيانات الوصفية لصورتك</a>
+    </nav>
+  </footer>
+
+  <div id="proModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h2>فتح Vantawebs Pro</h2>
+        <button id="modalClose" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="pro-features">
+          <div class="pro-feature"><span class="pro-check">&#10003;</span> حجم دفعات غير محدود (المجاني: 10 ملفات)</div>
+          <div class="pro-feature"><span class="pro-check">&#10003;</span> معالجة ذات أولوية</div>
+          <div class="pro-feature"><span class="pro-check">&#10003;</span> شراء لمرة واحدة، دون اشتراك</div>
+        </div>
+        <div class="pro-key-input">
+          <input id="licenseKey" type="text" placeholder="أدخل مفتاح الترخيص" class="license-input">
+          <button id="activateBtn" class="btn-primary">تفعيل</button>
+        </div>
+        <p class="pro-note">يُخزن مفتاح الترخيص محلياً في متصفحك. لا حاجة لحساب.</p>
+        <div id="proStatus" class="pro-status hidden"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/picscrub@1.2.0/dist/picscrub.min.js"></script>
+  <script src="../i18n.js"></script>
+  <script src="../app.js"></script>
+</body>
+</html>
