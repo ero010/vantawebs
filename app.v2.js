@@ -68,12 +68,16 @@ async function showInstantPreview(file) {
   } catch(e) { /* no metadata or unsupported */ }
 }
 previewClose.onclick = () => { instantPreview.classList.add('hidden'); previewFile = null; };
-previewClean.onclick = () => {
+previewClean.onclick = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  console.log('previewClean clicked, previewFile:', previewFile);
   if(previewFile) {
     instantPreview.classList.add('hidden');
     skipPreview = true;
-    handleFiles([previewFile]);
+    const f = previewFile;
     previewFile = null;
+    handleFiles([f]);
   }
 };
 
