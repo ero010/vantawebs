@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ScrubMeta — Private Metadata Remover for Images, Video & PDF</title>
+<meta name="description" content="Remove EXIF, GPS, device, author and software metadata from images, videos and PDFs. 100% client-side, fast, private." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">◍</span> ScrubMeta</div>
+  <div class="badges">
+    <span class="badge green">● 100% offline after load</span>
+    <span class="badge">files never upload</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Drop files. Get clean files.</h1>
+    <p>Strips EXIF, GPS, camera, author, software & container metadata from <b>images, PDFs, video & audio</b> — right in your browser.</p>
+    <div class="trust">
+      <span>✓ No signup</span><span>✓ No server</span><span>✓ Batch + ZIP</span><span>✓ Before / After proof</span>
+    </div>
+  </section>
+
+  <section id="dropzone" class="dropzone" tabindex="0" aria-label="Drop files here">
+    <div class="dz-inner">
+      <div class="dz-icon">⇪</div>
+      <div><b>Drag & drop files here</b> or <button id="pickBtn" class="linkbtn" type="button">browse</button></div>
+      <div class="hint">JPG · PNG · WEBP · GIF · BMP · PDF · MP4 · MOV · WEBM · MKV · MP3 · WAV · M4A · up to 500MB each</div>
+      <input id="fileInput" type="file" multiple hidden />
+    </div>
+  </section>
+
+  <section class="controls">
+    <label>Image quality <input id="quality" type="range" min="80" max="100" value="92" /> <span id="qval">92</span></label>
+    <label class="chk"><input id="randomize" type="checkbox" checked /> Randomize output filename</label>
+    <label class="chk"><input id="verify" type="checkbox" checked /> Verify clean after scrub</label>
+    <button id="downloadAll" class="btn secondary" disabled>Download all (.zip)</button>
+    <button id="clearAll" class="btn ghost" disabled>Clear</button>
+  </section>
+
+  <section id="ffmpegStatus" class="notice hidden">Loading video engine… (one-time ~30MB)</section>
+
+  <section id="list" class="cards"></section>
+
+  <section class="how">
+    <h2>How powerful is it?</h2>
+    <div class="grid3">
+      <div><b>Images</b><p>Pixel re-render via canvas. Destroys all EXIF / XMP / IPTC / GPS / thumbnail / comment chunks. No copy-paste of metadata possible.</p></div>
+      <div><b>PDF</b><p>Rebuilds document, wipes Author / Creator / Producer / dates / XMP / custom keys.</p></div>
+      <div><b>Video & Audio</b><p>FFmpeg <code>-map_metadata -1</code> with stream-copy. Strips title, encoder, GPS, creation_time with zero quality loss and full re-mux.</p></div>
+    </div>
+    <p class="warn"><b>Honest limit:</b> this removes <i>technical metadata</i> for privacy. It does not remove invisible pixel/audio watermarks (e.g. SynthID) and is not a substitute for legally required AI-content disclosure where applicable (EU AI Act, TikTok / Instagram / YouTube policies).</p>
+  </section>
+</main>
+
+<footer>ScrubMeta · client-side only · MIT · <span id="count">0 files cleaned</span></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
