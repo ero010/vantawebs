@@ -102,16 +102,16 @@
       <span class="pill glass">100% داخل المتصفح</span>
       <span class="pill glass">صفر رفع</span>
       <a href="/pages/" class="pill glass pill-link">الأدلة</a>
-      <span class="lang-switch">
-        <a href="/">EN</a>
-        <a href="/ar/" class="lang-active">عربي</a>
-        <a href="/fr/">FR</a>
-        <a href="/es/">ES</a>
-      </span>
       <span id="offlineIndicator" class="pill glass pill-offline hidden">جاهز دون اتصال</span>
-      <button id="proBtn" class="pill glass pill-pro">فتح Pro</button>
     </div>
   </nav>
+
+  <div class="lang-bar">
+    <a href="/">EN</a>
+    <a href="/ar/" class="lang-active">عربي</a>
+    <a href="/fr/">FR</a>
+    <a href="/es/">ES</a>
+  </div>
 
   <main class="main">
     <section class="hero">
@@ -243,28 +243,6 @@
     </nav>
   </footer>
 
-  <div id="proModal" class="modal hidden">
-    <div class="modal-overlay"></div>
-    <div class="modal-card glass-card">
-      <div class="modal-header">
-        <h2>فتح Vantawebs Pro</h2>
-        <button id="modalClose" class="modal-close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="pro-features">
-          <div class="pro-feature"><span class="pro-check">&#10003;</span> حجم دفعات غير محدود (المجاني: 10 ملفات)</div>
-          <div class="pro-feature"><span class="pro-check">&#10003;</span> معالجة ذات أولوية</div>
-          <div class="pro-feature"><span class="pro-check">&#10003;</span> شراء لمرة واحدة، دون اشتراك</div>
-        </div>
-        <div class="pro-key-input">
-          <input id="licenseKey" type="text" placeholder="أدخل مفتاح الترخيص" class="license-input">
-          <button id="activateBtn" class="btn-primary">تفعيل</button>
-        </div>
-        <p class="pro-note">يُخزن مفتاح الترخيص محلياً في متصفحك. لا حاجة لحساب.</p>
-        <div id="proStatus" class="pro-status hidden"></div>
-      </div>
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>

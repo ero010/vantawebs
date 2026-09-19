@@ -27,8 +27,6 @@ const previewClose = document.getElementById('previewClose');
 const offlineIndicator = document.getElementById('offlineIndicator');
 
 let processedFiles = [];
-let proUnlocked = localStorage.getItem('vanta_pro') === 'true';
-const FREE_BATCH_LIMIT = 10;
 
 /* ===== UTILS ===== */
 const extOf = n => (n.split('.').pop()||'').toLowerCase();
@@ -303,14 +301,6 @@ async function handleFiles(files) {
     return;
   }
 
-  // Check batch limit
-  if(!proUnlocked && supported.length > FREE_BATCH_LIMIT) {
-    showStatus(t('free_limit', {n: FREE_BATCH_LIMIT}));
-    statusText.textContent = t('free_hint');
-    setTimeout(() => statusEl.classList.add('hidden'), 3000);
-    return;
-  }
-
   // Show instant preview for single file
   if(supported.length === 1) {
     showInstantPreview(supported[0]);
@@ -491,69 +481,6 @@ function showStatus(msg) {
   batchActions.classList.add('hidden');
   statusText.textContent = msg;
 }
-
-/* ===== PRO TIER ===== */
-const proBtn = document.getElementById('proBtn');
-const proModal = document.getElementById('proModal');
-const modalClose = document.getElementById('modalClose');
-const activateBtn = document.getElementById('activateBtn');
-const licenseInput = document.getElementById('licenseKey');
-const proStatus = document.getElementById('proStatus');
-
-function validateLicenseKey(key) {
-  if(!key || key.length !== 32) return false;
-  if(!/^[a-f0-9]+$/i.test(key)) return false;
-  let sum = 0;
-  for(let i = 0; i < key.length; i++) sum += key.charCodeAt(i);
-  return sum % 7 === 0;
-}
-
-function updateProUI() {
-  if(proUnlocked) {
-    proBtn.textContent = t('pro_on');
-    proBtn.classList.add('pill-pro-active');
-  } else {
-    proBtn.textContent = t('unlock_pro');
-    proBtn.classList.remove('pill-pro-active');
-  }
-}
-
-proBtn.onclick = () => {
-  proModal.classList.remove('hidden');
-  if(proUnlocked) {
-    licenseInput.value = localStorage.getItem('vanta_pro_key') || '';
-    licenseInput.disabled = true;
-    activateBtn.textContent = t('activated_btn');
-    activateBtn.disabled = true;
-    proStatus.className = 'pro-status pro-ok';
-    proStatus.textContent = t('pro_active_msg');
-    proStatus.classList.remove('hidden');
-  }
-};
-
-modalClose.onclick = () => proModal.classList.add('hidden');
-proModal.querySelector('.modal-overlay').onclick = () => proModal.classList.add('hidden');
-
-activateBtn.onclick = () => {
-  const key = licenseInput.value.trim();
-  if(validateLicenseKey(key)) {
-    proUnlocked = true;
-    localStorage.setItem('vanta_pro', 'true');
-    localStorage.setItem('vanta_pro_key', key);
-    proStatus.className = 'pro-status pro-ok';
-    proStatus.textContent = t('pro_ok_msg');
-    proStatus.classList.remove('hidden');
-    updateProUI();
-    setTimeout(() => proModal.classList.add('hidden'), 1500);
-  } else {
-    proStatus.className = 'pro-status pro-err';
-    proStatus.textContent = t('invalid_key');
-    proStatus.classList.remove('hidden');
-  }
-};
-
-licenseInput.onkeydown = e => { if(e.key === 'Enter') activateBtn.click(); };
-updateProUI();
 
 /* ===== PWA ===== */
 if('serviceWorker' in navigator) {

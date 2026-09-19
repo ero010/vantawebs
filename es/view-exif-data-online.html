@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ver datos EXIF en línea — Descubre lo oculto en tu foto</title>
+  <title>Ver datos EXIF en línea — Descubre qué oculta tu foto</title>
   <meta name="description" content="Ve datos EXIF en línea gratis: inspecciona GPS, cámara, software, marcas de tiempo y firmas C2PA ocultos en cualquier foto. Sin subir nada.">
-  <meta property="og:title" content="Ver datos EXIF en línea — Descubre lo oculto en tu foto">
-  <meta property="og:description" content="Inspecciona el GPS, la cámara, el software y los datos C2PA ocultos en cualquier foto — y límpialos en un clic, en tu navegador.">
+  <meta property="og:title" content="Ver datos EXIF en línea — Descubre qué oculta tu foto">
+  <meta property="og:description" content="Inspecciona el GPS, la cámara, el software y los datos C2PA ocultos en cualquier foto — y límpialos con un clic, en tu navegador.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://vantawebs.site/es/view-exif-data-online">
   <link rel="canonical" href="https://vantawebs.site/es/view-exif-data-online">
@@ -34,11 +34,13 @@
     .nav-name{font-weight:700;font-size:17px;letter-spacing:-.3px}
     .nav-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
     .pill{font-size:11px;padding:5px 10px;border-radius:999px;font-weight:500;white-space:nowrap}
+    .pill-link{text-decoration:none;transition:all .2s}
+    .pill-link:hover{border-color:rgba(167,139,250,.3)!important;color:var(--text)!important}
     .glass{background:var(--glass);border:1px solid var(--glass-border);color:var(--text2);backdrop-filter:blur(12px)}
-    .lang-switch{display:flex;gap:10px;font-size:12px;justify-content:center;padding:0 24px 8px;position:relative;z-index:2}
-    .lang-switch a{color:var(--purple);text-decoration:none}
-    .lang-switch a:hover{text-decoration:underline}
-    .lang-switch .active{color:var(--text);font-weight:600}
+    .lang-bar{display:flex;gap:14px;justify-content:center;align-items:center;position:relative;z-index:2;margin:0 0 8px;font-size:12px}
+    .lang-bar a{color:var(--text3);text-decoration:none;font-weight:500;padding:2px 4px}
+    .lang-bar a:hover{color:var(--text)}
+    .lang-bar a.lang-active{color:var(--purple);font-weight:700}
     .main{width:100%;max-width:760px;padding:0 24px 60px;position:relative;z-index:2}
     .article-hero{padding:60px 0 20px;text-align:center}
     .article-hero h1{font-size:clamp(28px,5vw,42px);font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px}
@@ -126,15 +128,17 @@
       <span class="nav-name">Vantawebs</span>
     </a>
     <div class="nav-pills">
-      <span class="pill glass">100 % en tu navegador</span>
-      <span class="pill glass">Sin subidas</span>
+      <span class="pill glass">100% En tu navegador</span>
+      <span class="pill glass">Cero subidas</span>
+      <a href="/es/" class="pill glass pill-link">Guías</a>
     </div>
   </nav>
-  <div class="lang-switch">
-    <a href="https://vantawebs.site/pages/view-exif-data-online">EN</a>
-    <a href="https://vantawebs.site/ar/view-exif-data-online">AR</a>
-    <a href="https://vantawebs.site/fr/view-exif-data-online">FR</a>
-    <span class="active">ES</span>
+
+  <div class="lang-bar">
+    <a href="/pages/view-exif-data-online">EN</a>
+    <a href="/ar/view-exif-data-online">عربي</a>
+    <a href="/fr/view-exif-data-online">FR</a>
+    <a href="/es/view-exif-data-online" class="lang-active">ES</a>
   </div>
 
   <main class="main">
@@ -145,20 +149,20 @@
       </div>
 
       <div class="article-body">
-<p><strong>Te sorprendería lo que confiesan tus fotos.</strong> Un JPEG de apariencia inocente puede revelar las coordenadas GPS exactas de tu casa, el modelo de iPhone o cámara que tienes, la fecha, hora y zona horaria precisas en que la tomaste, y cada app que la ha tocado desde entonces — Lightroom, Snapseed, Photoshop. Las imágenes de la era IA añaden otra capa: las <strong>Content Credentials C2PA</strong> que registran qué generador creó la imagen. Nada de esto se ve en tu galería. Necesitas un inspector de metadatos para verlo.</p>
-        <p>Inspeccionar es fácil. Suelta una foto en la herramienta de abajo y Vantawebs te muestra al instante todo lo que encuentra, agrupado para humanos: info del dispositivo, ubicación, fecha y hora, rastro de software, autor y derechos, y procedencia de IA. <strong>Esto es lo que debes buscar:</strong> latitud/longitud GPS (tu mayor riesgo de privacidad), marca y modelo de cámara y objetivo, marcas de tiempo con desfases horarios, software e historial de edición, campos de artista y copyright, y cualquier firma C2PA/JUMBF que marque el archivo como generado o editado por IA.</p>
+<p><strong>Te sorprendería lo que confiesan tus fotos.</strong> Un JPEG de apariencia inocente puede revelar las coordenadas GPS exactas de tu casa, el modelo de iPhone o cámara que tienes, la fecha, la hora y la zona horaria precisas de la toma, y cada app que lo ha tocado desde entonces — Lightroom, Snapseed, Photoshop. Las imágenes de la era IA añaden otra capa: las <strong>credenciales de contenido C2PA</strong> que registran qué generador creó la imagen. Nada de esto se ve en tu galería. Necesitas un inspector de metadatos para verlo.</p>
+        <p>Inspeccionar es fácil. Suelta una foto en la herramienta de abajo y Vantawebs te muestra al instante todo lo que encuentra, agrupado para humanos: información del dispositivo, ubicación, fecha y hora, rastro de software, autor y derechos, y procedencia de IA. <strong>Esto es lo que debes buscar:</strong> latitud y longitud GPS (tu mayor riesgo de privacidad), marca y modelo de cámara y objetivo, marcas de tiempo con diferencias de zona horaria, software e historial de edición, campos de artista y derechos, y cualquier firma C2PA/JUMBF que marque el archivo como generado o editado por IA.</p>
         <ul>
-          <li><strong>GPS</strong> — coordenadas + altitud; localiza casas, escuelas y trabajos al metro</li>
-          <li><strong>Cámara y objetivo</strong> — marca, modelo, focal, apertura, ISO, velocidad de obturación, flash</li>
-          <li><strong>Software y C2PA</strong> — nombres de editores, etiquetas de generadores IA, firmas de procedencia JUMBF</li>
-          <li><strong>Fechas y miniaturas</strong> — DateTimeOriginal, zona horaria, más una vista previa JPEG integrada que sobrevive a trucos de recorte</li>
+          <li><strong>GPS</strong> — coordenadas + altitud; sitúa casas, escuelas y trabajos al metro</li>
+          <li><strong>Cámara y objetivo</strong> — marca, modelo, distancia focal, apertura, ISO, velocidad de obturación, flash</li>
+          <li><strong>Software y C2PA</strong> — nombres de editores, etiquetas de generador de IA, firmas de procedencia JUMBF</li>
+          <li><strong>Fechas y miniatura</strong> — fecha original, zona horaria, más una vista previa JPEG integrada que sobrevive a trucos de recorte</li>
         </ul>
         <div class="callout">
           <div class="callout-title">¿Encontraste algo que no quieres compartir?</div>
-          <p style="margin:0">No borres solo la foto — límpiala. Pulsa <strong>Limpiar ahora</strong> abajo y Vantawebs elimina cada etiqueta que acaba de mostrarte a nivel binario, sin perder calidad. Lee la <a href="/es/remove-exif-data-from-photo" style="color:var(--purple)">guía completa para eliminar EXIF</a>, o si lo que está en juego es tu ubicación, consulta <a href="/es/what-is-exif-data" style="color:var(--purple)">eliminar datos de ubicación de las fotos</a>.</p>
+          <p style="margin:0">No borres solo la foto — límpiala. Pulsa <strong>Limpiar ahora</strong> abajo y Vantawebs elimina cada etiqueta que acaba de mostrarte a nivel binario, sin pérdida de calidad. Lee la guía completa para <a href="/es/remove-exif-data-from-photo" style="color:var(--purple)">eliminar EXIF</a>, o entiende primero <a href="/es/what-is-exif-data" style="color:var(--purple)">qué son los datos EXIF</a>.</p>
         </div>
-        <p>Dos campos merecen atención especial porque engañan incluso a usuarios cuidadosos. Primero, <strong>OffsetTimeOriginal</strong>: combinado con el GPS reconstruye tu rutina diaria — casa, trayectos, gimnasio — a través de un lote de fotos, y por eso los investigadores adoran los volúmenes de varias fotos. Segundo, la <strong>miniatura integrada</strong>: muchos teléfonos guardan una pequeña vista previa de fotograma completo dentro del EXIF que no se actualiza cuando recortas o difuminas la imagen principal en algunos editores, así que fotos «censuradas» han filtrado caras y matrículas solo por la miniatura. Desplázate por los resultados del inspector de abajo buscando exactamente esas filas. Si alguna muestra valores que no imprimirías en una postal, usa el botón Limpiar en lugar de confiar en recortes, difuminados o capturas.</p>
-        <p>Suelta tu archivo abajo y pulsa <strong>Limpiar ahora</strong> — Vantawebs elimina todo en tu navegador en segundos, sin subir nada y sin perder calidad.</p>
+        <p>Dos campos merecen atención especial porque engañan incluso a usuarios cuidadosos. Primero, la <strong>diferencia de zona horaria</strong>: combinada con el GPS reconstruye tu rutina diaria — casa, trayectos, gimnasio — a través de un lote de fotos, y a los investigadores les encantan los volúmenes de varias fotos. Segundo, la <strong>miniatura integrada</strong>: muchos teléfonos guardan una pequeña vista previa de marco completo dentro de los EXIF que no se actualiza cuando recortas o difuminas la imagen principal en algunos editores, así que fotos «censuradas» ya han filtrado caras y matrículas solo por la miniatura. Revisa los resultados del inspector de abajo buscando exactamente esas filas. Si alguna muestra valores que no imprimirías en una postal, usa el botón Limpiar en lugar de confiar en recortes, difuminados o capturas. Volver al <a href="/es/" style="color:var(--purple)">inicio de Vantawebs</a>.</p>
+        <p>Suelta tu archivo abajo y pulsa <strong>Limpiar ahora</strong> — Vantawebs borra todo en tu navegador en segundos, sin subir nada y sin pérdida de calidad.</p>
       </div>
     </article>
 
@@ -168,7 +172,7 @@
           <svg class="dz-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
             <path d="M24 4L8 12v12c0 10.125 6.875 19.625 16 22 9.125-2.375 16-11.875 16-22V12L24 4z" stroke="url(#dzGrad)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
             <path d="M18 24l4 4 8-8" stroke="url(#dzGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <defs><linearGradient id="dzGrad" x1="8" y1="4" x2="40" y2="38"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+            <defs><linearGradient id="dzGrad" x1="4" y1="2" x2="24" y2="28"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
           </svg>
         </div>
         <div class="dz-text">
@@ -200,7 +204,7 @@
         <div class="loader-ring"></div>
         <div class="loader-ring"></div>
       </div>
-      <span id="statusText" class="status-text">Procesando...</span>
+      <span id="statusText" class="status-text">Procesando…</span>
       <div id="progressBar" class="progress-bar hidden">
         <div id="progressFill" class="progress-fill"></div>
       </div>
@@ -217,7 +221,7 @@
   </main>
 
   <footer class="footer">
-    <span>Vantawebs · hecho para la privacidad · <a href="https://vantawebs.site">vantawebs.site</a></span>
+    <span>Vantawebs · creado para tu privacidad · <a href="https://vantawebs.site/es/">vantawebs.site</a></span>
   </footer>
 
   <script type="application/ld+json">
@@ -227,10 +231,10 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Cómo puedo ver los datos EXIF en línea?",
+        "name": "¿Cómo puedo ver datos EXIF en línea?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Suelta tu foto en la herramienta Vantawebs de esta página. Lee al instante etiquetas EXIF, GPS, XMP y C2PA en tu navegador y las muestra agrupadas por categoría — no se sube nada."
+          "text": "Suelta tu foto en la herramienta Vantawebs de esta página. Lee etiquetas EXIF, GPS, XMP y C2PA al instante en tu navegador y las muestra agrupadas por categoría — no se sube nada."
         }
       },
       {
@@ -238,15 +242,15 @@
         "name": "¿Qué campos EXIF deberían preocuparme?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Las coordenadas GPS son el mayor riesgo, seguidas de marcas de tiempo con zonas horarias, huellas de cámara y dispositivo, historial de edición, miniaturas integradas y firmas de procedencia IA C2PA."
+          "text": "Las coordenadas GPS son el mayor riesgo, seguidas de las marcas de tiempo con zonas horarias, las huellas de cámara y dispositivo, el historial de edición, las miniaturas integradas y las firmas de procedencia de IA C2PA."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Puedo ver el EXIF y eliminarlo en el mismo lugar?",
+        "name": "¿Puedo ver los EXIF y borrarlos en el mismo sitio?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sí. Después de que Vantawebs muestre lo encontrado, pulsa Limpiar ahora para eliminarlo todo sin pérdida en el mismo paso, conservando la calidad original."
+          "text": "Sí. Después de que Vantawebs muestre lo encontrado, pulsa Limpiar ahora para borrarlo todo sin pérdida en el mismo paso, conservando la calidad original."
         }
       }
     ]
@@ -295,33 +299,33 @@
     if(isImg(file.name)){
       try{
         const tags=ExifReader.load(buf,{expanded:true,includeOffsets:false});result.raw=tags;
-        const device={};if(tags.Make)device['Make']=tags.Make.description||tags.Make;if(tags.Model)device['Model']=tags.Model.description||tags.Model;if(tags.LensModel)device['Lens']=tags.LensModel.description||tags.LensModel;if(tags.FocalLength)device['Focal Length']=tags.FocalLength.description||tags.FocalLength;if(tags.FNumber)device['Aperture']=tags.FNumber.description||tags.FNumber;if(tags.ISOSpeedRatings)device['ISO']=tags.ISOSpeedRatings.description||tags.ISOSpeedRatings;if(tags.ExposureTime)device['Shutter Speed']=tags.ExposureTime.description||tags.ExposureTime;if(Object.keys(device).length){result.categories['Dispositivo']=device;result.totalTags+=Object.keys(device).length}
-        const loc={};if(tags.GPSLatitude&&tags.GPSLongitude){const lat=tags.GPSLatitude.description||JSON.stringify(tags.GPSLatitude),lon=tags.GPSLongitude.description||JSON.stringify(tags.GPSLongitude);loc['GPS Location']=lat+', '+lon}if(tags.GPSAltitude)loc['Altitude']=tags.GPSAltitude.description||tags.GPSAltitude;if(Object.keys(loc).length){result.categories['Ubicación']=loc;result.totalTags+=Object.keys(loc).length}
-        const dates={};if(tags.DateTimeOriginal)dates['Date Taken']=tags.DateTimeOriginal.description||tags.DateTimeOriginal;if(tags.DateTime)dates['Date Modified']=tags.DateTime.description||tags.DateTime;if(tags.OffsetTimeOriginal)dates['Timezone']=tags.OffsetTimeOriginal.description||tags.OffsetTimeOriginal;if(Object.keys(dates).length){result.categories['Fecha y hora']=dates;result.totalTags+=Object.keys(dates).length}
-        const soft={};if(tags.Software)soft['Software']=tags.Software.description||tags.Software;if(tags.ImageDescription)soft['Description']=tags.ImageDescription.description||tags.ImageDescription;if(Object.keys(soft).length){result.categories['Software']=soft;result.totalTags+=Object.keys(soft).length}
-        const auth={};if(tags.Artist)auth['Author']=tags.Artist.description||tags.Artist;if(tags.Copyright)auth['Copyright']=tags.Copyright.description||tags.Copyright;if(Object.keys(auth).length){result.categories['Autor y derechos']=auth;result.totalTags+=Object.keys(auth).length}
-        const ai={};if(tags.DigitalSourceType)ai['Digital Source Type']=tags.DigitalSourceType.description||tags.DigitalSourceType;if(tags.Application)ai['Application']=tags.Application.description||tags.Application;const raw8=new Uint8Array(buf);const hasJUMBF=findBytes(raw8,[0xFF,0xE1])||findBytes(raw8,[0x6A,0x75,0x6D,0x62,0x66]);if(hasJUMBF)ai['C2PA Content Credentials']='Detectado (APP11/JUMBF)';if(Object.keys(ai).length){result.categories['Procedencia de IA']=ai;result.totalTags+=Object.keys(ai).length}
-        if(tags.Thumbnail){result.categories['Integrado']={'Thumbnail':'Presente'};result.totalTags++}
+        const device={};if(tags.Make)device['Marca']=tags.Make.description||tags.Make;if(tags.Model)device['Modelo']=tags.Model.description||tags.Model;if(tags.LensModel)device['Objetivo']=tags.LensModel.description||tags.LensModel;if(tags.FocalLength)device['Distancia focal']=tags.FocalLength.description||tags.FocalLength;if(tags.FNumber)device['Apertura']=tags.FNumber.description||tags.FNumber;if(tags.ISOSpeedRatings)device['ISO']=tags.ISOSpeedRatings.description||tags.ISOSpeedRatings;if(tags.ExposureTime)device['Velocidad']=tags.ExposureTime.description||tags.ExposureTime;if(Object.keys(device).length){result.categories['Dispositivo']=device;result.totalTags+=Object.keys(device).length}
+        const loc={};if(tags.GPSLatitude&&tags.GPSLongitude){const lat=tags.GPSLatitude.description||JSON.stringify(tags.GPSLatitude),lon=tags.GPSLongitude.description||JSON.stringify(tags.GPSLongitude);loc['Ubicación GPS']=lat+', '+lon}if(tags.GPSAltitude)loc['Altitud']=tags.GPSAltitude.description||tags.GPSAltitude;if(Object.keys(loc).length){result.categories['Ubicación']=loc;result.totalTags+=Object.keys(loc).length}
+        const dates={};if(tags.DateTimeOriginal)dates['Fecha de captura']=tags.DateTimeOriginal.description||tags.DateTimeOriginal;if(tags.DateTime)dates['Fecha de modificación']=tags.DateTime.description||tags.DateTime;if(tags.OffsetTimeOriginal)dates['Zona horaria']=tags.OffsetTimeOriginal.description||tags.OffsetTimeOriginal;if(Object.keys(dates).length){result.categories['Fecha y hora']=dates;result.totalTags+=Object.keys(dates).length}
+        const soft={};if(tags.Software)soft['Software']=tags.Software.description||tags.Software;if(tags.ImageDescription)soft['Descripción']=tags.ImageDescription.description||tags.ImageDescription;if(Object.keys(soft).length){result.categories['Software']=soft;result.totalTags+=Object.keys(soft).length}
+        const auth={};if(tags.Artist)auth['Autor']=tags.Artist.description||tags.Artist;if(tags.Copyright)auth['Derechos']=tags.Copyright.description||tags.Copyright;if(Object.keys(auth).length){result.categories['Autor y derechos']=auth;result.totalTags+=Object.keys(auth).length}
+        const ai={};if(tags.DigitalSourceType)ai['Tipo de fuente']=tags.DigitalSourceType.description||tags.DigitalSourceType;if(tags.Application)ai['Aplicación']=tags.Application.description||tags.Application;const raw8=new Uint8Array(buf);const hasJUMBF=findBytes(raw8,[0xFF,0xE1])||findBytes(raw8,[0x6A,0x75,0x6D,0x62,0x66]);if(hasJUMBF)ai['Credenciales C2PA']='Detectadas (APP11/JUMBF)';if(Object.keys(ai).length){result.categories['Procedencia de IA']=ai;result.totalTags+=Object.keys(ai).length}
+        if(tags.Thumbnail){result.categories['Integrado']={'Miniatura':'Presente'};result.totalTags++}
       }catch(e){}
     }
-    if(isPdf(file.name)){try{const doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});const pdfMeta={};if(doc.getTitle())pdfMeta['Title']=doc.getTitle();if(doc.getAuthor())pdfMeta['Author']=doc.getAuthor();if(doc.getSubject())pdfMeta['Subject']=doc.getSubject();if(doc.getProducer())pdfMeta['Producer']=doc.getProducer();if(doc.getCreator())pdfMeta['Creator']=doc.getCreator();if(doc.getKeywords()&&doc.getKeywords().length)pdfMeta['Keywords']=doc.getKeywords().join(', ');if(doc.getCreationDate())pdfMeta['Created']=doc.getCreationDate().toISOString();if(doc.getModificationDate())pdfMeta['Modified']=doc.getModificationDate().toISOString();if(Object.keys(pdfMeta).length){result.categories['Metadatos PDF']=pdfMeta;result.totalTags+=Object.keys(pdfMeta).length}}catch(e){}}
+    if(isPdf(file.name)){try{const doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});const pdfMeta={};if(doc.getTitle())pdfMeta['Título']=doc.getTitle();if(doc.getAuthor())pdfMeta['Autor']=doc.getAuthor();if(doc.getSubject())pdfMeta['Asunto']=doc.getSubject();if(doc.getProducer())pdfMeta['Productor']=doc.getProducer();if(doc.getCreator())pdfMeta['Creador']=doc.getCreator();if(doc.getKeywords()&&doc.getKeywords().length)pdfMeta['Palabras clave']=doc.getKeywords().join(', ');if(doc.getCreationDate())pdfMeta['Creado']=doc.getCreationDate().toISOString();if(doc.getModificationDate())pdfMeta['Modificado']=doc.getModificationDate().toISOString();if(Object.keys(pdfMeta).length){result.categories['Metadatos PDF']=pdfMeta;result.totalTags+=Object.keys(pdfMeta).length}}catch(e){}}
     return result;
   }
 
   function renderMetadataPreview(meta){let html='';for(const[cat,items]of Object.entries(meta.categories)){html+='<div class="meta-row"><span class="meta-cat">'+cat+'</span><div class="meta-val">';for(const[k,v]of Object.entries(items)){html+='<div>'+k+': '+escapeHtml(String(v).substring(0,120))+' <span class="removed">ELIMINADO</span></div>'}html+='</div></div>'}return html}
-  function renderMetadataPanel(meta,cleaned){let html='';for(const[cat,items]of Object.entries(meta.categories)){html+='<div class="meta-category"><div class="meta-cat-label">'+cat+'</div>';for(const[k,v]of Object.entries(items)){html+='<div class="meta-item"><span class="mk">'+k+':</span><span class="mv">'+escapeHtml(String(v).substring(0,120))+'</span>';html+=cleaned?'<span class="mg">LIMPIO</span>':'<span class="mr">ELIMINADO</span>';html+='</div>'}html+='</div>'}if(cleaned&&meta.totalTags===0){html='<div class="meta-item"><span class="mg">No se encontraron metadatos — el archivo está limpio</span></div>'}return html}
+  function renderMetadataPanel(meta,cleaned){let html='';for(const[cat,items]of Object.entries(meta.categories)){html+='<div class="meta-category"><div class="meta-cat-label">'+cat+'</div>';for(const[k,v]of Object.entries(items)){html+='<div class="meta-item"><span class="mk">'+k+':</span><span class="mv">'+escapeHtml(String(v).substring(0,120))+'</span>';html+=cleaned?'<span class="mg">LIMPIO</span>':'<span class="mr">ELIMINADO</span>';html+='</div>'}html+='</div>'}if(cleaned&&meta.totalTags===0){html='<div class="meta-item"><span class="mg">Sin metadatos — el archivo está limpio</span></div>'}return html}
 
   async function scrubImage(file){if(typeof picscrub!=='undefined'){try{const buf=await file.arrayBuffer(),input=new Uint8Array(buf),result=picscrub(input,file.name);if(result&&result.data){return new Blob([result.data],{type:mimeOf(extOf(file.name))})}}catch(e){console.warn('picscrub failed:',e)}}const bmp=await createImageBitmap(file),c=document.createElement('canvas');c.width=bmp.width;c.height=bmp.height;c.getContext('2d').drawImage(bmp,0,0);bmp.close();const ext=extOf(file.name);let mime='image/jpeg';if(ext==='png')mime='image/png';else if(ext==='webp')mime='image/webp';return new Promise(r=>c.toBlob(r,mime,1.0))}
   async function scrubPdf(file){const buf=await file.arrayBuffer(),doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});doc.setTitle('');doc.setAuthor('');doc.setSubject('');doc.setKeywords([]);doc.setProducer('');doc.setCreator('');doc.setCreationDate(new Date(0));doc.setModificationDate(new Date(0));try{const cat=doc.catalog,PN=PDFLib.PDFName;if(cat.has(PN.of('Metadata')))cat.delete(PN.of('Metadata'));if(cat.has(PN.of('Info')))cat.delete(PN.of('Info'))}catch(e){}return new Blob([await doc.save({useObjectStreams:false})],{type:'application/pdf'})}
   let ffInst=null,ffLoad=null;
   async function scrubAV(file){if(!ffLoad)ffLoad=(async()=>{await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js';s.onload=res;s.onerror=rej;document.head.appendChild(s)});const ff=window.FFmpeg.createFFmpeg({corePath:'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js',log:false});await ff.load();ffInst=ff})();await ffLoad;const ext=extOf(file.name)==='mov'?'mp4':extOf(file.name),inN='i_'+Math.random().toString(36).slice(2)+'.'+extOf(file.name),outN='o.'+ext;ffInst.FS('writeFile',inN,new Uint8Array(await file.arrayBuffer()));try{await ffInst.run('-hide_banner','-i',inN,'-map_metadata','-1','-c','copy',outN)}catch(e){await ffInst.run('-hide_banner','-i',inN,'-map_metadata','-1','-c:v','copy','-c:a','copy',outN)}const out=ffInst.FS('readFile',outN);try{ffInst.FS('unlink',inN);ffInst.FS('unlink',outN)}catch(e){}return new Blob([out.buffer],{type:file.type||'video/mp4'})}
 
-  async function handleFiles(files){const supported=files.filter(f=>isImg(f.name)||isPdf(f.name)||isAV(f.name));if(!supported.length){showStatus('Tipo de archivo no compatible');statusText.textContent='Compatibles: JPG, PNG, WebP, HEIC, PDF, MP4, MOV';setTimeout(()=>statusEl.classList.add('hidden'),3000);return}if(supported.length===1){showInstantPreview(supported[0]);return}instantPreview.classList.add('hidden');fileCountEl.classList.add('hidden');batchResults.innerHTML='';processedFiles=[];showStatus('Procesando '+supported.length+' archivos...');progressBar.classList.remove('hidden');progressFill.style.width='0%';for(const file of supported)addFileCard(file.name,file.size,'processing');for(let i=0;i<supported.length;i++){const file=supported[i];statusText.textContent='Procesando '+(i+1)+'/'+supported.length+': '+file.name;progressFill.style.width=((i/supported.length)*100)+'%';try{const metaBefore=await readMetadata(file);let blob;if(isImg(file.name))blob=await scrubImage(file);else if(isPdf(file.name))blob=await scrubPdf(file);else if(isAV(file.name))blob=await scrubAV(file);const metaAfter=await readMetadata(blobToFile(blob,file.name));processedFiles.push({name:cleanName(file.name),originalName:file.name,originalSize:file.size,cleanSize:blob.size,blob,metaBefore,metaAfter});updateFileCard(i,'clean',processedFiles[processedFiles.length-1])}catch(err){updateFileCard(i,'error',{error:err.message})}}progressFill.style.width='100%';setTimeout(()=>{statusEl.classList.add('hidden');progressBar.classList.add('hidden');batchActions.classList.remove('hidden');if(processedFiles.length>1)downloadAllBtn.classList.remove('hidden')},400)}
+  async function handleFiles(files){const supported=files.filter(f=>isImg(f.name)||isPdf(f.name)||isAV(f.name));if(!supported.length){showStatus('Tipo de archivo no compatible');statusText.textContent='Compatibles: JPG, PNG, WebP, HEIC, PDF, MP4, MOV';setTimeout(()=>statusEl.classList.add('hidden'),3000);return}if(supported.length===1){showInstantPreview(supported[0]);return}instantPreview.classList.add('hidden');fileCountEl.classList.add('hidden');batchResults.innerHTML='';processedFiles=[];showStatus('Procesando '+supported.length+' archivos…');progressBar.classList.remove('hidden');progressFill.style.width='0%';for(const file of supported)addFileCard(file.name,file.size,'processing');for(let i=0;i<supported.length;i++){const file=supported[i];statusText.textContent='Procesando '+(i+1)+'/'+supported.length+': '+file.name;progressFill.style.width=((i/supported.length)*100)+'%';try{const metaBefore=await readMetadata(file);let blob;if(isImg(file.name))blob=await scrubImage(file);else if(isPdf(file.name))blob=await scrubPdf(file);else if(isAV(file.name))blob=await scrubAV(file);const metaAfter=await readMetadata(blobToFile(blob,file.name));processedFiles.push({name:cleanName(file.name),originalName:file.name,originalSize:file.size,cleanSize:blob.size,blob,metaBefore,metaAfter});updateFileCard(i,'clean',processedFiles[processedFiles.length-1])}catch(err){updateFileCard(i,'error',{error:err.message})}}progressFill.style.width='100%';setTimeout(()=>{statusEl.classList.add('hidden');progressBar.classList.add('hidden');batchActions.classList.remove('hidden');if(processedFiles.length>1)downloadAllBtn.classList.remove('hidden')},400)}
   function blobToFile(blob,name){return new File([blob],name,{type:blob.type})}
   function addFileCard(name,size,state){const el=document.createElement('div');el.className='file-card card-dirty';el.innerHTML='<div class="file-card-top"><div class="file-dot dot-processing"></div><span class="file-name">'+escapeHtml(name)+'</span><span class="file-size">'+formatSize(size)+'</span></div>';batchResults.appendChild(el)}
-  function updateFileCard(index,state,data){const cards=batchResults.querySelectorAll('.file-card');if(!cards[index])return;const card=cards[index];if(state==='clean'){card.className='file-card card-clean';let metaHtml='';if(data.metaBefore.totalTags>0){metaHtml='<button class="file-meta-toggle" data-idx="'+index+'">Mostrar metadatos encontrados ('+data.metaBefore.totalTags+' elementos)</button><div class="file-meta-panel hidden" data-panel="'+index+'">'+renderMetadataPanel(data.metaBefore,true)+'</div>'}else{metaHtml='<div style="font-size:11px;color:var(--green);margin-top:6px">No se encontraron metadatos</div>'}card.innerHTML='<div class="file-card-top"><div class="file-dot dot-clean"></div><span class="file-name">'+escapeHtml(data.name)+'</span><span class="file-size">'+formatSize(data.originalSize)+' &rarr; '+formatSize(data.cleanSize)+'</span><div class="file-actions"><button class="btn-sm btn-download" data-idx="'+index+'"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Descargar</button></div></div>'+metaHtml;card.querySelector('.btn-download').onclick=()=>downloadSingle(index);const toggle=card.querySelector('.file-meta-toggle');if(toggle){toggle.onclick=()=>{const panel=card.querySelector('[data-panel="'+index+'"]');panel.classList.toggle('hidden');toggle.textContent=panel.classList.contains('hidden')?'Mostrar metadatos encontrados ('+data.metaBefore.totalTags+' elementos)':'Ocultar metadatos encontrados'}}}if(state==='error'){card.className='file-card card-dirty';card.innerHTML='<div class="file-card-top"><div class="file-dot" style="background:var(--red)"></div><span class="file-name">'+escapeHtml(card.querySelector('.file-name').textContent)+'</span><span class="file-size" style="color:var(--red)">Error: '+escapeHtml(data.error)+'</span></div>'}}
+  function updateFileCard(index,state,data){const cards=batchResults.querySelectorAll('.file-card');if(!cards[index])return;const card=cards[index];if(state==='clean'){card.className='file-card card-clean';let metaHtml='';if(data.metaBefore.totalTags>0){metaHtml='<button class="file-meta-toggle" data-idx="'+index+'">Mostrar metadatos encontrados ('+data.metaBefore.totalTags+' elementos)</button><div class="file-meta-panel hidden" data-panel="'+index+'">'+renderMetadataPanel(data.metaBefore,true)+'</div>'}else{metaHtml='<div style="font-size:11px;color:var(--green);margin-top:6px">Sin metadatos</div>'}card.innerHTML='<div class="file-card-top"><div class="file-dot dot-clean"></div><span class="file-name">'+escapeHtml(data.name)+'</span><span class="file-size">'+formatSize(data.originalSize)+' &rarr; '+formatSize(data.cleanSize)+'</span><div class="file-actions"><button class="btn-sm btn-download" data-idx="'+index+'"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Descargar</button></div></div>'+metaHtml;card.querySelector('.btn-download').onclick=()=>downloadSingle(index);const toggle=card.querySelector('.file-meta-toggle');if(toggle){toggle.onclick=()=>{const panel=card.querySelector('[data-panel="'+index+'"]');panel.classList.toggle('hidden');toggle.textContent=panel.classList.contains('hidden')?'Mostrar metadatos encontrados ('+data.metaBefore.totalTags+' elementos)':'Ocultar metadatos encontrados'}}}if(state==='error'){card.className='file-card card-dirty';card.innerHTML='<div class="file-card-top"><div class="file-dot" style="background:var(--red)"></div><span class="file-name">'+escapeHtml(card.querySelector('.file-name').textContent)+'</span><span class="file-size" style="color:var(--red)">Error: '+escapeHtml(data.error)+'</span></div>'}}
   function downloadSingle(index){const entry=processedFiles[index];if(!entry)return;const a=document.createElement('a');a.href=URL.createObjectURL(entry.blob);a.download=entry.name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
-  downloadAllBtn.onclick=async()=>{if(!processedFiles.length)return;downloadAllBtn.disabled=true;downloadAllBtn.textContent='Creando ZIP...';try{const zip=new JSZip();for(const entry of processedFiles)zip.file(entry.name,entry.blob);const blob=await zip.generateAsync({type:'blob'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='vanta-cleaned-'+Date.now()+'.zip';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}catch(e){alert('Error al crear el ZIP: '+e.message)}downloadAllBtn.disabled=false;downloadAllBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Descargar todo (ZIP)'};
+  downloadAllBtn.onclick=async()=>{if(!processedFiles.length)return;downloadAllBtn.disabled=true;downloadAllBtn.textContent='Creando ZIP…';try{const zip=new JSZip();for(const entry of processedFiles)zip.file(entry.name,entry.blob);const blob=await zip.generateAsync({type:'blob'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='vanta-cleaned-'+Date.now()+'.zip';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}catch(e){alert('Error al crear el ZIP: '+e.message)}downloadAllBtn.disabled=false;downloadAllBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Descargar todo (ZIP)'};
   clearAllBtn.onclick=()=>{batchResults.innerHTML='';batchActions.classList.add('hidden');processedFiles=[]};
   function showStatus(msg){statusEl.classList.remove('hidden');batchResults.innerHTML='';batchActions.classList.add('hidden');statusText.textContent=msg}
   })();

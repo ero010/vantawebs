@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Comment supprimer les données EXIF des photos (gratuit, sans envoi)</title>
-  <meta name="description" content="Supprimez les données EXIF de vos photos gratuitement sans envoi. Effacez GPS, appareil et horodatages au niveau binaire sans aucune perte de qualité.">
-  <meta property="og:title" content="Comment supprimer les données EXIF des photos (gratuit, sans envoi)">
-  <meta property="og:description" content="L'EXIF vit dans les segments APP1 du JPEG. Supprimez-le sans perte dans votre navigateur — sans envoi, sans réencodage, sans perte de qualité.">
+  <title>Comment supprimer les données EXIF de vos photos (gratuit, sans envoi)</title>
+  <meta name="description" content="Supprimez les données EXIF de vos photos gratuitement sans rien envoyer. Effacez GPS, appareil et horodatages au niveau binaire, sans perte de qualité.">
+  <meta property="og:title" content="Comment supprimer les données EXIF de vos photos (gratuit, sans envoi)">
+  <meta property="og:description" content="Les EXIF vivent dans les segments APP1 du JPEG. Effacez-les sans perte dans votre navigateur — aucun envoi, aucun réencodage, aucune perte de qualité.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://vantawebs.site/fr/remove-exif-data-from-photo">
   <link rel="canonical" href="https://vantawebs.site/fr/remove-exif-data-from-photo">
@@ -34,11 +34,13 @@
     .nav-name{font-weight:700;font-size:17px;letter-spacing:-.3px}
     .nav-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
     .pill{font-size:11px;padding:5px 10px;border-radius:999px;font-weight:500;white-space:nowrap}
+    .pill-link{text-decoration:none;transition:all .2s}
+    .pill-link:hover{border-color:rgba(167,139,250,.3)!important;color:var(--text)!important}
     .glass{background:var(--glass);border:1px solid var(--glass-border);color:var(--text2);backdrop-filter:blur(12px)}
-    .lang-switch{display:flex;gap:10px;font-size:12px;justify-content:center;padding:0 24px 8px;position:relative;z-index:2}
-    .lang-switch a{color:var(--purple);text-decoration:none}
-    .lang-switch a:hover{text-decoration:underline}
-    .lang-switch .active{color:var(--text);font-weight:600}
+    .lang-bar{display:flex;gap:14px;justify-content:center;align-items:center;position:relative;z-index:2;margin:0 0 8px;font-size:12px}
+    .lang-bar a{color:var(--text3);text-decoration:none;font-weight:500;padding:2px 4px}
+    .lang-bar a:hover{color:var(--text)}
+    .lang-bar a.lang-active{color:var(--purple);font-weight:700}
     .main{width:100%;max-width:760px;padding:0 24px 60px;position:relative;z-index:2}
     .article-hero{padding:60px 0 20px;text-align:center}
     .article-hero h1{font-size:clamp(28px,5vw,42px);font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px}
@@ -126,40 +128,42 @@
       <span class="nav-name">Vantawebs</span>
     </a>
     <div class="nav-pills">
-      <span class="pill glass">100 % côté client</span>
+      <span class="pill glass">100% Côté client</span>
       <span class="pill glass">Zéro envoi</span>
+      <a href="/fr/" class="pill glass pill-link">Guides</a>
     </div>
   </nav>
-  <div class="lang-switch">
-    <a href="https://vantawebs.site/pages/remove-exif-data-from-photo">EN</a>
-    <a href="https://vantawebs.site/ar/remove-exif-data-from-photo">AR</a>
-    <span class="active">FR</span>
-    <a href="https://vantawebs.site/es/remove-exif-data-from-photo">ES</a>
+
+  <div class="lang-bar">
+    <a href="/pages/remove-exif-data-from-photo">EN</a>
+    <a href="/ar/remove-exif-data-from-photo">عربي</a>
+    <a href="/fr/remove-exif-data-from-photo" class="lang-active">FR</a>
+    <a href="/es/remove-exif-data-from-photo">ES</a>
   </div>
 
   <main class="main">
     <article>
       <div class="article-hero">
         <div class="date">Mis à jour en septembre 2026</div>
-        <h1>Comment supprimer les <span class="gradient-text">données EXIF des photos</span></h1>
+        <h1>Comment supprimer les <span class="gradient-text">données EXIF de vos photos</span></h1>
       </div>
 
       <div class="article-body">
-<p><strong>Les données EXIF vivent dans votre JPEG dans une section appelée segment APP1.</strong> À chaque déclenchement, votre appareil photo ou votre téléphone y écrit des dizaines de balises cachées : coordonnées GPS, marque et modèle d'appareil, objectif, vitesse d'obturation, ISO, date et heure exactes, et souvent un aperçu miniature de l'image complète. Vous ne voyez rien de tout cela dans l'app Photos — mais quiconque télécharge votre fichier d'origine peut le lire en quelques secondes avec une visionneuse gratuite. Apprenez d'abord <a href="/fr/view-exif-data-online" style="color:var(--purple)">comment afficher les données EXIF en ligne</a> pour savoir ce que vous divulguez.</p>
-        <p>Voici le piège dans lequel tombent la plupart des gens : <strong>la plupart des outils gratuits suppriment l'EXIF en réencodant toute l'image.</strong> Ils ouvrent votre photo, la dessinent sur un canevas et enregistrent un tout nouveau JPEG. Cela efface les métadonnées, mais recompresse aussi chaque pixel — adoucissant les détails, ajoutant des artefacts et modifiant la taille du fichier de façon imprévisible. Les astuces de captures d'écran et les envois sur les réseaux sociaux font la même chose. Si vous tenez à conserver votre qualité d'origine, le réencodage est la mauvaise approche.</p>
-        <p>Vous avez des options intégrées, mais aucune n'est rapide. Sur <strong>Windows</strong>, clic droit sur une photo &gt; Propriétés &gt; Détails &gt; Supprimer les propriétés et les informations personnelles. Sur <strong>Mac</strong>, Aperçu &gt; Outils &gt; Afficher l'inspecteur permet de voir l'EXIF mais la suppression est laborieuse — l'export retire certaines balises mais pas toutes. Sur <strong>Android</strong>, Google Photos n'a pas de vrai suppresseur EXIF ; la Galerie Samsung peut retirer la localisation au partage, mais les réglages d'appareil photo restent intégrés. Tout faire photo par photo est lent et source d'erreurs.</p>
+<p><strong>Les données EXIF vivent dans votre JPEG, dans une section appelée segment APP1.</strong> À chaque déclenchement, votre appareil photo ou votre téléphone y écrit des dizaines d'étiquettes cachées : coordonnées GPS, marque et modèle d'appareil, objectif, vitesse d'obturation, ISO, date et heure exactes, et souvent un aperçu miniature de l'image complète. Vous ne voyez rien de tout cela dans l'application Photos — mais quiconque télécharge votre fichier original peut tout lire en quelques secondes avec une visionneuse gratuite. Apprenez d'abord à <a href="/fr/view-exif-data-online" style="color:var(--purple)">voir les données EXIF en ligne</a> pour savoir ce que vous exposez.</p>
+        <p>Voici le piège dans lequel tombent la plupart des gens : <strong>la plupart des outils gratuits suppriment les EXIF en réencodant toute l'image.</strong> Ils ouvrent votre photo, la dessinent sur un canevas et enregistrent un tout nouveau JPEG. Cela efface les métadonnées, mais recompresse aussi chaque pixel — adoucissant les détails, ajoutant des artefacts et modifiant la taille du fichier de façon imprévisible. Les captures d'écran et les envois sur les réseaux sociaux font la même chose. Si vous tenez à préserver votre qualité d'origine, le réencodage est la mauvaise approche.</p>
+        <p>Vous avez des options intégrées, mais aucune n'est rapide. Sur <strong>Windows</strong>, clic droit sur une photo &gt; Propriétés &gt; Détails &gt; Supprimer les propriétés et les informations personnelles. Sur <strong>Mac</strong>, Aperçu &gt; Outils &gt; Afficher l'inspecteur permet de voir les EXIF mais la suppression est laborieuse — l'export retire certaines étiquettes mais pas toutes. Sur <strong>Android</strong>, Google Photos n'a pas de vrai nettoyeur EXIF ; la Galerie Samsung peut retirer la localisation au partage, mais les réglages d'appareil restent intégrés. Tout faire photo par photo est lent et source d'erreurs.</p>
         <ul>
           <li><strong>Coordonnées GPS</strong> — latitude, longitude et altitude exactes du lieu de prise de vue</li>
-          <li><strong>Empreinte de l'appareil</strong> — modèle de téléphone ou d'appareil photo, objectif, firmware et identifiants proches du série</li>
+          <li><strong>Empreinte d'appareil</strong> — modèle de téléphone ou d'appareil photo, objectif, micrologiciel et identifiants proches du numéro de série</li>
           <li><strong>Données de prise de vue</strong> — date, heure, décalage de fuseau horaire, exposition, ISO, état du flash</li>
-          <li><strong>Piste logicielle</strong> — noms d'éditeurs (Lightroom, Photoshop, Snapseed), plus miniatures et signatures C2PA</li>
+          <li><strong>Trace logicielle</strong> — noms d'éditeurs (Lightroom, Photoshop, Snapseed), plus miniatures et signatures C2PA</li>
         </ul>
         <div class="callout">
           <div class="callout-title">Pourquoi Vantawebs est plus rapide</div>
-          <p style="margin:0">Vantawebs supprime l'EXIF <strong>au niveau binaire</strong> — il efface chirurgicalement les segments APP1/EXIF, les blocs XMP, les miniatures et les données JUMBF sans toucher un seul pixel. Sans réencodage, sans perte de qualité, sans envoi. C'est le même résultat que la commande pro <code>exiftool -all=</code>, mais en une seule étape de glisser-déposer. Supprimer les <a href="/fr/what-is-exif-data" style="color:var(--purple)">données de localisation des photos</a> avant de les partager est le réflexe de confidentialité le plus important.</p>
+          <p style="margin:0">Vantawebs efface les EXIF <strong>au niveau binaire</strong> — il supprime chirurgicalement les segments APP1/EXIF, les blocs XMP, les miniatures et les données JUMBF sans toucher un seul pixel. Aucun réencodage, aucune perte de qualité, aucun envoi. C'est le même résultat que la commande pro <code>exiftool -all=</code>, en un seul glisser-déposer. Comprenez aussi <a href="/fr/what-is-exif-data" style="color:var(--purple)">ce que sont les données EXIF</a> avant de partager.</p>
         </div>
-        <p>Un moyen rapide de vous en convaincre : prenez une photo récente de votre téléphone, déposez-la dans l'inspecteur ci-dessous et comptez les balises avant de la partager où que ce soit. La plupart des gens trouvent 30 à 80 champs, dont une miniature qui peut survivre même quand on recadre l'image visible. Cette miniature a piégé des personnes qui avaient recadré visages, plaques ou documents en se croyant à l'abri. Le seul correctif fiable est de supprimer les conteneurs de métadonnées eux-mêmes — APP1/EXIF, XMP, IPTC et l'IFD de miniature — en laissant les données d'image compressées intactes. C'est exactement ce que fait l'outil ci-dessous, et parce qu'il ne réencode jamais, un original de 4 Mo reste une image de 4 Mo identique à l'octet près, moins le bagage caché.</p>
-        <p>Déposez votre fichier ci-dessous et appuyez sur <strong>Nettoyer maintenant</strong> — Vantawebs supprime tout dans votre navigateur en quelques secondes, sans rien envoyer et sans aucune perte de qualité.</p>
+        <p>Un moyen rapide de vous en convaincre : prenez n'importe quelle photo récente de votre téléphone, déposez-la dans l'inspecteur ci-dessous et comptez les étiquettes avant de la partager. La plupart des gens trouvent 30 à 80 champs, dont une miniature qui peut survivre même quand ils recadrent l'image visible. Cette miniature a déjà piégé des personnes qui avaient recadré des visages, des plaques ou des documents en se croyant à l'abri. Le seul correctif fiable est de supprimer les conteneurs eux-mêmes — APP1/EXIF, XMP, IPTC et la miniature — en laissant les données d'image compressées intactes. C'est exactement ce que fait l'outil ci-dessous, et comme il ne réencode jamais, un original de 4 Mo reste une image de 4 Mo identique, sans le bagage caché.</p>
+        <p>Déposez votre fichier ci-dessous et appuyez sur <strong>Nettoyer maintenant</strong> — Vantawebs efface tout dans votre navigateur en quelques secondes, sans rien envoyer et sans perte de qualité. Retour à <a href="/fr/" style="color:var(--purple)">l'accueil Vantawebs</a>.</p>
       </div>
     </article>
 
@@ -201,7 +205,7 @@
         <div class="loader-ring"></div>
         <div class="loader-ring"></div>
       </div>
-      <span id="statusText" class="status-text">Traitement en cours...</span>
+      <span id="statusText" class="status-text">Traitement en cours…</span>
       <div id="progressBar" class="progress-bar hidden">
         <div id="progressFill" class="progress-fill"></div>
       </div>
@@ -218,7 +222,7 @@
   </main>
 
   <footer class="footer">
-    <span>Vantawebs · conçu pour la confidentialité · <a href="https://vantawebs.site">vantawebs.site</a></span>
+    <span>Vantawebs · conçu pour la confidentialité · <a href="https://vantawebs.site/fr/">vantawebs.site</a></span>
   </footer>
 
   <script type="application/ld+json">
@@ -231,23 +235,23 @@
         "name": "Où les données EXIF sont-elles stockées dans une photo ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Les données EXIF sont stockées dans le segment APP1 du JPEG, plus les blocs XMP et IPTC et une miniature intégrée. Elles comprennent le GPS, le modèle d'appareil, les réglages de prise de vue, les horodatages et le logiciel de retouche."
+          "text": "Les données EXIF sont stockées dans le segment APP1 du JPEG, plus des blocs XMP et IPTC et une miniature intégrée. Elles comprennent le GPS, le modèle d'appareil, les réglages de prise de vue, les horodatages et le logiciel d'édition."
         }
       },
       {
         "@type": "Question",
-        "name": "Supprimer l'EXIF réduit-il la qualité de l'image ?",
+        "name": "Supprimer les EXIF réduit-il la qualité d'image ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Seulement si l'outil réencode l'image. Vantawebs supprime les métadonnées au niveau binaire sans toucher aux pixels, donc la qualité est préservée à 100 % sans aucune recompression."
+          "text": "Seulement si l'outil réencode l'image. Vantawebs efface les métadonnées au niveau binaire sans toucher aux pixels, donc la qualité est préservée à 100 % sans aucune recompression."
         }
       },
       {
         "@type": "Question",
-        "name": "Puis-je supprimer l'EXIF sur Windows, Mac ou Android ?",
+        "name": "Puis-je supprimer les EXIF sur Windows, Mac ou Android ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Oui. Windows propose Supprimer les propriétés, Aperçu sur Mac peut exporter sans certaines balises, et certaines galeries Android retirent la localisation au partage. Mais aucune n'est complète ni rapide — un outil de suppression binaire dédié comme Vantawebs est l'option fiable."
+          "text": "Oui. Windows propose la suppression des propriétés, Aperçu sur Mac peut exporter sans certaines étiquettes, et certaines galeries Android retirent la localisation au partage. Mais aucune n'est complète ni rapide — un nettoyeur binaire dédié comme Vantawebs est l'option fiable."
         }
       }
     ]
@@ -296,16 +300,16 @@
     if(isImg(file.name)){
       try{
         const tags=ExifReader.load(buf,{expanded:true,includeOffsets:false});result.raw=tags;
-        const device={};if(tags.Make)device['Make']=tags.Make.description||tags.Make;if(tags.Model)device['Model']=tags.Model.description||tags.Model;if(tags.LensModel)device['Lens']=tags.LensModel.description||tags.LensModel;if(tags.FocalLength)device['Focal Length']=tags.FocalLength.description||tags.FocalLength;if(tags.FNumber)device['Aperture']=tags.FNumber.description||tags.FNumber;if(tags.ISOSpeedRatings)device['ISO']=tags.ISOSpeedRatings.description||tags.ISOSpeedRatings;if(tags.ExposureTime)device['Shutter Speed']=tags.ExposureTime.description||tags.ExposureTime;if(Object.keys(device).length){result.categories['Infos appareil']=device;result.totalTags+=Object.keys(device).length}
-        const loc={};if(tags.GPSLatitude&&tags.GPSLongitude){const lat=tags.GPSLatitude.description||JSON.stringify(tags.GPSLatitude),lon=tags.GPSLongitude.description||JSON.stringify(tags.GPSLongitude);loc['GPS Location']=lat+', '+lon}if(tags.GPSAltitude)loc['Altitude']=tags.GPSAltitude.description||tags.GPSAltitude;if(Object.keys(loc).length){result.categories['Localisation']=loc;result.totalTags+=Object.keys(loc).length}
-        const dates={};if(tags.DateTimeOriginal)dates['Date Taken']=tags.DateTimeOriginal.description||tags.DateTimeOriginal;if(tags.DateTime)dates['Date Modified']=tags.DateTime.description||tags.DateTime;if(tags.OffsetTimeOriginal)dates['Timezone']=tags.OffsetTimeOriginal.description||tags.OffsetTimeOriginal;if(Object.keys(dates).length){result.categories['Date et heure']=dates;result.totalTags+=Object.keys(dates).length}
-        const soft={};if(tags.Software)soft['Software']=tags.Software.description||tags.Software;if(tags.ImageDescription)soft['Description']=tags.ImageDescription.description||tags.ImageDescription;if(Object.keys(soft).length){result.categories['Logiciel']=soft;result.totalTags+=Object.keys(soft).length}
-        const auth={};if(tags.Artist)auth['Author']=tags.Artist.description||tags.Artist;if(tags.Copyright)auth['Copyright']=tags.Copyright.description||tags.Copyright;if(Object.keys(auth).length){result.categories['Auteur et droits']=auth;result.totalTags+=Object.keys(auth).length}
-        const ai={};if(tags.DigitalSourceType)ai['Digital Source Type']=tags.DigitalSourceType.description||tags.DigitalSourceType;if(tags.Application)ai['Application']=tags.Application.description||tags.Application;const raw8=new Uint8Array(buf);const hasJUMBF=findBytes(raw8,[0xFF,0xE1])||findBytes(raw8,[0x6A,0x75,0x6D,0x62,0x66]);if(hasJUMBF)ai['C2PA Content Credentials']='Détecté (APP11/JUMBF)';if(Object.keys(ai).length){result.categories['Provenance IA']=ai;result.totalTags+=Object.keys(ai).length}
-        if(tags.Thumbnail){result.categories['Intégré']={'Thumbnail':'Présente'};result.totalTags++}
+        const device={};if(tags.Make)device['Marque']=tags.Make.description||tags.Make;if(tags.Model)device['Modèle']=tags.Model.description||tags.Model;if(tags.LensModel)device['Objectif']=tags.LensModel.description||tags.LensModel;if(tags.FocalLength)device['Focale']=tags.FocalLength.description||tags.FocalLength;if(tags.FNumber)device['Ouverture']=tags.FNumber.description||tags.FNumber;if(tags.ISOSpeedRatings)device['ISO']=tags.ISOSpeedRatings.description||tags.ISOSpeedRatings;if(tags.ExposureTime)device['Vitesse']=tags.ExposureTime.description||tags.ExposureTime;if(Object.keys(device).length){result.categories['Appareil']=device;result.totalTags+=Object.keys(device).length}
+        const loc={};if(tags.GPSLatitude&&tags.GPSLongitude){const lat=tags.GPSLatitude.description||JSON.stringify(tags.GPSLatitude),lon=tags.GPSLongitude.description||JSON.stringify(tags.GPSLongitude);loc['Position GPS']=lat+', '+lon}if(tags.GPSAltitude)loc['Altitude']=tags.GPSAltitude.description||tags.GPSAltitude;if(Object.keys(loc).length){result.categories['Localisation']=loc;result.totalTags+=Object.keys(loc).length}
+        const dates={};if(tags.DateTimeOriginal)dates['Date de prise de vue']=tags.DateTimeOriginal.description||tags.DateTimeOriginal;if(tags.DateTime)dates['Date de modification']=tags.DateTime.description||tags.DateTime;if(tags.OffsetTimeOriginal)dates['Fuseau horaire']=tags.OffsetTimeOriginal.description||tags.OffsetTimeOriginal;if(Object.keys(dates).length){result.categories['Date et heure']=dates;result.totalTags+=Object.keys(dates).length}
+        const soft={};if(tags.Software)soft['Logiciel']=tags.Software.description||tags.Software;if(tags.ImageDescription)soft['Description']=tags.ImageDescription.description||tags.ImageDescription;if(Object.keys(soft).length){result.categories['Logiciel']=soft;result.totalTags+=Object.keys(soft).length}
+        const auth={};if(tags.Artist)auth['Auteur']=tags.Artist.description||tags.Artist;if(tags.Copyright)auth['Droits']=tags.Copyright.description||tags.Copyright;if(Object.keys(auth).length){result.categories['Auteur et droits']=auth;result.totalTags+=Object.keys(auth).length}
+        const ai={};if(tags.DigitalSourceType)ai['Type de source']=tags.DigitalSourceType.description||tags.DigitalSourceType;if(tags.Application)ai['Application']=tags.Application.description||tags.Application;const raw8=new Uint8Array(buf);const hasJUMBF=findBytes(raw8,[0xFF,0xE1])||findBytes(raw8,[0x6A,0x75,0x6D,0x62,0x66]);if(hasJUMBF)ai['Identifiants C2PA']='Détectés (APP11/JUMBF)';if(Object.keys(ai).length){result.categories['Provenance IA']=ai;result.totalTags+=Object.keys(ai).length}
+        if(tags.Thumbnail){result.categories['Intégré']={'Miniature':'Présente'};result.totalTags++}
       }catch(e){}
     }
-    if(isPdf(file.name)){try{const doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});const pdfMeta={};if(doc.getTitle())pdfMeta['Title']=doc.getTitle();if(doc.getAuthor())pdfMeta['Author']=doc.getAuthor();if(doc.getSubject())pdfMeta['Subject']=doc.getSubject();if(doc.getProducer())pdfMeta['Producer']=doc.getProducer();if(doc.getCreator())pdfMeta['Creator']=doc.getCreator();if(doc.getKeywords()&&doc.getKeywords().length)pdfMeta['Keywords']=doc.getKeywords().join(', ');if(doc.getCreationDate())pdfMeta['Created']=doc.getCreationDate().toISOString();if(doc.getModificationDate())pdfMeta['Modified']=doc.getModificationDate().toISOString();if(Object.keys(pdfMeta).length){result.categories['Métadonnées PDF']=pdfMeta;result.totalTags+=Object.keys(pdfMeta).length}}catch(e){}}
+    if(isPdf(file.name)){try{const doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});const pdfMeta={};if(doc.getTitle())pdfMeta['Titre']=doc.getTitle();if(doc.getAuthor())pdfMeta['Auteur']=doc.getAuthor();if(doc.getSubject())pdfMeta['Sujet']=doc.getSubject();if(doc.getProducer())pdfMeta['Producteur']=doc.getProducer();if(doc.getCreator())pdfMeta['Créateur']=doc.getCreator();if(doc.getKeywords()&&doc.getKeywords().length)pdfMeta['Mots-clés']=doc.getKeywords().join(', ');if(doc.getCreationDate())pdfMeta['Créé le']=doc.getCreationDate().toISOString();if(doc.getModificationDate())pdfMeta['Modifié le']=doc.getModificationDate().toISOString();if(Object.keys(pdfMeta).length){result.categories['Métadonnées PDF']=pdfMeta;result.totalTags+=Object.keys(pdfMeta).length}}catch(e){}}
     return result;
   }
 
@@ -317,12 +321,12 @@
   let ffInst=null,ffLoad=null;
   async function scrubAV(file){if(!ffLoad)ffLoad=(async()=>{await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js';s.onload=res;s.onerror=rej;document.head.appendChild(s)});const ff=window.FFmpeg.createFFmpeg({corePath:'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js',log:false});await ff.load();ffInst=ff})();await ffLoad;const ext=extOf(file.name)==='mov'?'mp4':extOf(file.name),inN='i_'+Math.random().toString(36).slice(2)+'.'+extOf(file.name),outN='o.'+ext;ffInst.FS('writeFile',inN,new Uint8Array(await file.arrayBuffer()));try{await ffInst.run('-hide_banner','-i',inN,'-map_metadata','-1','-c','copy',outN)}catch(e){await ffInst.run('-hide_banner','-i',inN,'-map_metadata','-1','-c:v','copy','-c:a','copy',outN)}const out=ffInst.FS('readFile',outN);try{ffInst.FS('unlink',inN);ffInst.FS('unlink',outN)}catch(e){}return new Blob([out.buffer],{type:file.type||'video/mp4'})}
 
-  async function handleFiles(files){const supported=files.filter(f=>isImg(f.name)||isPdf(f.name)||isAV(f.name));if(!supported.length){showStatus('Type de fichier non pris en charge');statusText.textContent='Pris en charge : JPG, PNG, WebP, HEIC, PDF, MP4, MOV';setTimeout(()=>statusEl.classList.add('hidden'),3000);return}if(supported.length===1){showInstantPreview(supported[0]);return}instantPreview.classList.add('hidden');fileCountEl.classList.add('hidden');batchResults.innerHTML='';processedFiles=[];showStatus('Traitement de '+supported.length+' fichiers...');progressBar.classList.remove('hidden');progressFill.style.width='0%';for(const file of supported)addFileCard(file.name,file.size,'processing');for(let i=0;i<supported.length;i++){const file=supported[i];statusText.textContent='Traitement '+(i+1)+'/'+supported.length+' : '+file.name;progressFill.style.width=((i/supported.length)*100)+'%';try{const metaBefore=await readMetadata(file);let blob;if(isImg(file.name))blob=await scrubImage(file);else if(isPdf(file.name))blob=await scrubPdf(file);else if(isAV(file.name))blob=await scrubAV(file);const metaAfter=await readMetadata(blobToFile(blob,file.name));processedFiles.push({name:cleanName(file.name),originalName:file.name,originalSize:file.size,cleanSize:blob.size,blob,metaBefore,metaAfter});updateFileCard(i,'clean',processedFiles[processedFiles.length-1])}catch(err){updateFileCard(i,'error',{error:err.message})}}progressFill.style.width='100%';setTimeout(()=>{statusEl.classList.add('hidden');progressBar.classList.add('hidden');batchActions.classList.remove('hidden');if(processedFiles.length>1)downloadAllBtn.classList.remove('hidden')},400)}
+  async function handleFiles(files){const supported=files.filter(f=>isImg(f.name)||isPdf(f.name)||isAV(f.name));if(!supported.length){showStatus('Type de fichier non pris en charge');statusText.textContent='Pris en charge : JPG, PNG, WebP, HEIC, PDF, MP4, MOV';setTimeout(()=>statusEl.classList.add('hidden'),3000);return}if(supported.length===1){showInstantPreview(supported[0]);return}instantPreview.classList.add('hidden');fileCountEl.classList.add('hidden');batchResults.innerHTML='';processedFiles=[];showStatus('Traitement de '+supported.length+' fichiers…');progressBar.classList.remove('hidden');progressFill.style.width='0%';for(const file of supported)addFileCard(file.name,file.size,'processing');for(let i=0;i<supported.length;i++){const file=supported[i];statusText.textContent='Traitement '+(i+1)+'/'+supported.length+' : '+file.name;progressFill.style.width=((i/supported.length)*100)+'%';try{const metaBefore=await readMetadata(file);let blob;if(isImg(file.name))blob=await scrubImage(file);else if(isPdf(file.name))blob=await scrubPdf(file);else if(isAV(file.name))blob=await scrubAV(file);const metaAfter=await readMetadata(blobToFile(blob,file.name));processedFiles.push({name:cleanName(file.name),originalName:file.name,originalSize:file.size,cleanSize:blob.size,blob,metaBefore,metaAfter});updateFileCard(i,'clean',processedFiles[processedFiles.length-1])}catch(err){updateFileCard(i,'error',{error:err.message})}}progressFill.style.width='100%';setTimeout(()=>{statusEl.classList.add('hidden');progressBar.classList.add('hidden');batchActions.classList.remove('hidden');if(processedFiles.length>1)downloadAllBtn.classList.remove('hidden')},400)}
   function blobToFile(blob,name){return new File([blob],name,{type:blob.type})}
   function addFileCard(name,size,state){const el=document.createElement('div');el.className='file-card card-dirty';el.innerHTML='<div class="file-card-top"><div class="file-dot dot-processing"></div><span class="file-name">'+escapeHtml(name)+'</span><span class="file-size">'+formatSize(size)+'</span></div>';batchResults.appendChild(el)}
   function updateFileCard(index,state,data){const cards=batchResults.querySelectorAll('.file-card');if(!cards[index])return;const card=cards[index];if(state==='clean'){card.className='file-card card-clean';let metaHtml='';if(data.metaBefore.totalTags>0){metaHtml='<button class="file-meta-toggle" data-idx="'+index+'">Afficher les métadonnées trouvées ('+data.metaBefore.totalTags+' éléments)</button><div class="file-meta-panel hidden" data-panel="'+index+'">'+renderMetadataPanel(data.metaBefore,true)+'</div>'}else{metaHtml='<div style="font-size:11px;color:var(--green);margin-top:6px">Aucune métadonnée trouvée</div>'}card.innerHTML='<div class="file-card-top"><div class="file-dot dot-clean"></div><span class="file-name">'+escapeHtml(data.name)+'</span><span class="file-size">'+formatSize(data.originalSize)+' &rarr; '+formatSize(data.cleanSize)+'</span><div class="file-actions"><button class="btn-sm btn-download" data-idx="'+index+'"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Télécharger</button></div></div>'+metaHtml;card.querySelector('.btn-download').onclick=()=>downloadSingle(index);const toggle=card.querySelector('.file-meta-toggle');if(toggle){toggle.onclick=()=>{const panel=card.querySelector('[data-panel="'+index+'"]');panel.classList.toggle('hidden');toggle.textContent=panel.classList.contains('hidden')?'Afficher les métadonnées trouvées ('+data.metaBefore.totalTags+' éléments)':'Masquer les métadonnées trouvées'}}}if(state==='error'){card.className='file-card card-dirty';card.innerHTML='<div class="file-card-top"><div class="file-dot" style="background:var(--red)"></div><span class="file-name">'+escapeHtml(card.querySelector('.file-name').textContent)+'</span><span class="file-size" style="color:var(--red)">Erreur : '+escapeHtml(data.error)+'</span></div>'}}
   function downloadSingle(index){const entry=processedFiles[index];if(!entry)return;const a=document.createElement('a');a.href=URL.createObjectURL(entry.blob);a.download=entry.name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
-  downloadAllBtn.onclick=async()=>{if(!processedFiles.length)return;downloadAllBtn.disabled=true;downloadAllBtn.textContent='Création du ZIP...';try{const zip=new JSZip();for(const entry of processedFiles)zip.file(entry.name,entry.blob);const blob=await zip.generateAsync({type:'blob'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='vanta-cleaned-'+Date.now()+'.zip';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}catch(e){alert('Échec de la création du ZIP : '+e.message)}downloadAllBtn.disabled=false;downloadAllBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Tout télécharger (ZIP)'};
+  downloadAllBtn.onclick=async()=>{if(!processedFiles.length)return;downloadAllBtn.disabled=true;downloadAllBtn.textContent='Création du ZIP…';try{const zip=new JSZip();for(const entry of processedFiles)zip.file(entry.name,entry.blob);const blob=await zip.generateAsync({type:'blob'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='vanta-cleaned-'+Date.now()+'.zip';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}catch(e){alert('Échec de la création du ZIP : '+e.message)}downloadAllBtn.disabled=false;downloadAllBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Tout télécharger (ZIP)'};
   clearAllBtn.onclick=()=>{batchResults.innerHTML='';batchActions.classList.add('hidden');processedFiles=[]};
   function showStatus(msg){statusEl.classList.remove('hidden');batchResults.innerHTML='';batchActions.classList.add('hidden');statusText.textContent=msg}
   })();

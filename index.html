@@ -102,16 +102,15 @@
       <span class="pill glass">100% Client-Side</span>
       <span class="pill glass">Zero Upload</span>
       <a href="/pages/" class="pill glass pill-link">Guides</a>
-      <span class="lang-switch">
-        <a href="/" class="lang-active">EN</a>
-        <a href="/ar/">عربي</a>
-        <a href="/fr/">FR</a>
-        <a href="/es/">ES</a>
-      </span>
-      <span id="offlineIndicator" class="pill glass pill-offline hidden">Offline Ready</span>
-      <button id="proBtn" class="pill glass pill-pro">Unlock Pro</button>
     </div>
   </nav>
+
+  <div class="lang-bar">
+    <a href="/" class="lang-active">EN</a>
+    <a href="/ar/">عربي</a>
+    <a href="/fr/">FR</a>
+    <a href="/es/">ES</a>
+  </div>
 
   <main class="main">
     <section class="hero">
@@ -242,29 +241,6 @@
       <a href="/pages/view-exif-data-online">Check your photo's metadata</a>
     </nav>
   </footer>
-
-  <div id="proModal" class="modal hidden">
-    <div class="modal-overlay"></div>
-    <div class="modal-card glass-card">
-      <div class="modal-header">
-        <h2>Unlock Vantawebs Pro</h2>
-        <button id="modalClose" class="modal-close">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="pro-features">
-          <div class="pro-feature"><span class="pro-check">&#10003;</span> Unlimited batch size (free: 10 files)</div>
-          <div class="pro-feature"><span class="pro-check">&#10003;</span> Priority processing</div>
-          <div class="pro-feature"><span class="pro-check">&#10003;</span> One-time purchase, no subscription</div>
-        </div>
-        <div class="pro-key-input">
-          <input id="licenseKey" type="text" placeholder="Enter your license key" class="license-input">
-          <button id="activateBtn" class="btn-primary">Activate</button>
-        </div>
-        <p class="pro-note">License key is stored locally in your browser. No account required.</p>
-        <div id="proStatus" class="pro-status hidden"></div>
-      </div>
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>

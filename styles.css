@@ -226,35 +226,18 @@ code,.mono{font-family:'JetBrains Mono',monospace}
 
 @media(max-width:600px){
   .features{grid-template-columns:1fr}
-  .nav-pills{display:none}
+  .nav{flex-wrap:wrap;gap:10px}
+  .nav-pills{flex-wrap:wrap;justify-content:flex-end}
+  .pill{font-size:10px;padding:4px 8px}
   .hero{padding:40px 0 24px}
   .file-card-top{flex-wrap:wrap}
   .file-actions{width:100%;justify-content:flex-end}
-  .modal-card{margin:16px;max-height:calc(100vh - 32px)}
 }
 
-.pill-pro{
-  background:linear-gradient(135deg,rgba(167,139,250,.15),rgba(109,40,217,.15))!important;
-  border-color:rgba(167,139,250,.3)!important;color:var(--purple)!important;
-  cursor:pointer;transition:all .2s;font-family:inherit;
+.lang-bar{
+  display:flex;gap:14px;justify-content:center;align-items:center;
+  position:relative;z-index:2;margin:0 0 8px;font-size:12px;
 }
-.pill-pro:hover{background:linear-gradient(135deg,rgba(167,139,250,.25),rgba(109,40,217,.25))!important;transform:translateY(-1px)}
-
-.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center}
-.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px)}
-.modal-card{
-  position:relative;z-index:1;width:100%;max-width:420px;margin:16px;
-  padding:28px;animation:fadeUp .3s ease;
-}
-.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.modal-header h2{font-size:18px;font-weight:700}
-.modal-close{background:none;border:none;color:var(--text3);font-size:22px;cursor:pointer;padding:0}
-.modal-close:hover{color:var(--text)}
-.modal-body{display:flex;flex-direction:column;gap:16px}
-.pro-features{display:flex;flex-direction:column;gap:8px}
-.pro-feature{font-size:13px;color:var(--text2);display:flex;align-items:center;gap:8px}
-.pro-check{color:var(--green);font-weight:700;font-size:14px}
-.pro-note{font-size:11px;color:var(--text3);text-align:center}
-.pro-status{font-size:12px;text-align:center;padding:8px;border-radius:8px}
-.pro-status.pro-ok{color:var(--green);background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.15)}
-.pro-status.pro-err{color:var(--red);background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.15)}
+.lang-bar a{color:var(--text3);text-decoration:none;font-weight:500;padding:2px 4px}
+.lang-bar a:hover{color:var(--text)}
+.lang-bar a.lang-active{color:var(--purple);font-weight:700}
