@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Is EXIF Data? (Complete 2026 Guide)</title>
+  <meta name="description" content="EXIF data hides GPS location, camera model, dates and settings inside every photo. Learn what EXIF is, why it's dangerous, how to view it, and how to remove it free.">
+  <meta property="og:title" content="What Is EXIF Data? (Complete 2026 Guide)">
+  <meta property="og:description" content="EXIF data hides GPS location, camera model, dates and settings inside every photo. Learn what EXIF is, why it's dangerous, how to view it, and how to remove it free.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://vantawebs.site/pages/what-is-exif-data">
+  <link rel="canonical" href="https://vantawebs.site/pages/what-is-exif-data">
+  <meta name="theme-color" content="#09090b">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#09090b;--surface:rgba(255,255,255,.04);--border:rgba(255,255,255,.08);--text:#fafafa;--text2:#a1a1aa;--text3:#52525b;--purple:#a78bfa;--violet:#6d28d9;--green:#34d399;--red:#f87171;--amber:#fbbf24;--glass:rgba(255,255,255,.03);--glass-border:rgba(255,255,255,.06)}
+    body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;align-items:center}
+    .hidden{display:none!important}
+    .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px}
+    .glow{position:fixed;border-radius:50%;filter:blur(120px);opacity:.12;pointer-events:none;z-index:0}
+    .glow-1{width:500px;height:500px;background:#7c3aed;top:-150px;left:-100px}
+    .glow-2{width:400px;height:400px;background:#3b82f6;bottom:-100px;right:-50px}
+    .nav{width:100%;max-width:760px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+    .nav-brand{display:flex;align-items:center;gap:10px}
+    .nav-logo{flex-shrink:0}
+    .nav-name{font-weight:700;font-size:17px;letter-spacing:-.3px}
+    .nav-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .pill{font-size:11px;padding:5px 10px;border-radius:999px;font-weight:500;white-space:nowrap}
+    .glass{background:var(--glass);border:1px solid var(--glass-border);color:var(--text2);backdrop-filter:blur(12px)}
+    .main{width:100%;max-width:760px;padding:0 24px 60px;position:relative;z-index:2}
+    .article-hero{padding:60px 0 20px;text-align:center}
+    .article-hero h1{font-size:clamp(28px,5vw,42px);font-weight:800;line-height:1.15;letter-spacing:-1px;margin-bottom:12px}
+    .gradient-text{background:linear-gradient(135deg,var(--purple),#818cf8,var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .article-hero .date{font-size:13px;color:var(--text3);margin-bottom:8px}
+    .article-body{font-size:15px;line-height:1.7;color:var(--text2)}
+    .article-body p{margin-bottom:16px}
+    .article-body strong{color:var(--text);font-weight:600}
+    .article-body ul{margin:12px 0 16px 20px}
+    .article-body li{margin-bottom:8px}
+    .article-body code{font-family:'JetBrains Mono',monospace;font-size:13px;background:rgba(167,139,250,.08);padding:2px 6px;border-radius:4px;color:var(--purple)}
+    .article-body .callout{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.15);border-radius:12px;padding:16px 20px;margin:20px 0}
+    .article-body .callout-title{color:var(--purple);font-weight:600;font-size:14px;margin-bottom:6px}
+    .glass-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;backdrop-filter:blur(20px)}
+    .dropzone{padding:48px 24px;text-align:center;cursor:pointer;transition:all .25s ease;position:relative;overflow:hidden;margin-top:24px}
+    .dropzone::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,rgba(167,139,250,.05),transparent);opacity:0;transition:opacity .25s}
+    .dropzone:hover,.dropzone.over{border-color:rgba(167,139,250,.3)}
+    .dropzone:hover::before,.dropzone.over::before{opacity:1}
+    .dropzone:focus{outline:none;border-color:rgba(167,139,250,.4)}
+    .dz-content{position:relative;z-index:1}
+    .dz-icon-wrap{width:72px;height:72px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.1);transition:all .25s}
+    .dropzone:hover .dz-icon-wrap{background:rgba(167,139,250,.1);transform:translateY(-2px)}
+    .dz-text{font-size:15px;color:var(--text2);margin-bottom:8px}
+    .dz-text b{color:var(--text);display:block;font-size:16px;margin-bottom:4px}
+    .dz-formats{font-size:12px;color:var(--text3);letter-spacing:.5px}
+    .linkbtn{background:none;border:none;color:var(--purple);font-weight:600;cursor:pointer;font-size:15px;text-decoration:underline;text-underline-offset:3px}
+    .instant-preview{margin-top:16px;padding:16px 20px;animation:fadeUp .3s ease}
+    .preview-header{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--amber);margin-bottom:12px}
+    .preview-close{margin-left:auto;background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:0 4px}
+    .preview-close:hover{color:var(--text)}
+    .preview-meta{display:flex;flex-direction:column;gap:6px;max-height:240px;overflow-y:auto;margin-bottom:12px;padding-right:8px}
+    .meta-row{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04)}
+    .meta-row .meta-cat{color:var(--text3);min-width:80px;font-weight:500;text-transform:uppercase;font-size:10px;letter-spacing:.5px;padding-top:1px}
+    .meta-row .meta-val{color:var(--text2);flex:1;word-break:break-all}
+    .meta-row .meta-val .removed{color:var(--red);font-weight:500;text-decoration:line-through;margin-left:6px}
+    .btn-primary{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--purple),var(--violet));color:#fff;border:none;padding:10px 20px;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s;box-shadow:0 4px 16px rgba(109,40,217,.3);width:100%;justify-content:center}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(109,40,217,.4)}
+    .btn-secondary{display:inline-flex;align-items:center;gap:6px;background:var(--glass);border:1px solid var(--glass-border);color:var(--text2);padding:10px 20px;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;transition:all .2s}
+    .btn-secondary:hover{border-color:rgba(167,139,250,.3);color:var(--text)}
+    .status{display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px 0}
+    .loader{position:relative;width:48px;height:48px}
+    .loader-ring{position:absolute;inset:0;border-radius:50%;border:2px solid transparent}
+    .loader-ring:nth-child(1){border-top-color:var(--purple);animation:spin 1s linear infinite}
+    .loader-ring:nth-child(2){inset:4px;border-right-color:var(--violet);animation:spin 1.5s linear infinite reverse}
+    .loader-ring:nth-child(3){inset:8px;border-bottom-color:var(--purple);animation:spin 2s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .status-text{font-size:14px;color:var(--text2);font-weight:500}
+    .progress-bar{width:100%;max-width:300px;height:4px;border-radius:2px;background:var(--border);overflow:hidden}
+    .progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--purple),var(--violet));transition:width .3s ease}
+    .batch-results{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+    .file-card{border-radius:12px;padding:14px 16px;background:var(--glass);border:1px solid var(--glass-border);animation:fadeUp .3s ease;transition:border-color .3s}
+    .file-card.card-clean{border-color:rgba(52,211,153,.3)}
+    .file-card.card-dirty{border-color:rgba(248,113,113,.2)}
+    .file-card-top{display:flex;align-items:center;gap:10px}
+    .file-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .file-dot.dot-clean{background:var(--green)}
+    .file-dot.dot-processing{background:var(--amber);animation:pulse 1s infinite}
+    .file-name{font-size:13px;font-weight:500;flex:1;word-break:break-all}
+    .file-size{font-size:11px;color:var(--text3);white-space:nowrap}
+    .file-actions{display:flex;gap:6px;margin-left:auto}
+    .btn-sm{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:8px;border:1px solid var(--glass-border);background:var(--glass);color:var(--text2);font-size:11px;font-weight:500;cursor:pointer;transition:all .2s}
+    .btn-sm:hover{border-color:rgba(167,139,250,.3);color:var(--text)}
+    .btn-sm svg{width:12px;height:12px}
+    .batch-actions{display:flex;gap:10px;justify-content:center;margin-top:16px;animation:fadeUp .3s ease}
+    .footer{padding:24px;font-size:12px;color:var(--text3);text-align:center;position:relative;z-index:2}
+    .footer a{color:var(--purple);text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    @media(max-width:600px){.nav-pills{display:none}.article-hero{padding:40px 0 16px}.file-card-top{flex-wrap:wrap}.file-actions{width:100%;justify-content:flex-end}}
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <nav class="nav">
+    <a href="https://vantawebs.site" class="nav-brand" style="text-decoration:none;color:inherit">
+      <svg class="nav-logo" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 2L4 7v7c0 6.075 4.25 11.725 10 13 5.75-1.275 10-6.925 10-13V7L14 2z" stroke="url(#navGrad)" stroke-width="2" fill="none"/>
+        <path d="M10 14l3 3 5-5" stroke="url(#navGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="navGrad" x1="4" y1="2" x2="24" y2="28"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+      </svg>
+      <span class="nav-name">Vantawebs</span>
+    </a>
+    <div class="nav-pills">
+      <span class="pill glass">100% Client-Side</span>
+      <span class="pill glass">Zero Upload</span>
+    </div>
+  </nav>
+
+  <main class="main">
+    <article>
+      <div class="article-hero">
+        <div class="date">Updated September 2026</div>
+        <h1>What Is <span class="gradient-text">EXIF Data?</span></h1>
+      </div>
+
+      <div class="article-body">
+<p><strong>EXIF (Exchangeable Image File Format) is a hidden data block inside every photo you take.</strong> Your phone or camera silently records dozens of fields at shutter-press: GPS coordinates, camera model, lens, shutter speed, aperture, ISO, flash state, timestamps, and often a thumbnail of the original image. It travels with the file when you share it — unless something strips it.</p>
+<p>A typical iPhone photo contains 50–150 EXIF tags. Here is what is commonly inside:</p>
+<ul>
+<li><strong>Device:</strong> Make, Model (e.g. Apple iPhone 15 Pro), LensModel, SerialNumber, Software / firmware version.</li>
+<li><strong>Location:</strong> GPSLatitude, GPSLongitude, GPSAltitude, GPS timestamp — precise to ~3 meters.</li>
+<li><strong>Dates:</strong> DateTimeOriginal (shutter moment), CreateDate, ModifyDate, timezone offset.</li>
+<li><strong>Settings:</strong> ExposureTime, FNumber, ISOSpeedRatings, FocalLength, Flash, WhiteBalance, MeteringMode.</li>
+<li><strong>Extras:</strong> ImageDescription, Artist, Copyright, embedded Thumbnail, orientation flags.</li>
+</ul>
+<p><strong>Why it is dangerous:</strong> posted photos have enabled real-world harm. Celebrities and streamers have been doxxed via GPS tags in uploaded images; burglary gangs have scouted empty homes from vacation photos with intact coordinates and dates; stalkers have extracted a victim's home location from a single marketplace listing photo; journalists have exposed anonymous sources because Word/PDF exports carried author names alongside image EXIF. A 2023–2025 string of "find my house" challenges on TikTok demonstrated GPS extraction live to millions.</p>
+<div class="callout"><div class="callout-title">The 10-second safety rule</div><p style="margin:0">Before posting any photo showing your home, kids, car plate, documents, or travel plans: strip EXIF. iPhone GPS alone narrows you to a single house. The free tool below wipes GPS, device, dates and thumbnails in one click — files never leave your browser. iPhone-specific walkthrough: <a href="/pages/remove-gps-from-iphone-photo" style="color:var(--purple)">remove GPS from iPhone photos</a>.</p></div>
+<p><strong>How to view EXIF:</strong> on Windows right-click &gt; Properties &gt; Details; on macOS open in Preview &gt; Tools &gt; Show Inspector &gt; Exif; on iPhone swipe up on a photo for device/date/location; power users run <code>exiftool photo.jpg</code>. Or drop the photo in the tool below — the instant preview lists everything found, exactly as a stranger would see it.</p>
+<p><strong>How to remove it:</strong> OS toggles help going forward (iPhone: Camera &gt; Location Services off; Samsung: Camera settings &gt; Location tags off; Windows: Properties &gt; "Remove Properties"). But toggles never clean old photos, and social platforms are inconsistent — see <a href="/pages/does-instagram-remove-exif-data" style="color:var(--purple)">does Instagram remove EXIF?</a> for what survives uploads. For guaranteed removal, structural strippers rebuild the file without metadata segments.</p>
+<p><strong>Clean it now:</strong> drop any photo below. The preview shows every tag found (GPS, device, dates) marked REMOVED, then one click produces a clean copy with identical pixels.</p>
+<p>Go deeper: <a href="/pages/what-is-c2pa" style="color:var(--purple)">what C2PA provenance is</a> · <a href="/pages/strip-metadata-before-selling-photos" style="color:var(--purple)">stripping metadata before selling photos</a>.</p>
+
+      </div>
+    </article>
+
+    <div id="dropzone" class="dropzone glass-card" tabindex="0">
+      <div class="dz-content">
+        <div class="dz-icon-wrap">
+          <svg class="dz-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4L8 12v12c0 10.125 6.875 19.625 16 22 9.125-2.375 16-11.875 16-22V12L24 4z" stroke="url(#dzGrad)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+            <path d="M18 24l4 4 8-8" stroke="url(#dzGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="dzGrad" x1="8" y1="4" x2="40" y2="38"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="dz-text">
+          <b>Drop your images here</b>
+          <span>or <button id="pickBtn" class="linkbtn">browse files</button></span>
+        </div>
+        <div class="dz-formats">JPG · PNG · WEBP · HEIC · PDF · MP4 · MOV</div>
+        <div id="fileCount" class="dz-count hidden"></div>
+      </div>
+      <input id="fileInput" type="file" multiple accept="image/*,video/*,.pdf" hidden>
+    </div>
+
+    <div id="instantPreview" class="instant-preview glass-card hidden">
+      <div class="preview-header">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#f59e0b" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Metadata found in this file</span>
+        <button id="previewClose" class="preview-close">&times;</button>
+      </div>
+      <div id="previewMeta" class="preview-meta"></div>
+      <button id="previewClean" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 2.5l-11 11M2.5 2.5l11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Clean it now
+      </button>
+    </div>
+
+    <div id="status" class="status hidden">
+      <div class="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+        <div class="loader-ring"></div>
+      </div>
+      <span id="statusText" class="status-text">Processing...</span>
+      <div id="progressBar" class="progress-bar hidden">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="batchResults" class="batch-results"></div>
+    <div id="batchActions" class="batch-actions hidden">
+      <button id="downloadAllBtn" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download All (ZIP)
+      </button>
+      <button id="clearAllBtn" class="btn-secondary">Clear</button>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>Vantawebs · built for privacy · <a href="https://vantawebs.site">vantawebs.site</a></span>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does EXIF stand for and what does it store?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "EXIF stands for Exchangeable Image File Format. It stores camera make/model, GPS coordinates, timestamps, exposure settings (shutter, aperture, ISO, focal length), software version, author/copyright fields and an embedded thumbnail — typically 50-150 tags per smartphone photo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can someone find my location from a photo I post?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, if GPS tags survive. Smartphone photos embed coordinates accurate to a few meters. Some platforms (Instagram, Facebook, WhatsApp) strip GPS on upload, but Discord, Google Drive, email, marketplaces and original-file downloads usually preserve it. Always strip before posting sensitive images."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does screenshotting a photo remove EXIF?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mostly yes — screenshots create a new file with only the screenshot device's basic metadata. But resolution drops and you lose quality. A structural metadata remover preserves full resolution while deleting EXIF, which is strictly better for photos you want to keep sharp."
+      }
+    }
+  ]
+}
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/picscrub@1.2.0/dist/picscrub.min.js"></script>
+  <script>
+  (function(){
+  'use strict';
+  const dz=document.getElementById('dropzone'),fi=document.getElementById('fileInput'),statusEl=document.getElementById('status'),statusText=document.getElementById('statusText'),progressBar=document.getElementById('progressBar'),progressFill=document.getElementById('progressFill'),batchResults=document.getElementById('batchResults'),batchActions=document.getElementById('batchActions'),downloadAllBtn=document.getElementById('downloadAllBtn'),clearAllBtn=document.getElementById('clearAllBtn'),fileCountEl=document.getElementById('fileCount'),instantPreview=document.getElementById('instantPreview'),previewMeta=document.getElementById('previewMeta'),previewClean=document.getElementById('previewClean'),previewClose=document.getElementById('previewClose');
+  let processedFiles=[];
+  const extOf=n=>(n.split('.').pop()||'').toLowerCase();
+  const isImg=n=>['jpg','jpeg','png','webp','gif','bmp','tiff','tif','heic'].includes(extOf(n));
+  const isPdf=n=>extOf(n)==='pdf';
+  const isAV=n=>['mp4','mov','m4a','webm','mkv','mp3','wav','ogg','aac','flac','avi'].includes(extOf(n));
+  const mimeOf=ext=>{const m={jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp',gif:'image/gif',bmp:'image/bmp',heic:'image/heic'};return m[ext]||'application/octet-stream'};
+  const formatSize=b=>b<1024?b+'B':(b/1024).toFixed(1)+'KB';
+  const cleanName=orig=>'clean-'+Math.random().toString(36).slice(2,10)+'.'+extOf(orig);
+  function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+  document.getElementById('pickBtn').onclick=e=>{e.stopPropagation();fi.click()};
+  dz.onclick=()=>fi.click();
+  dz.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')fi.click()};
+  ['dragover','dragenter'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over')}));
+  ['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over')}));
+  dz.addEventListener('drop',e=>{const files=Array.from(e.dataTransfer.files);if(files.length)handleFiles(files)});
+  fi.onchange=()=>{if(fi.files.length)handleFiles(Array.from(fi.files));fi.value=''};
+
+  let previewFile=null;
+  async function showInstantPreview(file){
+    if(!isImg(file.name)&&!isPdf(file.name))return;
+    previewFile=file;
+    try{const meta=await readMetadata(file);if(!meta||meta.totalTags===0)return;previewMeta.innerHTML=renderMetadataPreview(meta);instantPreview.classList.remove('hidden')}catch(e){}
+  }
+  previewClose.onclick=()=>{instantPreview.classList.add('hidden');previewFile=null};
+  previewClean.onclick=()=>{if(previewFile){instantPreview.classList.add('hidden');handleFiles([previewFile]);previewFile=null}};
+
+  function findBytes(arr,pattern){for(let i=0;i<=arr.length-pattern.length;i++){let match=true;for(let j=0;j<pattern.length;j++){if(arr[i+j]!==pattern[j]){match=false;break}}if(match)return true}return false}
+
+  async function readMetadata(file){
+    const buf=await file.arrayBuffer(),ext=extOf(file.name),result={categories:{},totalTags:0,raw:{}};
+    if(isImg(file.name)){
+      try{
+        const tags=ExifReader.load(buf,{expanded:true,includeOffsets:false});result.raw=tags;
+        const device={};if(tags.Make)device['Make']=tags.Make.description||tags.Make;if(tags.Model)device['Model']=tags.Model.description||tags.Model;if(tags.LensModel)device['Lens']=tags.LensModel.description||tags.LensModel;if(tags.FocalLength)device['Focal Length']=tags.FocalLength.description||tags.FocalLength;if(tags.FNumber)device['Aperture']=tags.FNumber.description||tags.FNumber;if(tags.ISOSpeedRatings)device['ISO']=tags.ISOSpeedRatings.description||tags.ISOSpeedRatings;if(tags.ExposureTime)device['Shutter Speed']=tags.ExposureTime.description||tags.ExposureTime;if(Object.keys(device).length){result.categories['Device Info']=device;result.totalTags+=Object.keys(device).length}
+        const loc={};if(tags.GPSLatitude&&tags.GPSLongitude){const lat=tags.GPSLatitude.description||JSON.stringify(tags.GPSLatitude),lon=tags.GPSLongitude.description||JSON.stringify(tags.GPSLongitude);loc['GPS Location']=lat+', '+lon}if(tags.GPSAltitude)loc['Altitude']=tags.GPSAltitude.description||tags.GPSAltitude;if(Object.keys(loc).length){result.categories['Location']=loc;result.totalTags+=Object.keys(loc).length}
+        const dates={};if(tags.DateTimeOriginal)dates['Date Taken']=tags.DateTimeOriginal.description||tags.DateTimeOriginal;if(tags.DateTime)dates['Date Modified']=tags.DateTime.description||tags.DateTime;if(tags.OffsetTimeOriginal)dates['Timezone']=tags.OffsetTimeOriginal.description||tags.OffsetTimeOriginal;if(Object.keys(dates).length){result.categories['Date & Time']=dates;result.totalTags+=Object.keys(dates).length}
+        const soft={};if(tags.Software)soft['Software']=tags.Software.description||tags.Software;if(tags.ImageDescription)soft['Description']=tags.ImageDescription.description||tags.ImageDescription;if(Object.keys(soft).length){result.categories['Software']=soft;result.totalTags+=Object.keys(soft).length}
+        const auth={};if(tags.Artist)auth['Author']=tags.Artist.description||tags.Artist;if(tags.Copyright)auth['Copyright']=tags.Copyright.description||tags.Copyright;if(Object.keys(auth).length){result.categories['Author & Rights']=auth;result.totalTags+=Object.keys(auth).length}
+        const ai={};if(tags.DigitalSourceType)ai['Digital Source Type']=tags.DigitalSourceType.description||tags.DigitalSourceType;if(tags.Application)ai['Application']=tags.Application.description||tags.Application;const raw8=new Uint8Array(buf);const hasJUMBF=findBytes(raw8,[0xFF,0xE1])||findBytes(raw8,[0x6A,0x75,0x6D,0x62,0x66]);if(hasJUMBF)ai['C2PA Content Credentials']='Detected (APP11/JUMBF)';if(Object.keys(ai).length){result.categories['AI Provenance']=ai;result.totalTags+=Object.keys(ai).length}
+        if(tags.Thumbnail){result.categories['Embedded']={'Thumbnail':'Present'};result.totalTags++}
+      }catch(e){}
+    }
+    if(isPdf(file.name)){try{const doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});const pdfMeta={};if(doc.getTitle())pdfMeta['Title']=doc.getTitle();if(doc.getAuthor())pdfMeta['Author']=doc.getAuthor();if(doc.getSubject())pdfMeta['Subject']=doc.getSubject();if(doc.getProducer())pdfMeta['Producer']=doc.getProducer();if(doc.getCreator())pdfMeta['Creator']=doc.getCreator();if(doc.getKeywords()&&doc.getKeywords().length)pdfMeta['Keywords']=doc.getKeywords().join(', ');if(doc.getCreationDate())pdfMeta['Created']=doc.getCreationDate().toISOString();if(doc.getModificationDate())pdfMeta['Modified']=doc.getModificationDate().toISOString();if(Object.keys(pdfMeta).length){result.categories['PDF Metadata']=pdfMeta;result.totalTags+=Object.keys(pdfMeta).length}}catch(e){}}
+    return result;
+  }
+
+  function renderMetadataPreview(meta){let html='';for(const[cat,items]of Object.entries(meta.categories)){html+='<div class="meta-row"><span class="meta-cat">'+cat+'</span><div class="meta-val">';for(const[k,v]of Object.entries(items)){html+='<div>'+k+': '+escapeHtml(String(v).substring(0,120))+' <span class="removed">REMOVED</span></div>'}html+='</div></div>'}return html}
+  function renderMetadataPanel(meta,cleaned){let html='';for(const[cat,items]of Object.entries(meta.categories)){html+='<div class="meta-category"><div class="meta-cat-label">'+cat+'</div>';for(const[k,v]of Object.entries(items)){html+='<div class="meta-item"><span class="mk">'+k+':</span><span class="mv">'+escapeHtml(String(v).substring(0,120))+'</span>';html+=cleaned?'<span class="mg">CLEAN</span>':'<span class="mr">REMOVED</span>';html+='</div>'}html+='</div>'}if(cleaned&&meta.totalTags===0){html='<div class="meta-item"><span class="mg">No metadata found — file is clean</span></div>'}return html}
+
+  async function scrubImage(file){if(typeof picscrub!=='undefined'){try{const buf=await file.arrayBuffer(),input=new Uint8Array(buf),result=picscrub(input,file.name);if(result&&result.data){return new Blob([result.data],{type:mimeOf(extOf(file.name))})}}catch(e){console.warn('picscrub failed:',e)}}const bmp=await createImageBitmap(file),c=document.createElement('canvas');c.width=bmp.width;c.height=bmp.height;c.getContext('2d').drawImage(bmp,0,0);bmp.close();const ext=extOf(file.name);let mime='image/jpeg';if(ext==='png')mime='image/png';else if(ext==='webp')mime='image/webp';return new Promise(r=>c.toBlob(r,mime,1.0))}
+  async function scrubPdf(file){const buf=await file.arrayBuffer(),doc=await PDFLib.PDFDocument.load(buf,{ignoreEncryption:true});doc.setTitle('');doc.setAuthor('');doc.setSubject('');doc.setKeywords([]);doc.setProducer('');doc.setCreator('');doc.setCreationDate(new Date(0));doc.setModificationDate(new Date(0));try{const cat=doc.catalog,PN=PDFLib.PDFName;if(cat.has(PN.of('Metadata')))cat.delete(PN.of('Metadata'));if(cat.has(PN.of('Info')))cat.delete(PN.of('Info'))}catch(e){}return new Blob([await doc.save({useObjectStreams:false})],{type:'application/pdf'})}
+  let ffInst=null,ffLoad=null;
+  async function scrubAV(file){if(!ffLoad)ffLoad=(async()=>{await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js';s.onload=res;s.onerror=rej;document.head.appendChild(s)});const ff=window.FFmpeg.createFFmpeg({corePath:'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js',log:false});await ff.load();ffInst=ff})();await ffLoad;const ext=extOf(file.name)==='mov'?'mp4':extOf(file.name),inN='i_'+Math.random().toString(36).slice(2)+'.'+extOf(file.name),outN='o.'+ext;ffInst.FS('writeFile',inN,new Uint8Array(await file.arrayBuffer()));try{await ffInst.run('-hide_banner','-i',inN,'-map_metadata','-1','-c','copy',outN)}catch(e){await ffInst.run('-hide_banner','-i',inN,'-map_metadata','-1','-c:v','copy','-c:a','copy',outN)}const out=ffInst.FS('readFile',outN);try{ffInst.FS('unlink',inN);ffInst.FS('unlink',outN)}catch(e){}return new Blob([out.buffer],{type:file.type||'video/mp4'})}
+
+  async function handleFiles(files){const supported=files.filter(f=>isImg(f.name)||isPdf(f.name)||isAV(f.name));if(!supported.length){showStatus('Unsupported file type');statusText.textContent='Supported: JPG, PNG, WebP, HEIC, PDF, MP4, MOV';setTimeout(()=>statusEl.classList.add('hidden'),3000);return}if(supported.length===1){showInstantPreview(supported[0]);return}instantPreview.classList.add('hidden');fileCountEl.classList.add('hidden');batchResults.innerHTML='';processedFiles=[];showStatus('Processing '+supported.length+' files...');progressBar.classList.remove('hidden');progressFill.style.width='0%';for(const file of supported)addFileCard(file.name,file.size,'processing');for(let i=0;i<supported.length;i++){const file=supported[i];statusText.textContent='Processing '+(i+1)+'/'+supported.length+': '+file.name;progressFill.style.width=((i/supported.length)*100)+'%';try{const metaBefore=await readMetadata(file);let blob;if(isImg(file.name))blob=await scrubImage(file);else if(isPdf(file.name))blob=await scrubPdf(file);else if(isAV(file.name))blob=await scrubAV(file);const metaAfter=await readMetadata(blobToFile(blob,file.name));processedFiles.push({name:cleanName(file.name),originalName:file.name,originalSize:file.size,cleanSize:blob.size,blob,metaBefore,metaAfter});updateFileCard(i,'clean',processedFiles[processedFiles.length-1])}catch(err){updateFileCard(i,'error',{error:err.message})}}progressFill.style.width='100%';setTimeout(()=>{statusEl.classList.add('hidden');progressBar.classList.add('hidden');batchActions.classList.remove('hidden');if(processedFiles.length>1)downloadAllBtn.classList.remove('hidden')},400)}
+  function blobToFile(blob,name){return new File([blob],name,{type:blob.type})}
+  function addFileCard(name,size,state){const el=document.createElement('div');el.className='file-card card-dirty';el.innerHTML='<div class="file-card-top"><div class="file-dot dot-processing"></div><span class="file-name">'+escapeHtml(name)+'</span><span class="file-size">'+formatSize(size)+'</span></div>';batchResults.appendChild(el)}
+  function updateFileCard(index,state,data){const cards=batchResults.querySelectorAll('.file-card');if(!cards[index])return;const card=cards[index];if(state==='clean'){card.className='file-card card-clean';let metaHtml='';if(data.metaBefore.totalTags>0){metaHtml='<button class="file-meta-toggle" data-idx="'+index+'">Show metadata found ('+data.metaBefore.totalTags+' items)</button><div class="file-meta-panel hidden" data-panel="'+index+'">'+renderMetadataPanel(data.metaBefore,true)+'</div>'}else{metaHtml='<div style="font-size:11px;color:var(--green);margin-top:6px">No metadata found</div>'}card.innerHTML='<div class="file-card-top"><div class="file-dot dot-clean"></div><span class="file-name">'+escapeHtml(data.name)+'</span><span class="file-size">'+formatSize(data.originalSize)+' &rarr; '+formatSize(data.cleanSize)+'</span><div class="file-actions"><button class="btn-sm btn-download" data-idx="'+index+'"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Download</button></div></div>'+metaHtml;card.querySelector('.btn-download').onclick=()=>downloadSingle(index);const toggle=card.querySelector('.file-meta-toggle');if(toggle){toggle.onclick=()=>{const panel=card.querySelector('[data-panel="'+index+'"]');panel.classList.toggle('hidden');toggle.textContent=panel.classList.contains('hidden')?'Show metadata found ('+data.metaBefore.totalTags+' items)':'Hide metadata found'}}}if(state==='error'){card.className='file-card card-dirty';card.innerHTML='<div class="file-card-top"><div class="file-dot" style="background:var(--red)"></div><span class="file-name">'+escapeHtml(card.querySelector('.file-name').textContent)+'</span><span class="file-size" style="color:var(--red)">Error: '+escapeHtml(data.error)+'</span></div>'}}
+  function downloadSingle(index){const entry=processedFiles[index];if(!entry)return;const a=document.createElement('a');a.href=URL.createObjectURL(entry.blob);a.download=entry.name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
+  downloadAllBtn.onclick=async()=>{if(!processedFiles.length)return;downloadAllBtn.disabled=true;downloadAllBtn.textContent='Creating ZIP...';try{const zip=new JSZip();for(const entry of processedFiles)zip.file(entry.name,entry.blob);const blob=await zip.generateAsync({type:'blob'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='vanta-cleaned-'+Date.now()+'.zip';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}catch(e){alert('ZIP creation failed: '+e.message)}downloadAllBtn.disabled=false;downloadAllBtn.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Download All (ZIP)'};
+  clearAllBtn.onclick=()=>{batchResults.innerHTML='';batchActions.classList.add('hidden');processedFiles=[]};
+  function showStatus(msg){statusEl.classList.remove('hidden');batchResults.innerHTML='';batchActions.classList.add('hidden');statusText.textContent=msg}
+  })();
+  </script>
+</body>
+</html>

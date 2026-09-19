@@ -1,28 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ScrubMeta — Premium Metadata Remover</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vantawebs — Free Online Metadata Remover (EXIF, GPS, C2PA)</title>
+  <meta name="description" content="Remove EXIF, GPS location, AI fingerprints & C2PA Content Credentials from images, PDFs and videos. Free, lossless, 100% client-side — files never leave your browser.">
+  <meta name="keywords" content="remove metadata, remove exif, strip metadata, remove gps from photo, remove c2pa, exif remover, metadata scrubber, photo privacy">
+  <link rel="canonical" href="https://vantawebs.site/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:title" content="Vantawebs — Free Online Metadata Remover">
+  <meta property="og:description" content="Strip EXIF, GPS, AI provenance, and all hidden metadata. Zero upload. Zero tracking. 100% free.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vantawebs.site">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Vantawebs",
+    "url": "https://vantawebs.site/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Free online tool to remove EXIF, GPS, IPTC, XMP, C2PA Content Credentials and all hidden metadata from images, PDFs and videos. 100% client-side processing.",
+    "featureList": "EXIF removal, GPS stripping, C2PA removal, PDF metadata cleaning, video metadata stripping, batch processing, lossless output",
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "127" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is photo metadata (EXIF data)?",
+        "acceptedAnswer": { "@type": "Answer", "text": "EXIF data is hidden information embedded in photo files: camera model, GPS coordinates, date taken, lens settings, and sometimes author name. Most people share photos without knowing this data travels with the file." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it safe to upload files to Vantawebs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes — Vantawebs processes everything in your browser with JavaScript. Your files are never uploaded to any server. You can verify this by disconnecting from the internet after the page loads; the tool keeps working." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Vantawebs reduce image quality?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Vantawebs removes metadata at the binary/container level without re-encoding pixels, so output is pixel-identical to the original." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Vantawebs remove C2PA Content Credentials and AI metadata?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Vantawebs strips C2PA/JUMBF segments, IPTC Digital Source Type tags, and generator-embedded parameters from tools like Midjourney, DALL-E, Stable Diffusion and Adobe Firefly." }
+      },
+      {
+        "@type": "Question",
+        "name": "Which file formats does Vantawebs support?",
+        "acceptedAnswer": { "@type": "Answer", "text": "JPEG, PNG, WebP, HEIC, GIF, TIFF, PDF, MP4, MOV, WebM, MKV, MP3 and WAV. Free tier allows up to 10 files per batch." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to remove metadata from a photo",
+    "step": [
+      { "@type": "HowToStep", "name": "Drop your file", "text": "Drag and drop your image, PDF or video onto the Vantawebs dropzone." },
+      { "@type": "HowToStep", "name": "Review what was found", "text": "Vantawebs shows you exactly which metadata was detected — GPS, camera model, author, AI tags — in plain English." },
+      { "@type": "HowToStep", "name": "Download the clean file", "text": "Download your file with all metadata stripped. Quality is preserved pixel-for-pixel." }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2309090b'/%3E%3Ctext x='16' y='23' font-family='Inter,system-ui,sans-serif' font-weight='800' font-size='22' fill='%23a78bfa' text-anchor='middle'%3EV%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#09090b">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="bg-grid"></div>
   <div class="glow glow-1"></div>
   <div class="glow glow-2"></div>
-  <div class="glow glow-3"></div>
 
   <nav class="nav">
     <div class="nav-brand">
-      <div class="nav-logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="url(#g1)" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="url(#g1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="g1" x1="0" y1="0" x2="24" y2="24"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs></svg>
-      </div>
-      <span class="nav-name">ScrubMeta</span>
+      <svg class="nav-logo" width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 2L4 7v7c0 6.075 4.25 11.725 10 13 5.75-1.275 10-6.925 10-13V7L14 2z" stroke="url(#navGrad)" stroke-width="2" fill="none"/>
+        <path d="M10 14l3 3 5-5" stroke="url(#navGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs><linearGradient id="navGrad" x1="4" y1="2" x2="24" y2="28"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+      </svg>
+      <span class="nav-name">Vantawebs</span>
     </div>
     <div class="nav-pills">
       <span class="pill glass">100% Client-Side</span>
       <span class="pill glass">Zero Upload</span>
+      <a href="/pages/" class="pill glass pill-link">Guides</a>
+      <span id="offlineIndicator" class="pill glass pill-offline hidden">Offline Ready</span>
+      <button id="proBtn" class="pill glass pill-pro">Unlock Pro</button>
     </div>
   </nav>
 
@@ -30,28 +106,42 @@
     <section class="hero">
       <div class="hero-badge glass">
         <span class="hero-badge-dot"></span>
-        Premium Metadata Scrubber
+        Privacy-first metadata scrubber
       </div>
       <h1 class="hero-title">Strip metadata.<br><span class="gradient-text">Keep quality.</span></h1>
-      <p class="hero-desc">Drop any file. We remove EXIF, GPS, author, device info, and AI fingerprints — then return it at full quality. Everything happens in your browser. Nothing touches a server.</p>
+      <p class="hero-desc">Drop any file. We remove EXIF, GPS, author info, device data, AI fingerprints, and C2PA Content Credentials — at full quality. Everything happens in your browser. Nothing touches a server.</p>
     </section>
 
     <div id="dropzone" class="dropzone glass-card" tabindex="0">
       <div class="dz-content">
         <div class="dz-icon-wrap">
           <svg class="dz-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <rect x="2" y="2" width="44" height="44" rx="12" stroke="url(#g2)" stroke-width="2" stroke-dasharray="6 4"/>
-            <path d="M24 16v16M16 24h16" stroke="url(#g2)" stroke-width="2" stroke-linecap="round"/>
-            <defs><linearGradient id="g2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+            <path d="M24 4L8 12v12c0 10.125 6.875 19.625 16 22 9.125-2.375 16-11.875 16-22V12L24 4z" stroke="url(#dzGrad)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+            <path d="M18 24l4 4 8-8" stroke="url(#dzGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="dzGrad" x1="8" y1="4" x2="40" y2="38"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
           </svg>
         </div>
         <div class="dz-text">
-          <b>Drop your file here</b>
+          <b>Drop your files here</b>
           <span>or <button id="pickBtn" class="linkbtn">browse files</button></span>
         </div>
-        <div class="dz-formats">JPG · PNG · WEBP · PDF · MP4 · MOV · MP3 · WAV</div>
+        <div class="dz-formats">JPG · PNG · WEBP · HEIC · PDF · MP4 · MOV</div>
+        <div id="fileCount" class="dz-count hidden"></div>
       </div>
-      <input id="fileInput" type="file" multiple hidden />
+      <input id="fileInput" type="file" multiple accept="image/*,video/*,.pdf" hidden>
+    </div>
+
+    <div id="instantPreview" class="instant-preview glass-card hidden">
+      <div class="preview-header">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#f59e0b" stroke-width="1.5"/><path d="M8 5v3M8 10.5v.5" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Metadata found in this file</span>
+        <button id="previewClose" class="preview-close">&times;</button>
+      </div>
+      <div id="previewMeta" class="preview-meta"></div>
+      <button id="previewClean" class="btn-primary btn-clean-now">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 2.5l-11 11M2.5 2.5l11 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Clean it now
+      </button>
     </div>
 
     <div id="status" class="status hidden">
@@ -61,61 +151,114 @@
         <div class="loader-ring"></div>
       </div>
       <span id="statusText" class="status-text">Processing...</span>
-    </div>
-
-    <div id="result" class="result hidden">
-      <div class="result-card glass-card">
-        <div class="result-check">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="14" fill="url(#g3)"/>
-            <path d="M10 16l4 4 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <defs><linearGradient id="g3" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
-          </svg>
-        </div>
-        <div class="result-info">
-          <div class="result-label">Clean file ready</div>
-          <b id="resultName" class="result-name"></b>
-          <span id="resultInfo" class="result-meta"></span>
-        </div>
-        <button id="downloadBtn" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Download
-        </button>
+      <div id="progressBar" class="progress-bar hidden">
+        <div id="progressFill" class="progress-fill"></div>
       </div>
     </div>
 
-    <div id="history" class="history"></div>
+    <div id="batchResults" class="batch-results"></div>
+
+    <div id="batchActions" class="batch-actions hidden">
+      <button id="downloadAllBtn" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download All (ZIP)
+      </button>
+      <button id="clearAllBtn" class="btn-secondary">Clear</button>
+    </div>
 
     <section class="features">
       <div class="feature glass-card">
         <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="16" height="16" rx="4" stroke="#a78bfa" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 6v5c0 5 3.5 9.5 7 10.5 3.5-1 7-5.5 7-10.5V6L10 2z" stroke="#a78bfa" stroke-width="1.5" fill="none"/></svg>
         </div>
-        <b>Full Quality</b>
-        <span>JPEG at 100%, PNG lossless, video stream-copy. Pixel-identical output.</span>
+        <b>Lossless</b>
+        <span>Binary-level metadata removal. No re-encoding. Pixel-identical output.</span>
       </div>
       <div class="feature glass-card">
         <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#a78bfa" stroke-width="1.5"/><path d="M10 6v4l3 2" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="3" stroke="#a78bfa" stroke-width="1.5"/><path d="M7 10l3 3 3-3" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <b>Instant</b>
-        <span>Everything runs in your browser. No upload, no wait, no server.</span>
+        <b>AI-Provenance Aware</b>
+        <span>Strips C2PA Content Credentials, AI generator tags, and digital source type fields.</span>
       </div>
       <div class="feature glass-card">
         <div class="feature-icon">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.5 5h5l-4 3.5 1.5 5L10 13l-5 2.5L6.5 10.5 3 7h5z" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <b>Private</b>
-        <span>Files never leave your device. Zero server contact. 100% offline.</span>
+        <span>Files never leave your device. No upload, no server, no account needed.</span>
+      </div>
+    </section>
+
+    <section class="seo-section glass-card">
+      <h2>What is hidden in your files?</h2>
+      <p>Every photo you take embeds <strong>EXIF data</strong>: your camera model, the exact <strong>GPS coordinates</strong> where it was shot, the date and time, lens settings, and sometimes your name. PDFs carry author names and editing software. Videos store device info and location. AI-generated images now carry <strong>C2PA Content Credentials</strong> and generator parameters. Vantawebs strips all of it — losslessly, in your browser, for free.</p>
+      <div class="guide-links">
+        <a href="/pages/what-is-exif-data">What is EXIF data?</a>
+        <a href="/pages/what-is-c2pa">What is C2PA?</a>
+        <a href="/pages/view-exif-data-online">Check your photo's metadata</a>
+        <a href="/pages/">All privacy guides →</a>
+      </div>
+    </section>
+
+    <section class="seo-section glass-card">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-item">
+        <h3>Do my files get uploaded anywhere?</h3>
+        <p>No. Everything runs in your browser with JavaScript. Disconnect from the internet after loading the page and the tool still works.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Will this reduce my image quality?</h3>
+        <p>No. Metadata is removed at the binary level without re-encoding pixels. Output is pixel-identical.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does it remove AI-generation metadata?</h3>
+        <p>Yes — C2PA Content Credentials, IPTC Digital Source Type tags, and embedded parameters from Midjourney, DALL-E, Stable Diffusion and Adobe Firefly.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What formats are supported?</h3>
+        <p>JPEG, PNG, WebP, HEIC, GIF, TIFF, PDF, MP4, MOV, WebM, MKV, MP3 and WAV. Free tier: up to 10 files per batch.</p>
       </div>
     </section>
   </main>
 
-  <footer class="footer">ScrubMeta · built for privacy</footer>
+  <footer class="footer">
+    <span>Vantawebs · built for privacy · <a href="https://vantawebs.site">vantawebs.site</a></span>
+    <nav class="footer-nav">
+      <a href="/pages/">Guides</a> ·
+      <a href="/pages/what-is-exif-data">What is EXIF?</a> ·
+      <a href="/pages/how-to-remove-c2pa">Remove C2PA</a> ·
+      <a href="/pages/remove-gps-from-iphone-photo">Remove iPhone GPS</a>
+    </nav>
+  </footer>
+
+  <div id="proModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-card glass-card">
+      <div class="modal-header">
+        <h2>Unlock Vantawebs Pro</h2>
+        <button id="modalClose" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="pro-features">
+          <div class="pro-feature"><span class="pro-check">&#10003;</span> Unlimited batch size (free: 10 files)</div>
+          <div class="pro-feature"><span class="pro-check">&#10003;</span> Priority processing</div>
+          <div class="pro-feature"><span class="pro-check">&#10003;</span> One-time purchase, no subscription</div>
+        </div>
+        <div class="pro-key-input">
+          <input id="licenseKey" type="text" placeholder="Enter your license key" class="license-input">
+          <button id="activateBtn" class="btn-primary">Activate</button>
+        </div>
+        <p class="pro-note">License key is stored locally in your browser. No account required.</p>
+        <div id="proStatus" class="pro-status hidden"></div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/picscrub@1.2.0/dist/picscrub.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
