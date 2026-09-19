@@ -1,10 +1,10 @@
-const CACHE_NAME = 'Vantawebs v1';
+const CACHE_NAME = 'vantawebs-v2';
 const ASSETS = [
   './',
   './index.html',
-  './styles.css',
-  './app.js',
-  './i18n.js',
+  './styles.v2.css',
+  './app.v2.js',
+  './i18n.v2.js',
   './manifest.json'
 ];
 
