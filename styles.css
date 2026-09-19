@@ -25,3 +25,13 @@ table.diff td,table.diff th{padding:6px 8px;border-bottom:1px solid #1c2530;text
 .how{margin-top:34px;color:#aeb9c5}.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.grid3>div{background:#111821;border:1px solid #1f2a37;border-radius:12px;padding:14px}.grid3 b{color:#fff}.warn{margin-top:14px;font-size:13px;background:#141109;border:1px solid #3a300f;padding:12px;border-radius:10px}
 footer{text-align:center;color:#5b6875;font-size:13px;padding:22px}
 code{background:#00000066;padding:2px 6px;border-radius:6px}
+.anti-detect{background:#111821;border:1px solid #2c3a49;border-radius:14px;padding:18px;margin:14px 0}
+.ad-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.ad-head h3{margin:0;color:#fbbf24;font-size:16px}
+.ad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 16px;margin-bottom:14px}
+.ad-grid label{font-size:13px;color:#aeb9c5;cursor:pointer}
+.ad-strength{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.ad-strength label{font-size:14px;color:#aeb9c5}
+.ad-strength .hint{margin-top:0}
+.chk{display:flex;align-items:center;gap:6px;cursor:pointer}
+.chk input{accent-color:#4ade80;width:15px;height:15px}

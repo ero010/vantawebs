@@ -1,12 +1,14 @@
-/* ScrubMeta - 100% client-side metadata remover */
+/* ScrubMeta - 100% client-side metadata remover + anti-detection pipeline */
 const $ = (s) => document.querySelector(s);
 const dz = $('#dropzone'), fi = $('#fileInput');
 const listEl = $('#list'), dlAllBtn = $('#downloadAll'), clearBtn = $('#clearAll');
 const q = $('#quality'), qval = $('#qval');
+const adStr = $('#adStrength'), adVal = $('#adVal');
 let cleaned = []; // {name, blob}
 let totalCleaned = 0;
 
 q.oninput = () => qval.textContent = q.value;
+adStr.oninput = () => adVal.textContent = adStr.value;
 $('#pickBtn').onclick = (e) => { e.stopPropagation(); fi.click(); };
 dz.onclick = () => fi.click();
 dz.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') fi.click(); };
@@ -31,6 +33,7 @@ function downloadBlob(blob, name){
   a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
 }
+
 // Always randomize output filenames for privacy (no original name leaks)
 function outName(orig){
   const dot = orig.lastIndexOf('.');
@@ -38,10 +41,14 @@ function outName(orig){
   const r = Math.random().toString(36).slice(2,12);
   return 'scrub-' + r + ext;
 }
+
 const extOf = n => (n.split('.').pop()||'').toLowerCase();
 const isImg = n => ['jpg','jpeg','png','webp','gif','bmp'].includes(extOf(n));
 const isPdf = n => extOf(n)==='pdf';
 const isAV = n => ['mp4','mov','m4a','webm','mkv','mp3','wav','ogg','aac','flac','avi'].includes(extOf(n));
+
+// strength from slider: 1-5 → multiplier
+const strMul = () => parseInt(adStr.value,10);
 
 async function handleFiles(files){
   for (const f of files) await processOne(f);
@@ -61,7 +68,158 @@ function cardSkeleton(file){
 function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function setProg(el,p){ el.querySelector('.prog i').style.width = (p*100)+'%'; }
 
-/* ---------- BEFORE inspect ---------- */
+/* ========== ANTI-DETECTION POST-PROCESSING PIPELINE ========== */
+
+// 1. RESAMPLE — downscale to 70-85% then upscale back to original size
+//    Changes pixel grid alignment and frequency distribution
+function resample(canvas, strength){
+  const w = canvas.width, h = canvas.height;
+  const factor = 0.70 + (5 - strength) * 0.03; // strength 1→0.82, strength 5→0.70
+  const tmp = document.createElement('canvas');
+  const tw = Math.round(w * factor), th = Math.round(h * factor);
+  tmp.width = tw; tmp.height = th;
+  const ctx = tmp.getContext('2d');
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(canvas, 0, 0, tw, th);
+  const ctx2 = canvas.getContext('2d');
+  ctx2.clearRect(0,0,w,h);
+  ctx2.imageSmoothingEnabled = true;
+  ctx2.imageSmoothingQuality = 'high';
+  ctx2.drawImage(tmp, 0, 0, w, h);
+}
+
+// 2. FILM GRAIN — subtle random noise overlay on every pixel
+//    Disrupts statistical patterns AI classifiers rely on
+function addGrain(canvas, strength){
+  const ctx = canvas.getContext('2d');
+  const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const d = img.data;
+  const intensity = 3 + strength * 2; // strength 1→5, strength 5→13
+  for (let i = 0; i < d.length; i += 4){
+    const n = (Math.random() - 0.5) * intensity;
+    d[i]   = Math.max(0, Math.min(255, d[i]   + n));
+    d[i+1] = Math.max(0, Math.min(255, d[i+1] + n));
+    d[i+2] = Math.max(0, Math.min(255, d[i+2] + n));
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+// 3. RANDOM MICRO-CROP — crop 1-6% from random edge then resize back
+//    Shifts pixel positions and breaks spatial alignment
+function randomCrop(canvas, strength){
+  const w = canvas.width, h = canvas.height;
+  const pct = (0.01 + strength * 0.01); // strength 1→2%, strength 5→6%
+  const cropX = Math.floor(Math.random() * w * pct);
+  const cropY = Math.floor(Math.random() * h * pct);
+  const cropW = w - cropX - Math.floor(Math.random() * w * pct * 0.5);
+  const cropH = h - cropY - Math.floor(Math.random() * h * pct * 0.5);
+  const tmp = document.createElement('canvas');
+  tmp.width = cropW; tmp.height = cropH;
+  const tctx = tmp.getContext('2d');
+  tctx.drawImage(canvas, cropX, cropY, cropW, cropH, 0, 0, cropW, cropH);
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,w,h);
+  ctx.drawImage(tmp, 0, 0, w, h);
+}
+
+// 4. COLOR PROFILE SHIFT — slight hue/saturation/brightness/contrast adjustment
+//    Changes color statistics without visible artifacts at low strength
+function colorShift(canvas, strength){
+  const ctx = canvas.getContext('2d');
+  const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const d = img.data;
+  // random per-image offsets (deterministic within this call)
+  const bShift = (Math.random() - 0.5) * strength * 2;  // brightness ±10
+  const cMul   = 1 + (Math.random() - 0.5) * strength * 0.01; // contrast ±2.5%
+  const sMul   = 1 + (Math.random() - 0.5) * strength * 0.015; // saturation ±3.75%
+  for (let i = 0; i < d.length; i += 4){
+    let r = d[i], g = d[i+1], b = d[i+2];
+    // brightness
+    r += bShift; g += bShift; b += bShift;
+    // contrast (around 128 midpoint)
+    r = (r - 128) * cMul + 128;
+    g = (g - 128) * cMul + 128;
+    b = (b - 128) * cMul + 128;
+    // saturation (using luminance approximation)
+    const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+    r = lum + sMul * (r - lum);
+    g = lum + sMul * (g - lum);
+    b = lum + sMul * (b - lum);
+    d[i]   = Math.max(0, Math.min(255, r));
+    d[i+1] = Math.max(0, Math.min(255, g));
+    d[i+2] = Math.max(0, Math.min(255, b));
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+// 5. LIGHT SHARPEN — unsharp mask at very low radius
+//    Adds high-frequency detail that classifiers interpret as natural texture
+function sharpen(canvas, strength){
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  const img = ctx.getImageData(0, 0, w, h);
+  const d = img.data;
+  const out = new Uint8ClampedArray(d);
+  const amt = 0.3 + strength * 0.15; // strength 1→0.45, strength 5→1.05
+  for (let y = 1; y < h-1; y++){
+    for (let x = 1; x < w-1; x++){
+      const i = (y*w+x)*4;
+      for (let c = 0; c < 3; c++){
+        const v = d[i+c];
+        const blur = (
+          d[((y-1)*w+x)*4+c] + d[((y+1)*w+x)*4+c] +
+          d[(y*w+x-1)*4+c] + d[(y*w+x+1)*4+c]
+        ) / 4;
+        out[i+c] = Math.max(0, Math.min(255, v + (v - blur) * amt));
+      }
+    }
+  }
+  const outImg = new ImageData(out, w, h);
+  ctx.putImageData(outImg, 0, 0);
+}
+
+// 6. DOUBLE JPEG RECOMPRESS — encode → decode → re-encode at different quality
+//    Breaks JPEG block-boundary patterns that AI models detect
+async function doubleJpegRecompress(canvas, strength){
+  const q1 = 85 - strength * 3;  // strength 1→82, strength 5→70
+  const q2 = 92 - strength * 1;  // strength 1→91, strength 5→87
+  // first pass
+  const blob1 = await new Promise(r => canvas.toBlob(r, 'image/jpeg', q1/100));
+  const bmp = await createImageBitmap(blob1);
+  canvas.width = bmp.width; canvas.height = bmp.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(bmp, 0, 0);
+  bmp.close();
+  // second pass at different quality
+  return q2;
+}
+
+// Master pipeline — runs selected post-processing in order
+async function postProcessCanvas(canvas){
+  const steps = [];
+  if ($('#optResample').checked) steps.push('resample');
+  if ($('#optGrain').checked)    steps.push('grain');
+  if ($('#optCrop').checked)     steps.push('crop');
+  if ($('#optColor').checked)    steps.push('color');
+  if ($('#optSharpen').checked)  steps.push('sharpen');
+  if ($('#optJpegRe').checked)   steps.push('jpegre');
+
+  const s = strMul();
+
+  for (const step of steps){
+    switch(step){
+      case 'resample': resample(canvas, s); break;
+      case 'grain':    addGrain(canvas, s); break;
+      case 'crop':     randomCrop(canvas, s); break;
+      case 'color':    colorShift(canvas, s); break;
+      case 'sharpen':  sharpen(canvas, s); break;
+      case 'jpegre':   await doubleJpegRecompress(canvas, s); break;
+    }
+  }
+}
+
+/* ========== BEFORE INSPECT ========== */
 async function inspectBefore(file){
   try{
     if (isImg(file.name) && window.ExifReader){
@@ -79,7 +237,7 @@ async function inspectBefore(file){
   return {count:'n/a', sample: isAV(file.name)?'container metadata (title/encoder/GPS/time)':'unknown type'};
 }
 
-/* ---------- SCRUBBERS ---------- */
+/* ========== SCRUBBERS ========== */
 async function scrubImage(file){
   const bitmap = await createImageBitmap(file);
   const canvas = document.createElement('canvas');
@@ -87,11 +245,14 @@ async function scrubImage(file){
   const ctx = canvas.getContext('2d');
   ctx.drawImage(bitmap, 0, 0);
   bitmap.close();
+
+  // --- run anti-detection pipeline BEFORE final encode ---
+  await postProcessCanvas(canvas);
+
   const ext = extOf(file.name);
   let mime = 'image/jpeg', type='image/jpeg';
   if (ext==='png'){ mime='image/png'; type='image/png'; }
   else if (ext==='webp'){ mime='image/webp'; type='image/webp'; }
-  // quality 92% (lossy enough to erase any residual EXIF that canvas copy may keep)
   const quality = mime==='image/png' ? undefined : 0.92;
   const blob = await new Promise(res => canvas.toBlob(res, mime, quality));
   if (!blob) throw new Error('encode failed (AVIF/HEIC may be unsupported in this browser)');
@@ -101,21 +262,15 @@ async function scrubImage(file){
 async function scrubPdf(file){
   const buf = await file.arrayBuffer();
   const doc = await PDFLib.PDFDocument.load(buf, {ignoreEncryption:true});
-  // wipe all built-in metadata fields
   doc.setTitle(''); doc.setAuthor(''); doc.setSubject(''); doc.setKeywords([]); doc.setProducer(''); doc.setCreator('');
   doc.setCreationDate(new Date(0)); doc.setModificationDate(new Date(0));
-  // aggressively wipe XMP / custom metadata at catalog level
   try{
     const catalog = doc.catalog;
     const PDFName = PDFLib.PDFName;
-    // delete /Metadata entry
     if (catalog.has(PDFName.of('Metadata'))) catalog.delete(PDFName.of('Metadata'));
-    // delete common custom info keys
     ['PieceInfo','LastModified','MarkInfo','Meta','XMP'].forEach(k=>{ try{ if(catalog.has(PDFName.of(k))) catalog.delete(PDFName.of(k)); }catch{} });
-    // wipe the /Info dict entirely if present
     if (catalog.has(PDFName.of('Info'))) catalog.delete(PDFName.of('Info'));
   }catch{}
-  // force save with no object streams to maximize compatibility & minimize residual data
   const bytes = await doc.save({useObjectStreams:false, addDefaultPage:false});
   return {blob: new Blob([bytes], {type:'application/pdf'})};
 }
@@ -151,11 +306,9 @@ async function scrubAV(file){
   const outName = 'out.' + ext;
   const data = new Uint8Array(await file.arrayBuffer());
   ff.FS('writeFile', inName, data);
-  // -map_metadata -1 strips container metadata, stream copy = lossless + fast
   try{
     await ff.run('-hide_banner','-i', inName, '-map_metadata','-1', '-c:v','copy', '-c:a','copy', '-c:s','copy', '-fflags','+bitexact', '-flags:v','+bitexact', '-flags:a','+bitexact', outName);
   }catch(e){
-    // fallback: try without subtitle copy (mkv/webm edge cases)
     await ff.run('-hide_banner','-i', inName, '-map_metadata','-1', '-c','copy', outName);
   }
   let out;
@@ -166,7 +319,7 @@ async function scrubAV(file){
   return {blob: new Blob([out.buffer], {type: mime})};
 }
 
-/* ---------- VERIFY ---------- */
+/* ========== VERIFY ========== */
 async function verifyClean(name, blob){
   if (!$('#verify').checked) return null;
   try{
@@ -184,7 +337,7 @@ async function verifyClean(name, blob){
   return {count:0, sample:'container re-muxed with -map_metadata -1 ✓'};
 }
 
-/* ---------- MAIN ---------- */
+/* ========== MAIN ========== */
 async function processOne(file){
   const el = cardSkeleton(file);
   const pill = el.querySelector('.pill'), meta = el.querySelector('.meta'), acts = el.querySelector('.actions');
@@ -202,7 +355,7 @@ async function processOne(file){
     else throw new Error('unsupported type — images, PDF, video & audio only in v1');
     setProg(el, .8);
     const after = await verifyClean(res.blob ? file.name : file.name, res.blob);
-    const name = outName(file.name); // always randomized clean name
+    const name = outName(file.name);
     cleaned.push({name, blob: res.blob});
     totalCleaned++;
     $('#count').textContent = totalCleaned + ' files cleaned';
@@ -211,15 +364,22 @@ async function processOne(file){
     pill.className = 'pill ' + (cleanNow ? 'ok' : 'warn');
     pill.textContent = cleanNow ? 'clean ✓' : 'cleaned ('+(after?.count||'?')+' left)';
     const sizeKB = (res.blob.size/1024).toFixed(1);
-    // show before/after summary
     let beforeLabel = hadMetadata ? `had ${hadMetadata} field(s)` : 'no detectable metadata';
     let afterLabel = cleanNow ? 'all metadata removed ✓' : `${after?.count||0} field(s) remaining`;
-    meta.innerHTML += `<br><b>Before:</b> ${beforeLabel} | <b>After:</b> ${afterLabel} · ${sizeKB} KB · output: <b>${escapeHtml(name)}</b>`;
+    // show active post-processing steps
+    const activeOpts = [];
+    if ($('#optResample').checked) activeOpts.push('resample');
+    if ($('#optGrain').checked)    activeOpts.push('grain');
+    if ($('#optCrop').checked)     activeOpts.push('crop');
+    if ($('#optColor').checked)    activeOpts.push('color');
+    if ($('#optSharpen').checked)  activeOpts.push('sharpen');
+    if ($('#optJpegRe').checked)   activeOpts.push('jpeg');
+    const ppTag = activeOpts.length ? ` · pipeline: ${activeOpts.join('+')}` : '';
+    meta.innerHTML += `<br><b>Before:</b> ${beforeLabel} | <b>After:</b> ${afterLabel} · ${sizeKB} KB · output: <b>${escapeHtml(name)}</b>${ppTag}`;
     const b = document.createElement('button');
     b.className='btn'; b.textContent='Download clean file';
     b.onclick=()=>downloadBlob(res.blob, name);
     acts.appendChild(b);
-    // also show a small tag about what was cleaned
     if (hadMetadata && cleanNow){
       const tag = document.createElement('span');
       tag.className='pill ok'; tag.style.marginLeft='8px'; tag.style.fontSize='12px';
