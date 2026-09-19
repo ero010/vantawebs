@@ -71,6 +71,7 @@ previewClose.onclick = () => { instantPreview.classList.add('hidden'); previewFi
 previewClean.onclick = () => {
   if(previewFile) {
     instantPreview.classList.add('hidden');
+    skipPreview = true;
     handleFiles([previewFile]);
     previewFile = null;
   }
@@ -213,20 +214,22 @@ function escapeHtml(s) {
 
 // Image: try picscrub first (lossless structural), fallback to canvas
 async function scrubImage(file) {
-  // Try picscrub (lossless byte-level removal)
-  if(typeof picscrub !== 'undefined') {
-    try {
-      const buf = await file.arrayBuffer();
-      const input = new Uint8Array(buf);
-      const result = picscrub(input, file.name);
-      if(result && result.data) {
+  // Try picscrub via dynamic import (since it's an ES module)
+  try {
+    const buf = await file.arrayBuffer();
+    const input = new Uint8Array(buf);
+    const pic = await import('https://cdn.jsdelivr.net/npm/picscrub@1.2.0/dist/picscrub.js');
+    if (pic && pic.default) {
+      const result = pic.default(input, file.name);
+      if (result && result.data) {
         const ext = extOf(file.name);
         return new Blob([result.data], { type: mimeOf(ext) });
       }
-    } catch(e) {
-      console.warn('picscrub failed, falling back to canvas:', e);
     }
+  } catch(e) {
+    console.warn('picscrub dynamic import failed, falling back to canvas:', e);
   }
+
   // Fallback: canvas re-encode (still strips metadata, but may affect quality)
   const bmp = await createImageBitmap(file);
   const c = document.createElement('canvas');
@@ -289,6 +292,7 @@ async function scrubAV(file) {
 }
 
 /* ===== BATCH PROCESSING ===== */
+let skipPreview = false;
 async function handleFiles(files) {
   // Filter supported types
   const supported = files.filter(f => isImg(f.name) || isPdf(f.name) || isAV(f.name));
@@ -301,11 +305,12 @@ async function handleFiles(files) {
     return;
   }
 
-  // Show instant preview for single file
-  if(supported.length === 1) {
+  // Show instant preview for single file (unless already clicked "Clean it now")
+  if(supported.length === 1 && !skipPreview) {
     showInstantPreview(supported[0]);
     return;
   }
+  skipPreview = false;
 
   // Batch processing
   instantPreview.classList.add('hidden');
@@ -360,8 +365,11 @@ async function handleFiles(files) {
     statusEl.classList.add('hidden');
     progressBar.classList.add('hidden');
     batchActions.classList.remove('hidden');
+    downloadAllBtn.classList.remove('hidden');
     if(processedFiles.length > 1) {
-      downloadAllBtn.classList.remove('hidden');
+      downloadAllBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> ' + t('download_all');
+    } else {
+      downloadAllBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> ' + t('download');
     }
   }, 400);
 }
@@ -447,6 +455,10 @@ function downloadSingle(index) {
 
 downloadAllBtn.onclick = async () => {
   if(!processedFiles.length) return;
+  if(processedFiles.length === 1) {
+    downloadSingle(0);
+    return;
+  }
   downloadAllBtn.disabled = true;
   downloadAllBtn.textContent = t('creating_zip');
   try {
@@ -491,6 +503,7 @@ if('serviceWorker' in navigator) {
 
 // Online/offline indicator
 function updateOnlineStatus() {
+  if(!offlineIndicator) return;
   if(navigator.onLine) {
     offlineIndicator.classList.add('hidden');
   } else {
