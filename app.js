@@ -1,15 +1,15 @@
 /* ScrubMeta - 100% client-side metadata remover + anti-detection pipeline */
-const $ = (s) => document.querySelector(s);
-const dz = $('#dropzone'), fi = $('#fileInput');
-const listEl = $('#list'), dlAllBtn = $('#downloadAll'), clearBtn = $('#clearAll');
-const q = $('#quality'), qval = $('#qval');
-const adStr = $('#adStrength'), adVal = $('#adVal');
+const _q = (s) => document.querySelector(s);
+const dz = _q('#dropzone'), fi = _q('#fileInput');
+const listEl = _q('#list'), dlAllBtn = _q('#downloadAll'), clearBtn = _q('#clearAll');
+const q = _q('#quality'), qval = _q('#qval');
+const adStr = _q('#adStrength'), adVal = _q('#adVal');
 let cleaned = []; // {name, blob}
 let totalCleaned = 0;
 
 q.oninput = () => qval.textContent = q.value;
 adStr.oninput = () => adVal.textContent = adStr.value;
-$('#pickBtn').onclick = (e) => { e.stopPropagation(); fi.click(); };
+_q('#pickBtn').onclick = (e) => { e.stopPropagation(); fi.click(); };
 dz.onclick = () => fi.click();
 dz.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') fi.click(); };
 ['dragover','dragenter'].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.add('over'); }));
@@ -196,14 +196,15 @@ async function doubleJpegRecompress(canvas, strength){
 }
 
 // Master pipeline — runs selected post-processing in order
+function isChecked(id){ const el = document.getElementById(id); return el && el.checked; }
 async function postProcessCanvas(canvas){
   const steps = [];
-  if ($('#optResample').checked) steps.push('resample');
-  if ($('#optGrain').checked)    steps.push('grain');
-  if ($('#optCrop').checked)     steps.push('crop');
-  if ($('#optColor').checked)    steps.push('color');
-  if ($('#optSharpen').checked)  steps.push('sharpen');
-  if ($('#optJpegRe').checked)   steps.push('jpegre');
+  if (isChecked('optResample')) steps.push('resample');
+  if (isChecked('optGrain'))    steps.push('grain');
+  if (isChecked('optCrop'))     steps.push('crop');
+  if (isChecked('optColor'))    steps.push('color');
+  if (isChecked('optSharpen'))  steps.push('sharpen');
+  if (isChecked('optJpegRe'))   steps.push('jpegre');
 
   const s = strMul();
 
@@ -287,12 +288,12 @@ async function getFFmpeg(){
   if (ffmpegInst) return ffmpegInst;
   if (ffmpegLoading) return ffmpegLoading;
   ffmpegLoading = (async()=>{
-    $('#ffmpegStatus').classList.remove('hidden');
+    document.getElementById('ffmpegStatus').classList.remove('hidden');
     await loadFFmpegScript('https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js');
     const { createFFmpeg } = window.FFmpeg;
     const ff = createFFmpeg({ corePath:'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js', log:false });
     await ff.load();
-    $('#ffmpegStatus').classList.add('hidden');
+    document.getElementById('ffmpegStatus').classList.add('hidden');
     ffmpegInst = ff;
     return ff;
   })();
@@ -321,7 +322,7 @@ async function scrubAV(file){
 
 /* ========== VERIFY ========== */
 async function verifyClean(name, blob){
-  if (!$('#verify').checked) return null;
+  if (!document.getElementById('verify')?.checked) return null;
   try{
     if (isImg(name) && window.ExifReader){
       const tags = await ExifReader.load(blob);
@@ -358,7 +359,7 @@ async function processOne(file){
     const name = outName(file.name);
     cleaned.push({name, blob: res.blob});
     totalCleaned++;
-    $('#count').textContent = totalCleaned + ' files cleaned';
+    document.getElementById('count').textContent = totalCleaned + ' files cleaned';
     const hadMetadata = typeof beforeCount === 'number' && beforeCount > 0;
     const cleanNow = after && (after.count===0 || after.count==='0');
     pill.className = 'pill ' + (cleanNow ? 'ok' : 'warn');
@@ -368,12 +369,12 @@ async function processOne(file){
     let afterLabel = cleanNow ? 'all metadata removed ✓' : `${after?.count||0} field(s) remaining`;
     // show active post-processing steps
     const activeOpts = [];
-    if ($('#optResample').checked) activeOpts.push('resample');
-    if ($('#optGrain').checked)    activeOpts.push('grain');
-    if ($('#optCrop').checked)     activeOpts.push('crop');
-    if ($('#optColor').checked)    activeOpts.push('color');
-    if ($('#optSharpen').checked)  activeOpts.push('sharpen');
-    if ($('#optJpegRe').checked)   activeOpts.push('jpeg');
+    if (isChecked('optResample')) activeOpts.push('resample');
+    if (isChecked('optGrain'))    activeOpts.push('grain');
+    if (isChecked('optCrop'))     activeOpts.push('crop');
+    if (isChecked('optColor'))    activeOpts.push('color');
+    if (isChecked('optSharpen'))  activeOpts.push('sharpen');
+    if (isChecked('optJpegRe'))   activeOpts.push('jpeg');
     const ppTag = activeOpts.length ? ` · pipeline: ${activeOpts.join('+')}` : '';
     meta.innerHTML += `<br><b>Before:</b> ${beforeLabel} | <b>After:</b> ${afterLabel} · ${sizeKB} KB · output: <b>${escapeHtml(name)}</b>${ppTag}`;
     const b = document.createElement('button');
