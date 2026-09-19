@@ -31,15 +31,12 @@ function downloadBlob(blob, name){
   a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
 }
+// Always randomize output filenames for privacy (no original name leaks)
 function outName(orig){
   const dot = orig.lastIndexOf('.');
   const ext = dot>=0 ? orig.slice(dot).toLowerCase() : '';
-  if ($('#randomize').checked) {
-    const r = Math.random().toString(36).slice(2,10);
-    return 'clean-' + r + ext;
-  }
-  const base = dot>=0 ? orig.slice(0,dot) : orig;
-  return base.replace(/[^\w\-]+/g,'_').slice(0,60) + '_clean' + ext;
+  const r = Math.random().toString(36).slice(2,12);
+  return 'scrub-' + r + ext;
 }
 const extOf = n => (n.split('.').pop()||'').toLowerCase();
 const isImg = n => ['jpg','jpeg','png','webp','gif','bmp'].includes(extOf(n));
@@ -94,30 +91,32 @@ async function scrubImage(file){
   let mime = 'image/jpeg', type='image/jpeg';
   if (ext==='png'){ mime='image/png'; type='image/png'; }
   else if (ext==='webp'){ mime='image/webp'; type='image/webp'; }
-  const quality = mime==='image/png' ? undefined : (parseInt(q.value,10)/100);
+  // quality 92% (lossy enough to erase any residual EXIF that canvas copy may keep)
+  const quality = mime==='image/png' ? undefined : 0.92;
   const blob = await new Promise(res => canvas.toBlob(res, mime, quality));
   if (!blob) throw new Error('encode failed (AVIF/HEIC may be unsupported in this browser)');
-  // normalize extension to actual output
   return {blob, mimeOut: type};
 }
 
 async function scrubPdf(file){
   const buf = await file.arrayBuffer();
   const doc = await PDFLib.PDFDocument.load(buf, {ignoreEncryption:true});
+  // wipe all built-in metadata fields
   doc.setTitle(''); doc.setAuthor(''); doc.setSubject(''); doc.setKeywords([]); doc.setProducer(''); doc.setCreator('');
   doc.setCreationDate(new Date(0)); doc.setModificationDate(new Date(0));
-  // wipe XMP / custom keys at catalog level
+  // aggressively wipe XMP / custom metadata at catalog level
   try{
     const catalog = doc.catalog;
-    // Delete /Metadata stream if present
     const PDFName = PDFLib.PDFName;
+    // delete /Metadata entry
     if (catalog.has(PDFName.of('Metadata'))) catalog.delete(PDFName.of('Metadata'));
-    // Delete /PieceInfo, / spider custom info
-    ['PieceInfo','LastModified','MarkInfo'].forEach(k=>{ try{ if(catalog.has(PDFName.of(k))) catalog.delete(PDFName.of(k)); }catch{} });
-    // Wipe Info dict entries beyond standard
-    const info = doc.context.trailerInfo && doc.context.trailerInfo.Info;
+    // delete common custom info keys
+    ['PieceInfo','LastModified','MarkInfo','Meta','XMP'].forEach(k=>{ try{ if(catalog.has(PDFName.of(k))) catalog.delete(PDFName.of(k)); }catch{} });
+    // wipe the /Info dict entirely if present
+    if (catalog.has(PDFName.of('Info'))) catalog.delete(PDFName.of('Info'));
   }catch{}
-  const bytes = await doc.save({useObjectStreams:true, addDefaultPage:false});
+  // force save with no object streams to maximize compatibility & minimize residual data
+  const bytes = await doc.save({useObjectStreams:false, addDefaultPage:false});
   return {blob: new Blob([bytes], {type:'application/pdf'})};
 }
 
@@ -191,7 +190,9 @@ async function processOne(file){
   const pill = el.querySelector('.pill'), meta = el.querySelector('.meta'), acts = el.querySelector('.actions');
   setProg(el, .1);
   const before = await inspectBefore(file);
-  meta.innerHTML = `<b>Before:</b> ${escapeHtml(String(before.count))} metadata fields — ${escapeHtml(before.sample)} · ${(file.size/1024).toFixed(1)} KB`;
+  const beforeCount = before.count;
+  const beforeSample = typeof before.sample === 'string' ? before.sample : (before.sample?.sample||String(before.sample));
+  meta.innerHTML = `<b>Before:</b> ${escapeHtml(String(beforeCount))} metadata fields — ${escapeHtml(beforeSample)} · ${(file.size/1024).toFixed(1)} KB`;
   setProg(el, .3);
   try{
     let res;
@@ -201,18 +202,30 @@ async function processOne(file){
     else throw new Error('unsupported type — images, PDF, video & audio only in v1');
     setProg(el, .8);
     const after = await verifyClean(res.blob ? file.name : file.name, res.blob);
-    const name = outName(file.name);
+    const name = outName(file.name); // always randomized clean name
     cleaned.push({name, blob: res.blob});
     totalCleaned++;
     $('#count').textContent = totalCleaned + ' files cleaned';
-    const ok = after && (after.count===0 || after.count==='0');
-    pill.className = 'pill ' + (ok||after===null ? 'ok' : 'warn');
-    pill.textContent = ok||after===null ? 'clean ✓' : 'cleaned ('+after.count+' left — see below)';
-    meta.innerHTML += `<br><b>After:</b> ${after?escapeHtml(String(after.count))+' fields — '+escapeHtml(after.sample):'done'} · ${(res.blob.size/1024).toFixed(1)} KB · output: <b>${escapeHtml(name)}</b>`;
+    const hadMetadata = typeof beforeCount === 'number' && beforeCount > 0;
+    const cleanNow = after && (after.count===0 || after.count==='0');
+    pill.className = 'pill ' + (cleanNow ? 'ok' : 'warn');
+    pill.textContent = cleanNow ? 'clean ✓' : 'cleaned ('+(after?.count||'?')+' left)';
+    const sizeKB = (res.blob.size/1024).toFixed(1);
+    // show before/after summary
+    let beforeLabel = hadMetadata ? `had ${hadMetadata} field(s)` : 'no detectable metadata';
+    let afterLabel = cleanNow ? 'all metadata removed ✓' : `${after?.count||0} field(s) remaining`;
+    meta.innerHTML += `<br><b>Before:</b> ${beforeLabel} | <b>After:</b> ${afterLabel} · ${sizeKB} KB · output: <b>${escapeHtml(name)}</b>`;
     const b = document.createElement('button');
     b.className='btn'; b.textContent='Download clean file';
     b.onclick=()=>downloadBlob(res.blob, name);
     acts.appendChild(b);
+    // also show a small tag about what was cleaned
+    if (hadMetadata && cleanNow){
+      const tag = document.createElement('span');
+      tag.className='pill ok'; tag.style.marginLeft='8px'; tag.style.fontSize='12px';
+      tag.textContent = 'metadata purged';
+      acts.appendChild(tag);
+    }
     setProg(el,1);
     if (cleaned.length){ dlAllBtn.disabled=false; clearBtn.disabled=false; }
   }catch(err){
