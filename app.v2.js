@@ -216,25 +216,8 @@ function escapeHtml(s) {
 
 /* ===== METADATA STRIPPING ===== */
 
-// Image: try picscrub first (lossless structural), fallback to canvas
+// Image: canvas re-encode strips metadata reliably
 async function scrubImage(file) {
-  // Try picscrub via dynamic import (since it's an ES module)
-  try {
-    const buf = await file.arrayBuffer();
-    const input = new Uint8Array(buf);
-    const pic = await import('https://cdn.jsdelivr.net/npm/picscrub@1.2.0/dist/picscrub.js');
-    if (pic && pic.default) {
-      const result = pic.default(input, file.name);
-      if (result && result.data) {
-        const ext = extOf(file.name);
-        return new Blob([result.data], { type: mimeOf(ext) });
-      }
-    }
-  } catch(e) {
-    console.warn('picscrub dynamic import failed, falling back to canvas:', e);
-  }
-
-  // Fallback: canvas re-encode (still strips metadata, but may affect quality)
   const bmp = await createImageBitmap(file);
   const c = document.createElement('canvas');
   c.width = bmp.width; c.height = bmp.height;
@@ -244,7 +227,13 @@ async function scrubImage(file) {
   let mime = 'image/jpeg';
   if(ext === 'png') mime = 'image/png';
   else if(ext === 'webp') mime = 'image/webp';
-  return new Promise(r => c.toBlob(r, mime, 1.0));
+  else if(ext === 'gif') mime = 'image/gif';
+  return new Promise((resolve, reject) => {
+    c.toBlob(blob => {
+      if(blob) resolve(blob);
+      else reject(new Error('Canvas encoding failed'));
+    }, mime, 1.0);
+  });
 }
 
 // PDF

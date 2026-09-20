@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vantawebs-v2';
+const CACHE_NAME = 'vantawebs-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -11,8 +11,7 @@ const ASSETS = [
 const CDN_ASSETS = [
   'https://cdn.jsdelivr.net/npm/exifreader@4.23.7/dist/exif-reader.min.js',
   'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js',
-  'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js',
-  'https://cdn.jsdelivr.net/npm/picscrub@1.2.0/dist/picscrub.min.js'
+  'https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js'
 ];
 
 self.addEventListener('install', e => {
