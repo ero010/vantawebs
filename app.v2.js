@@ -62,10 +62,16 @@ async function showInstantPreview(file) {
   previewFile = file;
   try {
     const meta = await readMetadata(file);
-    if(!meta || meta.totalTags === 0) return;
-    previewMeta.innerHTML = renderMetadataPreview(meta);
+    if(meta && meta.totalTags > 0) {
+      previewMeta.innerHTML = renderMetadataPreview(meta);
+    } else {
+      previewMeta.innerHTML = '<div style="color:var(--green);font-size:13px;padding:4px 0">No metadata detected — file looks clean. Click below to process anyway.</div>';
+    }
     instantPreview.classList.remove('hidden');
-  } catch(e) { /* no metadata or unsupported */ }
+  } catch(e) {
+    previewMeta.innerHTML = '<div style="color:var(--text2);font-size:13px;padding:4px 0">Ready to process this file.</div>';
+    instantPreview.classList.remove('hidden');
+  }
 }
 previewClose.onclick = () => { instantPreview.classList.add('hidden'); previewFile = null; };
 previewClean.onclick = (e) => {
