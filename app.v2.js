@@ -488,10 +488,12 @@ function showStatus(msg) {
 }
 
 /* ===== PWA ===== */
+// Unregister stale service worker to force fresh loads
 if('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').then(reg => {
-    console.log('Vantawebs SW registered');
-  }).catch(e => console.log('SW registration failed:', e));
+  navigator.serviceWorker.getRegistrations().then(regs => {
+    regs.forEach(r => r.unregister());
+    caches.keys().then(keys => keys.forEach(k => caches.delete(k)));
+  });
 }
 
 // Online/offline indicator
