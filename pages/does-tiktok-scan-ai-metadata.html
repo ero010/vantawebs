@@ -11,6 +11,16 @@
   <meta property="og:url" content="https://vantawebs.site/pages/does-tiktok-scan-ai-metadata">
   <meta name="theme-color" content="#09090b">
   <link rel="canonical" href="https://vantawebs.site/pages/does-tiktok-scan-ai-metadata">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta property="og:site_name" content="Vantawebs">
+  <meta property="og:image" content="https://vantawebs.site/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Does TikTok Scan for AI Metadata? (C2PA &amp; AI Disclosure)">
+  <meta name="twitter:description" content="TikTok requires labeling AI-generated content but does not automatically detect C2PA metadata.">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -123,6 +133,7 @@
     </div>
   </nav>
 
+  <nav aria-label="Breadcrumb" style="width:100%;max-width:760px;padding:0 24px;margin:0 auto;position:relative;z-index:2;font-size:12px;color:#a1a1aa"><a href="https://vantawebs.site/" style="color:#a78bfa;text-decoration:none">Home</a> › <a href="https://vantawebs.site/pages/" style="color:#a78bfa;text-decoration:none">Guides</a> › <span>Does TikTok Scan for AI Metadata?</span></nav>
   <main class="main">
     <article>
       <div class="article-hero">
@@ -136,6 +147,27 @@
         <p>The responsibility for disclosing AI-generated content falls entirely on the creator. TikTok's Community Guidelines require you to label content that has been generated or significantly edited by AI, but they don't technically enforce this by reading embedded C2PA data from your files. If you upload an AI-generated image without the label, TikTok won't flag it based on metadata alone.</p>
 
         <p>However, this doesn't mean you should skip disclosure. <strong>You are responsible for complying with platform content policies.</strong> TikTok's AI disclosure rules are part of their terms of service, and violating them can result in content removal or account restrictions — even if TikTok can't detect the metadata automatically.</p>
+
+        <p><strong>How TikTok's AI label actually works.</strong> When you post, TikTok shows an <strong>AI-generated</strong> toggle in the posting flow under More options or Effects disclosure. Turning it on adds a visible label to your video or photo. TikTok also applies automatic labels in some cases based on its own detection signals, but those signals are not the same as reading your file's C2PA manifest. In short: the label comes from what you declare and what TikTok's systems infer, not from a reliable scan of embedded provenance data.</p>
+
+        <p><strong>Step-by-step: stay compliant and keep clean files.</strong> First, finish editing your photo or video and export the final version. Second, if you need a clean file for clients, stock libraries, or your own archive, drop a copy into the tool below and save the clean version — this removes C2PA, EXIF, editing software tags, and timestamps. Third, upload to TikTok from your phone as normal. Fourth, turn on the AI-generated label if the content is AI-made or heavily AI-edited, even if the file itself is now clean. Cleaning the file and labelling the post are two separate jobs: one protects your privacy, the other keeps your account in good standing.</p>
+
+        <p><strong>What survives a TikTok upload vs what does not.</strong> TikTok re-encodes everything you upload, so GPS, camera settings, and most EXIF data do not reach viewers through the app. What can survive outside TikTok is everything in your source file: if you send that same source video to a brand by email, Drive, or DM on another app, the C2PA data, device model, and location (for videos shot on phones) travel with it. Clean the source once, then distribute that clean copy everywhere — do not rely on TikTok's compression to protect files you share through other channels.</p>
+
+        <p><strong>Common mistakes.</strong> The biggest is assuming that stripping metadata removes the need to disclose. It does not — TikTok's rules are about what the content is, not what the file contains. Another mistake is labelling only the TikTok post but sending unlabelled, metadata-rich files to sponsors or reposting them to YouTube or Instagram where different AI rules apply. Creators also forget that CapCut, Adobe apps, and phone editors add their own software tags and edit history. If you edit after cleaning, clean again as the final step before delivery.</p>
+
+        <div class="callout">
+          <div class="callout-title">Practical tip for creators</div>
+          <p style="margin:0">Keep two folders: one private Originals folder with full metadata for proof of creation, and one Clean for Delivery folder with stripped copies. When a brand asks for raw files, send clean copies unless they specifically need provenance data. You will look professional, protect your prompts and locations, and still have the originals if ownership is ever questioned.</p>
+        </div>
+
+        <p><strong>Frequently asked questions</strong></p>
+
+        <p><strong>Will TikTok remove my video if I strip AI metadata?</strong><br>No, stripping metadata alone does not cause removals. Videos are removed for undisclosed AI content, misleading claims, or other guideline violations — not for having clean files. If your content is AI-generated, add TikTok's AI label when posting and you should be fine.</p>
+
+        <p><strong>Do I need to label minor AI edits like captions or filters?</strong><br>TikTok asks for labels on realistic AI-generated or significantly AI-altered content, not on everyday touch-ups. Auto-captions, basic beauty filters, and standard colour correction generally do not need the AI label. When in doubt, check TikTok's current AI disclosure guidance, since the wording changes over time.</p>
+
+        <p><strong>Does cleaning a file affect video quality?</strong><br>No. Metadata lives in the file wrapper and header sections, not in the picture itself. A proper cleaner removes those headers without re-encoding the video or photo, so quality stays the same and the file often gets slightly smaller.</p>
 
         <div class="warn">
           <div class="warn-title">Important: Technical vs Policy Compliance</div>
@@ -204,6 +236,29 @@
     <span>Vantawebs · built for privacy · <a href="https://vantawebs.site">vantawebs.site</a></span>
   </footer>
 
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vantawebs.site/" },
+      { "@type": "ListItem", "position": 2, "name": "Guides", "item": "https://vantawebs.site/pages/" },
+      { "@type": "ListItem", "position": 3, "name": "Does TikTok Scan for AI Metadata?", "item": "https://vantawebs.site/pages/does-tiktok-scan-ai-metadata" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Does TikTok Scan for AI Metadata? (C2PA & AI Disclosure)",
+    "description": "TikTok requires labeling AI-generated content but does not automatically detect C2PA metadata. Learn what you need to know about AI disclosure on TikTok.",
+    "author": { "@type": "Organization", "name": "Vantawebs", "url": "https://vantawebs.site/" },
+    "publisher": { "@type": "Organization", "name": "Vantawebs", "url": "https://vantawebs.site/", "logo": { "@type": "ImageObject", "url": "https://vantawebs.site/favicon-192.png" } },
+    "mainEntityOfPage": "https://vantawebs.site/pages/does-tiktok-scan-ai-metadata"
+  }
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -231,6 +286,30 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "TikTok relies on creator self-disclosure rather than automated C2PA metadata scanning. They do not currently read C2PA or EXIF AI provenance data from uploaded files to detect AI-generated content."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will TikTok remove my video if I strip AI metadata?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, stripping metadata alone does not cause removals. Videos are removed for undisclosed AI content, misleading claims, or other guideline violations — not for having clean files. If your content is AI-generated, add TikTok's AI label when posting and you should be fine."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to label minor AI edits like captions or filters?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TikTok asks for labels on realistic AI-generated or significantly AI-altered content, not on everyday touch-ups. Auto-captions, basic beauty filters, and standard colour correction generally do not need the AI label. When in doubt, check TikTok's current AI disclosure guidance, since the wording changes over time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does cleaning a file affect video quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Metadata lives in the file wrapper and header sections, not in the picture itself. A proper cleaner removes those headers without re-encoding the video or photo, so quality stays the same and the file often gets slightly smaller."
         }
       }
     ]
