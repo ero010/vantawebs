@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Photo to HDR Converter – Make Images Pop | Vantawebs</title>
+  <meta name="description" content="Turn flat photos into vibrant HDR-style images free. Boost contrast, color and clarity for Instagram and social media. 100% in-browser, no upload.">
+  <meta name="keywords" content="photo to hdr, image to hdr, hdr converter, hdr photo enhancer, make photo pop, hdr filter online, social media image enhancer, free hdr converter">
+  <link rel="canonical" href="https://vantawebs.site/hdr/">
+  <link rel="alternate" hreflang="x-default" href="https://vantawebs.site/hdr/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:title" content="Photo to HDR Converter – Make Images Pop | Vantawebs">
+  <meta property="og:description" content="Turn flat photos into vibrant HDR-style images free. Boost contrast, color and clarity for Instagram and social media. 100% in-browser, no upload.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vantawebs.site/hdr/">
+  <meta property="og:site_name" content="Vantawebs">
+  <meta property="og:locale" content="en">
+  <meta property="og:image" content="https://vantawebs.site/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vantawebs">
+  <meta name="twitter:title" content="Photo to HDR Converter – Make Images Pop | Vantawebs">
+  <meta name="twitter:description" content="Turn flat photos into vibrant HDR-style images free. Boost contrast, color and clarity for Instagram and social media. 100% in-browser, no upload.">
+  <meta name="twitter:image" content="https://vantawebs.site/og-image.png">
+  <meta name="theme-color" content="#09090b">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to convert a photo to HDR style",
+    "step": [
+      { "@type": "HowToStep", "name": "Drop your photo", "text": "Drag and drop a JPG, PNG, WEBP or GIF onto the Vantawebs HDR dropzone." },
+      { "@type": "HowToStep", "name": "Tune the strength", "text": "Drag the before/after slider to compare, then set the HDR strength that looks best." },
+      { "@type": "HowToStep", "name": "Download", "text": "Export as JPG or PNG. The export is metadata-free and ready to post." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this real HDR?",
+        "acceptedAnswer": { "@type": "Answer", "text": "It is an HDR look created from a single photo: shadow recovery, highlight roll-off, contrast curve, vibrance and clarity. It makes images pop on normal screens without needing an HDR display or bracketed exposures." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will it work for Instagram and TikTok?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Export at up to 2048px, which is ideal for Instagram, TikTok, X and Facebook. The punchier contrast and color survive platform compression better than flat originals." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my photos uploaded anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. All processing happens in your browser with JavaScript. Your photos never leave your device." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the HDR export contain metadata?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Exports are re-encoded by your browser, which strips EXIF, GPS and other metadata automatically — safe to post." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vantawebs.site/" },
+      { "@type": "ListItem", "position": 2, "name": "HDR Converter", "item": "https://vantawebs.site/hdr/" }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.v2.css?v=5">
+  <style>
+    .pill-active{border-color:rgba(167,139,250,.5)!important;color:#fff!important;background:rgba(167,139,250,.12)!important}
+    .hdr-compare{position:relative;overflow:hidden;border-radius:16px;touch-action:none;cursor:ew-resize;user-select:none;-webkit-user-select:none;line-height:0}
+    .hdr-compare img{display:block;width:100%;height:auto;pointer-events:none}
+    #hdrAfter{position:absolute;inset:0}
+    .hdr-divider{position:absolute;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.6);left:50%}
+    .hdr-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:rgba(9,9,11,.75);border:2px solid #fff;color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center;line-height:1;backdrop-filter:blur(4px)}
+    .hdr-tag{position:absolute;top:12px;font-size:11px;font-weight:700;letter-spacing:.5px;padding:4px 10px;border-radius:999px;background:rgba(9,9,11,.7);color:#fff;line-height:1.5;backdrop-filter:blur(4px)}
+    .tag-before{left:12px}
+    .tag-after{right:12px}
+    .hdr-controls{margin-top:16px;padding:20px;display:flex;flex-direction:column;gap:16px}
+    .hdr-row{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text2)}
+    .hdr-row label{min-width:90px;font-weight:600;color:var(--text)}
+    .hdr-row output{min-width:48px;text-align:right;font-family:'JetBrains Mono',monospace;color:var(--purple);font-size:12px}
+    input[type=range]{flex:1;appearance:none;-webkit-appearance:none;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--purple),var(--violet));outline:none;cursor:pointer}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--purple);box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:ew-resize}
+    input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--purple);cursor:ew-resize}
+    .hdr-select{background:var(--glass);border:1px solid var(--glass-border);color:var(--text);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer}
+    .hdr-select option{background:#131316}
+    .hdr-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .hdr-actions .btn-primary,.hdr-actions .btn-secondary{flex:1;min-width:140px;width:auto}
+    .hdr-status{margin-top:12px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <svg class="nav-logo" width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M14 2L4 7v7c0 6.075 4.25 11.725 10 13 5.75-1.275 10-6.925 10-13V7L14 2z" stroke="url(#navGrad)" stroke-width="2" fill="none"/>
+          <path d="M10 14l3 3 5-5" stroke="url(#navGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs><linearGradient id="navGrad" x1="4" y1="2" x2="24" y2="28"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+        </svg>
+        <span class="nav-name">Vantawebs</span>
+      </a>
+    </div>
+    <div class="nav-pills">
+      <span class="pill glass">100% Client-Side</span>
+      <span class="pill glass">Zero Upload</span>
+      <a href="/pages/" class="pill glass pill-link">Guides</a>
+      <span class="pill glass pill-active">✨ HDR</span>
+    </div>
+  </nav>
+
+  <main class="main">
+    <section class="hero">
+      <div class="hero-badge glass">
+        <span class="hero-badge-dot"></span>
+        Free HDR photo enhancer
+      </div>
+      <h1 class="hero-title">Normal Photo to <span class="gradient-text">HDR.</span></h1>
+      <p class="hero-desc">Make flat images pop with vibrant HDR-style contrast, color and clarity — perfect for Instagram, TikTok and social media. Free, private, 100% in your browser.</p>
+    </section>
+
+    <div id="hdrDrop" class="dropzone glass-card" tabindex="0">
+      <div class="dz-content">
+        <div class="dz-icon-wrap">
+          <svg class="dz-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M24 4L8 12v12c0 10.125 6.875 19.625 16 22 9.125-2.375 16-11.875 16-22V12L24 4z" stroke="url(#dzGrad)" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+            <path d="M18 24l4 4 8-8" stroke="url(#dzGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs><linearGradient id="dzGrad" x1="8" y1="4" x2="40" y2="38"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+          </svg>
+        </div>
+        <div class="dz-text">
+          <b>Drop your photo here</b>
+          <span>or <button id="hdrPick" class="linkbtn">browse files</button></span>
+        </div>
+        <div class="dz-formats">JPG · PNG · WEBP · GIF</div>
+      </div>
+      <input id="hdrFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+    </div>
+
+    <div id="hdrStatus" class="status hdr-status hidden">
+      <span id="hdrStatusText" class="status-text">Loading…</span>
+    </div>
+
+    <div id="hdrEditor" class="hidden">
+      <div class="hdr-compare glass-card" id="hdrCompare">
+        <img id="hdrBefore" alt="Original photo before HDR enhancement">
+        <img id="hdrAfter" alt="Photo after HDR enhancement">
+        <div class="hdr-divider" id="hdrDivider"><span class="hdr-handle">⇔</span></div>
+        <span class="hdr-tag tag-before">BEFORE</span>
+        <span class="hdr-tag tag-after">AFTER</span>
+      </div>
+
+      <div class="hdr-controls glass-card">
+        <div class="hdr-row">
+          <label for="hdrStrength">HDR strength</label>
+          <input type="range" id="hdrStrength" min="0" max="100" value="65">
+          <output id="hdrStrengthVal">65%</output>
+        </div>
+        <div class="hdr-row">
+          <label for="hdrFormat">Format</label>
+          <select id="hdrFormat" class="hdr-select">
+            <option value="jpeg" selected>JPG (small, best for social)</option>
+            <option value="png">PNG (larger, lossless)</option>
+          </select>
+        </div>
+        <div class="hdr-row" id="hdrQualityWrap">
+          <label for="hdrQuality">JPG quality</label>
+          <input type="range" id="hdrQuality" min="50" max="100" value="92">
+          <output id="hdrQualityVal">92%</output>
+        </div>
+        <div class="hdr-actions">
+          <button id="hdrDownload" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download HDR
+          </button>
+          <button id="hdrReset" class="btn-secondary">New image</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="seo-section glass-card">
+      <h2>How the HDR look works</h2>
+      <p>Flat phone photos often look dull next to professional shots. The HDR grade fixes that in four moves: <strong>shadow recovery</strong> lifts dark areas without washing out blacks, <strong>highlight roll-off</strong> rescues bright skies and skin tones, an <strong>S-curve</strong> adds punchy contrast, and <strong>vibrance + clarity</strong> make colors richer and details crisper. Drag the before/after slider to see exactly what changed.</p>
+      <div class="guide-links">
+        <a href="/pages/strip-metadata-before-selling-photos">Selling photos? Strip metadata first</a>
+        <a href="/pages/view-exif-data-online">Check your photo's metadata</a>
+        <a href="/pages/">All privacy guides →</a>
+      </div>
+    </section>
+
+    <section class="seo-section glass-card">
+      <h2>Tips to stand out on social media</h2>
+      <p><strong>Start at 60–75% strength.</strong> That range pops on phone screens without looking over-processed. Portraits usually want less (40–60%), landscapes and city shots can take more (70–90%). Export JPG at 92% quality — Instagram recompresses everything, and starting clean keeps details sharp. Bonus: every HDR export from Vantawebs is <strong>metadata-free</strong>, so no GPS or device info leaks when you post.</p>
+    </section>
+
+    <section class="seo-section glass-card">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-item">
+        <h3>Is this real HDR?</h3>
+        <p>It is an HDR look from a single photo — no bracketed exposures or HDR display needed. It makes images pop on any normal screen.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Will it work for Instagram and TikTok?</h3>
+        <p>Yes. Exports up to 2048px are ideal for Instagram, TikTok, X and Facebook, and the extra punch survives platform compression.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are my photos uploaded anywhere?</h3>
+        <p>No. Everything runs in your browser with JavaScript. Your photos never leave your device.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does the HDR export contain metadata?</h3>
+        <p>No. Browser re-encoding strips EXIF, GPS and other metadata automatically — safe to post.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Vantawebs · built for privacy · <a href="https://vantawebs.site">vantawebs.site</a> · <a href="https://x.com/vantawebs" target="_blank" rel="noopener">X @vantawebs</a></span>
+    <nav class="footer-nav">
+      <a href="/hdr/">HDR Converter</a> ·
+      <a href="/pages/">Guides</a> ·
+      <a href="/pages/what-is-exif-data">What is EXIF?</a> ·
+      <a href="/pages/view-exif-data-online">Check your photo's metadata</a>
+    </nav>
+  </footer>
+
+  <script src="/hdr.js?v=1"></script>
+</body>
+</html>
