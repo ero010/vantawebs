@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Before After Photo Maker – Comparison Sliders | Vantawebs</title>
+  <meta name="description" content="Make before/after comparison photos free. Show cleaning, detailing or renovation results with a draggable slider. Export for WhatsApp and Instagram, no upload.">
+  <meta name="keywords" content="before after photo maker, before and after picture app, comparison slider maker, cleaning before after photos, detailing results photo, renovation before after, side by side photo maker">
+  <link rel="canonical" href="https://vantawebs.site/before-after/">
+  <link rel="alternate" hreflang="x-default" href="https://vantawebs.site/before-after/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:title" content="Before After Photo Maker – Comparison Sliders | Vantawebs">
+  <meta property="og:description" content="Make before/after comparison photos free. Show cleaning, detailing or renovation results with a draggable slider. Export for WhatsApp and Instagram, no upload.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vantawebs.site/before-after/">
+  <meta property="og:site_name" content="Vantawebs">
+  <meta property="og:locale" content="en">
+  <meta property="og:image" content="https://vantawebs.site/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@vantawebs">
+  <meta name="twitter:title" content="Before After Photo Maker – Comparison Sliders | Vantawebs">
+  <meta name="twitter:description" content="Make before/after comparison photos free. Show cleaning, detailing or renovation results with a draggable slider. Export for WhatsApp and Instagram, no upload.">
+  <meta name="twitter:image" content="https://vantawebs.site/og-image.png">
+  <meta name="theme-color" content="#09090b">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to make a before/after comparison photo",
+    "step": [
+      { "@type": "HowToStep", "name": "Drop both photos", "text": "Drop your before photo and your after photo into the two slots." },
+      { "@type": "HowToStep", "name": "Drag the divider", "text": "Position the slider where the transformation shows best, pick an aspect ratio for WhatsApp or Instagram." },
+      { "@type": "HowToStep", "name": "Share or download", "text": "Export one image with labels burned in — share straight to WhatsApp or download it." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a before/after photo?",
+        "acceptedAnswer": { "@type": "Answer", "text": "One image split by a draggable divider showing the before state on one side and the after state on the other. Cleaners, detailers, painters and renovators use them as visual proof of their work." }
+      },
+      {
+        "@type": "Question",
+        "name": "My before and after photos are different sizes. Will it still work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Both photos are auto-cropped to fill the same frame. Pick match, square, 4:5 or 9:16 depending on where you will post." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my photos uploaded anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Everything runs in your browser with JavaScript. Your photos never leave your device." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I share straight to WhatsApp?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. On phones the Share button opens the native share sheet, so you can send the result to WhatsApp, Instagram or anywhere else in one tap." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vantawebs.site/" },
+      { "@type": "ListItem", "position": 2, "name": "Before/After Maker", "item": "https://vantawebs.site/before-after/" }
+    ]
+  }
+  </script>
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.v2.css?v=6">
+  <style>
+    .ba-slots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+    @media(max-width:600px){.ba-slots{grid-template-columns:1fr}}
+    .ba-slot{padding:20px 16px;text-align:center;cursor:pointer;transition:all .25s ease;position:relative;overflow:hidden}
+    .ba-slot:hover{border-color:rgba(167,139,250,.3)}
+    .ba-slot h3{font-size:14px;font-weight:700;margin-bottom:4px}
+    .ba-slot p{font-size:12px;color:var(--text2);margin-bottom:10px}
+    .ba-thumb{width:100%;height:120px;object-fit:cover;border-radius:10px;border:1px solid var(--glass-border);margin-top:8px}
+    .ba-canvas-wrap{margin-top:16px;line-height:0}
+    #baCanvas{width:100%;height:auto;border-radius:16px;cursor:ew-resize;touch-action:none;display:block}
+    .ba-controls{margin-top:16px;padding:20px;display:flex;flex-direction:column;gap:16px}
+    .ba-row{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--text2);flex-wrap:wrap}
+    .ba-row label{min-width:90px;font-weight:600;color:var(--text)}
+    .ba-row output{min-width:48px;text-align:right;font-family:'JetBrains Mono',monospace;color:var(--purple);font-size:12px}
+    input[type=range]{flex:1;min-width:120px;appearance:none;-webkit-appearance:none;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--purple),var(--violet));outline:none;cursor:pointer}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--purple);box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:ew-resize}
+    input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--purple);cursor:ew-resize}
+    .seg-row{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+    .seg{background:var(--glass);border:1px solid var(--glass-border);color:var(--text2);padding:8px 14px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+    .seg:hover{color:var(--text);border-color:rgba(167,139,250,.3)}
+    .seg-active{background:rgba(167,139,250,.15)!important;border-color:rgba(167,139,250,.5)!important;color:#fff!important}
+    .ba-select{background:var(--glass);border:1px solid var(--glass-border);color:var(--text);padding:8px 12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer}
+    .ba-select option{background:#131316}
+    .ba-check{display:flex;align-items:center;gap:8px;cursor:pointer}
+    .ba-check input{width:18px;height:18px;accent-color:#a78bfa;cursor:pointer}
+    .ba-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .ba-actions .btn-primary,.ba-actions .btn-secondary{flex:1;min-width:140px;width:auto}
+    .ba-status{margin-top:12px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <nav class="nav">
+    <div class="nav-brand">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit">
+        <svg class="nav-logo" width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <path d="M14 2L4 7v7c0 6.075 4.25 11.725 10 13 5.75-1.275 10-6.925 10-13V7L14 2z" stroke="url(#navGrad)" stroke-width="2" fill="none"/>
+          <path d="M10 14l3 3 5-5" stroke="url(#navGrad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs><linearGradient id="navGrad" x1="4" y1="2" x2="24" y2="28"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#6d28d9"/></linearGradient></defs>
+        </svg>
+        <span class="nav-name">Vantawebs</span>
+      </a>
+    </div>
+    <div class="nav-pills">
+      <span class="pill glass">100% Client-Side</span>
+      <span class="pill glass">Zero Upload</span>
+      <a href="/" class="pill glass pill-link pill-tool">🧹 Metadata Remover</a>
+      <a href="/hdr/" class="pill glass pill-link pill-tool">✨ HDR Converter</a>
+      <span class="pill glass pill-tool pill-tool-active">↔️ Before/After</span>
+      <a href="/pages/" class="pill glass pill-link">Guides</a>
+    </div>
+  </nav>
+
+  <main class="main">
+    <section class="hero">
+      <div class="hero-badge glass">
+        <span class="hero-badge-dot"></span>
+        Free before/after slider maker
+      </div>
+      <h1 class="hero-title">Show the <span class="gradient-text">Transformation.</span></h1>
+      <p class="hero-desc">Turn two photos into one powerful before/after slider. Perfect for cleaners, detailers, painters and renovators proving their work on WhatsApp and Instagram. Free, private, 100% in your browser.</p>
+    </section>
+
+    <div class="ba-slots">
+      <div id="baDropB" class="ba-slot glass-card" tabindex="0">
+        <h3>1 · Before photo</h3>
+        <p>Drop here or <button id="baPickB" class="linkbtn">browse</button></p>
+        <img id="baThumbB" class="ba-thumb hidden" alt="Before photo preview">
+        <input id="baFileB" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+      </div>
+      <div id="baDropA" class="ba-slot glass-card" tabindex="0">
+        <h3>2 · After photo</h3>
+        <p>Drop here or <button id="baPickA" class="linkbtn">browse</button></p>
+        <img id="baThumbA" class="ba-thumb hidden" alt="After photo preview">
+        <input id="baFileA" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+      </div>
+    </div>
+
+    <div id="baStatus" class="status ba-status hidden">
+      <span id="baStatusText" class="status-text">Loading…</span>
+    </div>
+
+    <div id="baEditor" class="hidden">
+      <div class="ba-canvas-wrap glass-card" style="padding:12px">
+        <canvas id="baCanvas"></canvas>
+      </div>
+
+      <div class="ba-controls glass-card">
+        <div class="ba-row">
+          <label for="baDivider">Divider</label>
+          <input type="range" id="baDivider" min="2" max="98" value="50">
+          <output id="baDividerVal">50%</output>
+        </div>
+        <div class="ba-row">
+          <label>Size</label>
+          <div class="seg-row">
+            <button class="seg seg-active" data-aspect="match">Match 1st photo</button>
+            <button class="seg" data-aspect="square">1:1</button>
+            <button class="seg" data-aspect="4:5">4:5</button>
+            <button class="seg" data-aspect="9:16">9:16 Story</button>
+          </div>
+        </div>
+        <div class="ba-row">
+          <label class="ba-check"><input type="checkbox" id="baLabels" checked> Labels</label>
+          <span style="font-size:12px">Burn BEFORE / AFTER tags into the export</span>
+        </div>
+        <div class="ba-row">
+          <label for="baFormat">Format</label>
+          <select id="baFormat" class="ba-select">
+            <option value="jpeg" selected>JPG (small, best for WhatsApp)</option>
+            <option value="png">PNG (larger, lossless)</option>
+          </select>
+        </div>
+        <div class="ba-row" id="baQualityWrap">
+          <label for="baQuality">JPG quality</label>
+          <input type="range" id="baQuality" min="50" max="100" value="90">
+          <output id="baQualityVal">90%</output>
+        </div>
+        <div class="ba-actions">
+          <button id="baShare" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 10l8-6M14 4v5M14 4h-5M9 5H4a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Share
+          </button>
+          <button id="baDownload" class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v8M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download
+          </button>
+          <button id="baReset" class="btn-secondary">New</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="seo-section glass-card">
+      <h2>Why before/after photos win clients</h2>
+      <p>People do not buy promises — they buy proof. A single slider image showing a dirty oven next to a sparkling one, or a dusty car next to a mirror shine, tells the whole story in one glance. Post it as your WhatsApp status, send it to prospects, pin it on Instagram. One great transformation photo does more selling than a hundred words.</p>
+      <div class="guide-links">
+        <a href="/hdr/">Make photos pop with HDR first</a>
+        <a href="/pages/strip-metadata-before-selling-photos">Strip metadata before posting</a>
+        <a href="/pages/">All privacy guides →</a>
+      </div>
+    </section>
+
+    <section class="seo-section glass-card">
+      <h2>Tips for a convincing comparison</h2>
+      <p><strong>Shoot from the same angle.</strong> Stand in the same spot for the after shot — matching framing makes the transformation undeniable. Use <strong>4:5 for feeds</strong> and <strong>9:16 Story</strong> for statuses. Keep the divider near the middle so both sides get equal glory, and leave labels on so viewers instantly know which side is which — even in a tiny WhatsApp preview.</p>
+    </section>
+
+    <section class="seo-section glass-card">
+      <h2>Frequently asked questions</h2>
+      <div class="faq-item">
+        <h3>What is a before/after photo?</h3>
+        <p>One image split by a draggable divider showing the before state on one side and the after state on the other — visual proof of cleaning, detailing, painting or renovation work.</p>
+      </div>
+      <div class="faq-item">
+        <h3>My photos are different sizes. Will it still work?</h3>
+        <p>Yes. Both photos are auto-cropped to fill the same frame. Pick match, square, 4:5 or 9:16 depending on where you will post.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Are my photos uploaded anywhere?</h3>
+        <p>No. Everything runs in your browser with JavaScript. Your photos never leave your device.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I share straight to WhatsApp?</h3>
+        <p>Yes. On phones the Share button opens the native share sheet — send to WhatsApp, Instagram or anywhere else in one tap.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Vantawebs · built for privacy · <a href="https://vantawebs.site">vantawebs.site</a> · <a href="https://x.com/vantawebs" target="_blank" rel="noopener">X @vantawebs</a></span>
+    <nav class="footer-nav">
+      <a href="/before-after/">Before/After Maker</a> ·
+      <a href="/hdr/">HDR Converter</a> ·
+      <a href="/pages/">Guides</a> ·
+      <a href="/pages/view-exif-data-online">Check your photo's metadata</a>
+    </nav>
+  </footer>
+
+  <script src="/before-after.js?v=1"></script>
+</body>
+</html>
