@@ -41,6 +41,11 @@ code,.mono{font-family:'JetBrains Mono',monospace}
 .pill-tool{border:1px solid rgba(167,139,250,.45)!important;background:rgba(167,139,250,.12)!important;color:#fff!important;font-weight:600;box-shadow:0 0 12px rgba(167,139,250,.18)}
 a.pill-tool:hover{background:rgba(167,139,250,.22)!important;border-color:rgba(167,139,250,.75)!important;color:#fff!important}
 .pill-tool-active{background:linear-gradient(135deg,var(--purple),var(--violet))!important;border-color:transparent!important;color:#fff!important;font-weight:700;box-shadow:0 4px 16px rgba(109,40,217,.4)}
+.tools-bar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;width:100%;max-width:760px;margin:0 auto;padding:2px 24px 6px;position:relative;z-index:2}
+.tool-tab{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:12px;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;color:var(--text2);background:var(--glass);border:1px solid var(--glass-border);transition:all .2s}
+.tool-tab:hover{color:#fff;border-color:rgba(167,139,250,.45);transform:translateY(-1px)}
+.tool-tab-active{background:linear-gradient(135deg,var(--purple),var(--violet));color:#fff;border-color:transparent;box-shadow:0 4px 16px rgba(109,40,217,.4)}
+.tool-tab-active:hover{color:#fff}
 .lang-switch{display:inline-flex;gap:2px;align-items:center;font-size:11px}
 .lang-switch a{color:var(--text3);text-decoration:none;padding:5px 7px;border-radius:8px;font-weight:500}
 .lang-switch a:hover{color:var(--text)}
